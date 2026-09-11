@@ -222,6 +222,327 @@ body[data-theme="dark"] .example-clickable{color:#ffc26f}
   .quick-finder:after{right:25px}
 }
 
+
+/* ===== V4: GOOGLE / WEB / AI FINDER + PEN / HIGHLIGHTER / SPOTLIGHT ===== */
+.qf-mode-tabs{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:9px
+}
+.qf-mode{
+  border:1px solid var(--line);background:var(--card);color:var(--muted);
+  border-radius:10px;padding:7px 5px;cursor:pointer;font-size:.76rem;font-weight:900
+}
+.qf-mode.active{background:var(--green);color:#fff;border-color:var(--green)}
+.qf-online{
+  display:none;padding:10px;overflow:auto;min-height:170px;max-height:48vh
+}
+.qf-online.open{display:block}
+.qf-online-actions{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}
+.qf-web-btn{
+  border:1px solid var(--line);background:var(--green-soft);color:var(--green);
+  border-radius:10px;padding:8px 10px;cursor:pointer;font-weight:900;font-size:.8rem
+}
+.qf-web-btn.primary{background:var(--green);color:#fff;border-color:var(--green)}
+.qf-settings-btn{
+  border:1px solid var(--line);background:var(--card);color:var(--muted);
+  border-radius:10px;padding:8px 10px;cursor:pointer;font-weight:900;font-size:.8rem
+}
+.web-status{
+  padding:10px 11px;border:1px dashed var(--line);border-radius:11px;color:var(--muted);
+  font-size:.8rem;background:var(--card-2);margin-bottom:9px
+}
+.web-result{
+  border:1px solid var(--line);background:var(--card-2);border-radius:13px;padding:10px 11px;margin-bottom:8px
+}
+.web-result a{color:var(--green);font-weight:900;text-decoration:none}
+.web-result a:hover{text-decoration:underline}
+.web-result small{display:block;color:var(--muted);margin-top:2px}
+.web-result p{margin:5px 0 0;font-size:.84rem;line-height:1.5}
+.image-results{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px
+}
+.image-card{
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card-2)
+}
+.image-card img{display:block;width:100%;height:135px;object-fit:cover;background:var(--green-soft)}
+.image-card div{padding:7px;font-size:.75rem;line-height:1.35}
+.image-card a{color:var(--green);font-weight:900;text-decoration:none}
+.ai-answer{
+  border:1px solid var(--line);background:linear-gradient(135deg,var(--blue-soft),var(--card));
+  border-radius:14px;padding:13px;line-height:1.65;white-space:pre-wrap
+}
+.ai-label{
+  display:inline-flex;align-items:center;gap:5px;padding:4px 8px;border-radius:999px;
+  background:var(--green-soft);color:var(--green);font-size:.72rem;font-weight:900;margin-bottom:8px
+}
+.provider-note{
+  margin-top:9px;padding:9px 10px;border-radius:10px;background:var(--yellow-soft);
+  color:var(--text);font-size:.77rem
+}
+
+/* API settings */
+.api-modal-overlay{
+  position:fixed;inset:0;background:rgba(4,15,9,.52);z-index:10050;display:none;
+  align-items:center;justify-content:center;padding:16px
+}
+.api-modal-overlay.open{display:flex}
+.api-modal{
+  width:min(650px,96vw);max-height:90vh;overflow:auto;background:var(--card);
+  border:1px solid var(--line);border-radius:20px;box-shadow:0 24px 70px rgba(0,0,0,.28)
+}
+.api-modal-head{display:flex;justify-content:space-between;gap:12px;padding:17px;border-bottom:1px solid var(--line)}
+.api-modal-head h3{margin:0;color:var(--green)}
+.api-modal-body{padding:17px}
+.api-field{margin-bottom:12px}
+.api-field label{display:block;font-weight:900;margin-bottom:5px}
+.api-field input{
+  width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:10px;
+  background:var(--card-2);color:var(--text);outline:none
+}
+.api-help{font-size:.77rem;color:var(--muted);line-height:1.55}
+.api-warning{
+  padding:10px 11px;border-radius:11px;background:var(--rose-soft);border-left:5px solid #c45e75;
+  font-size:.79rem;margin:12px 0
+}
+.api-modal-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:14px}
+
+/* STUDY / ANNOTATION TOOLS */
+#annotationCanvas{
+  position:fixed;inset:0;width:100vw;height:100vh;z-index:10000;pointer-events:none
+}
+#spotlightOverlay{
+  position:fixed;inset:0;z-index:9999;pointer-events:none;display:none;
+  background:rgba(0,0,0,.72)
+}
+#spotlightOverlay.active{display:block}
+.study-tools-toggle{
+  position:fixed;left:18px;bottom:18px;z-index:10031;border:0;border-radius:999px;
+  padding:11px 14px;background:linear-gradient(135deg,#2a5b89,#4a8ec9);color:#fff;
+  box-shadow:0 10px 28px rgba(20,60,95,.3);cursor:pointer;font-weight:900
+}
+.study-tools{
+  position:fixed;left:18px;bottom:70px;z-index:10030;width:min(420px,calc(100vw - 36px));
+  background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:0 18px 50px rgba(0,0,0,.23);
+  transform:translateY(12px) scale(.97);opacity:0;pointer-events:none;transition:.22s;overflow:hidden
+}
+.study-tools.open{transform:none;opacity:1;pointer-events:auto}
+.study-tools-head{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 14px;
+  border-bottom:1px solid var(--line);background:linear-gradient(135deg,var(--blue-soft),var(--card))
+}
+.study-tools-head h3{margin:0;font-size:1rem;color:var(--green)}
+.study-close{
+  width:34px;height:34px;border:1px solid var(--line);border-radius:10px;background:var(--card-2);
+  cursor:pointer;font-size:19px
+}
+.tool-modes{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:10px}
+.tool-mode{
+  border:1px solid var(--line);background:var(--card-2);border-radius:11px;padding:8px 4px;
+  cursor:pointer;font-weight:900;font-size:.73rem;text-align:center
+}
+.tool-mode.active{background:#2a5b89;color:#fff;border-color:#2a5b89}
+.tool-options{padding:0 10px 10px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tool-option{
+  border:1px solid var(--line);border-radius:11px;padding:8px;background:var(--card-2)
+}
+.tool-option label{display:block;font-size:.72rem;font-weight:900;color:var(--muted);margin-bottom:4px}
+.tool-option input[type="range"]{width:100%}
+.tool-option input[type="color"]{width:100%;height:34px;border:0;background:transparent}
+.tool-actions{display:flex;gap:6px;flex-wrap:wrap;padding:0 10px 10px}
+.tool-action{
+  border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;
+  padding:7px 9px;cursor:pointer;font-weight:900;font-size:.76rem
+}
+.tool-action:hover{background:var(--green-soft)}
+.stylus-row{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 10px 10px;
+  padding:8px 10px;border:1px solid var(--line);border-radius:11px;background:var(--card-2);
+  font-size:.76rem
+}
+.stylus-row label{font-weight:900}
+.tool-status{
+  border-top:1px solid var(--line);padding:8px 11px;color:var(--muted);font-size:.72rem;background:var(--card-2)
+}
+body.annotating{touch-action:none;user-select:none}
+body.annotating *{cursor:crosshair !important}
+.study-tools, .study-tools *, .quick-finder, .quick-finder *, .concept-drawer, .concept-drawer *,
+.api-modal, .api-modal *{cursor:auto !important;user-select:auto}
+.spotlight-ring{
+  position:fixed;z-index:10001;pointer-events:none;border:2px solid rgba(255,255,255,.8);
+  border-radius:50%;display:none;box-shadow:0 0 0 1px rgba(0,0,0,.2) inset
+}
+.spotlight-ring.active{display:block}
+
+@media(max-width:760px){
+  .image-results{grid-template-columns:1fr 1fr}
+  .study-tools-toggle{left:10px;bottom:10px}
+  .study-tools{left:10px;bottom:62px;width:calc(100vw - 20px)}
+  .tool-modes{grid-template-columns:repeat(5,1fr)}
+  .qf-mode-tabs{grid-template-columns:repeat(4,1fr)}
+}
+
+
+/* =========================================================
+   V5 CLASSROOM UX — LARGE FINDER WINDOW + HAND POINTER +
+   BLACKBOARD + IMPROVED WRITING SURFACES
+   CONTENT IS UNCHANGED; THESE ARE TOOL/UI OVERRIDES ONLY.
+   ========================================================= */
+
+/* ---------- Large finder overlay window ---------- */
+.finder-backdrop{
+  position:fixed;inset:0;z-index:10016;background:rgba(4,15,9,.56);
+  backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:.22s
+}
+.finder-backdrop.open{opacity:1;pointer-events:auto}
+
+.quick-finder{
+  left:4vw !important;right:auto !important;top:4vh !important;bottom:auto !important;
+  width:92vw !important;height:88vh !important;max-height:none !important;
+  border-radius:22px !important;z-index:10019 !important;
+  display:flex !important;flex-direction:column !important;
+  transform:translateY(14px) scale(.985) !important
+}
+.quick-finder.open{transform:none !important}
+.quick-finder:after{display:none !important}
+.quick-finder.maximized{
+  inset:0 !important;width:100vw !important;height:100vh !important;
+  border-radius:0 !important
+}
+.quick-finder.minimized{
+  left:auto !important;right:18px !important;top:auto !important;bottom:74px !important;
+  width:min(520px,calc(100vw - 30px)) !important;height:66px !important;
+  min-height:66px !important;border-radius:18px !important;overflow:hidden !important
+}
+.quick-finder.minimized .qf-head{height:66px;padding:12px 14px !important;border-bottom:0}
+.quick-finder.minimized .qf-head > :not(.qf-title-row),
+.quick-finder.minimized .qf-body,
+.quick-finder.minimized .qf-online,
+.quick-finder.minimized .qf-detail,
+.quick-finder.minimized .qf-footer{display:none !important}
+.quick-finder.minimized .qf-title-row small{display:none}
+.quick-finder.minimized .qf-title-row{align-items:center}
+
+.qf-title-row{align-items:flex-start}
+.qf-window-controls{display:flex;align-items:center;gap:6px;flex:0 0 auto}
+.qf-window-btn{
+  width:36px;height:36px;border:1px solid var(--line);background:var(--card-2);color:var(--text);
+  border-radius:10px;cursor:pointer;display:grid;place-items:center;font-weight:900;font-size:15px
+}
+.qf-window-btn:hover{background:var(--green-soft)}
+.qf-window-btn.close:hover{background:#ffe4e4;color:#8a2d2d;border-color:#e2a0a0}
+
+.qf-body,.qf-online,.qf-detail{min-height:0 !important}
+.qf-body{flex:1 !important;overflow:auto !important}
+.qf-online.open{
+  flex:1 !important;display:flex !important;flex-direction:column !important;
+  max-height:none !important;overflow:hidden !important
+}
+#qfOnlineResults{flex:1;min-height:0;overflow:auto;padding-right:3px}
+.qf-detail.open{flex:1 !important;max-height:none !important;overflow:auto !important}
+.qf-footer{flex:0 0 auto}
+.image-results{grid-template-columns:repeat(3,minmax(0,1fr))}
+.image-card img{height:190px}
+
+/* ---------- Put drawing/spotlight visually above finder content ---------- */
+#annotationCanvas{z-index:10025 !important}
+#spotlightOverlay{z-index:10023 !important}
+.spotlight-ring{z-index:10026 !important}
+.study-tools{z-index:10042 !important}
+.study-tools-toggle{z-index:10043 !important}
+.api-modal-overlay{z-index:10060 !important}
+
+/* ---------- Study tool expansion ---------- */
+.tool-modes{grid-template-columns:repeat(7,1fr) !important}
+.tool-mode[data-tool="hand"].active{background:#6a4b9c !important;border-color:#6a4b9c !important}
+.tool-mode[data-tool="blackboard"].active{background:#183c2a !important;border-color:#183c2a !important}
+
+/* ---------- Custom hand pointer ---------- */
+#customHandPointer{
+  position:fixed;left:0;top:0;z-index:10080;pointer-events:none;
+  font-size:34px;line-height:1;display:none;
+  transform:translate(-49%,-91%);
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.28))
+}
+body.hand-pointer-active #customHandPointer{display:block}
+body.hand-pointer-active,
+body.hand-pointer-active .content,
+body.hand-pointer-active .content *,
+body.hand-pointer-active .quick-finder,
+body.hand-pointer-active .quick-finder *{cursor:none !important}
+body.hand-pointer-active input,
+body.hand-pointer-active textarea{cursor:text !important}
+
+/* ---------- Blackboard ---------- */
+.blackboard-overlay{
+  position:fixed;inset:0;z-index:10035;display:none;flex-direction:column;
+  background:
+    radial-gradient(circle at 18% 12%,rgba(255,255,255,.025),transparent 28%),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 1px,transparent 1px 5px),
+    #07150f;
+  color:#eef9f1
+}
+.blackboard-overlay.open{display:flex}
+.blackboard-topbar{
+  flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:9px 12px;background:#10261b;border-bottom:1px solid rgba(255,255,255,.13);
+  box-shadow:0 5px 18px rgba(0,0,0,.22)
+}
+.blackboard-title{font-weight:900;display:flex;align-items:center;gap:8px}
+.blackboard-tools{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.board-btn{
+  border:1px solid rgba(255,255,255,.18);background:#183426;color:#effcf3;
+  border-radius:9px;padding:7px 9px;cursor:pointer;font-weight:900;font-size:.78rem
+}
+.board-btn:hover,.board-btn.active{background:#2c6748;border-color:#5ea67d}
+.board-btn.danger:hover{background:#6a2828}
+.board-color{
+  width:36px;height:34px;border:1px solid rgba(255,255,255,.18);border-radius:8px;
+  background:#183426;padding:2px
+}
+.board-size{width:100px}
+.blackboard-stage{position:relative;flex:1;min-height:0;overflow:hidden;touch-action:none}
+#blackboardCanvas{
+  position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair
+}
+.blackboard-help{
+  position:absolute;left:14px;bottom:12px;pointer-events:none;
+  padding:6px 9px;border-radius:9px;background:rgba(0,0,0,.28);
+  color:rgba(255,255,255,.68);font-size:.72rem
+}
+.board-dot{
+  width:10px;height:10px;border-radius:50%;display:inline-block;background:#aee3bf;
+  box-shadow:0 0 0 0 rgba(174,227,191,.5);animation:qfpulse 2s infinite
+}
+
+/* Finder drawing hint while Pen/Highlighter/Eraser is active */
+.quick-finder.finder-annotating{
+  box-shadow:0 0 0 3px rgba(61,133,204,.34),0 20px 55px rgba(0,0,0,.24)
+}
+.finder-draw-hint{
+  display:none;margin-left:auto;padding:4px 8px;border-radius:999px;
+  background:#e7f1ff;color:#275887;font-size:.69rem;font-weight:900
+}
+.quick-finder.finder-annotating .finder-draw-hint{display:inline-flex}
+
+@media(max-width:900px){
+  .quick-finder{
+    left:2vw !important;top:2vh !important;width:96vw !important;height:92vh !important
+  }
+  .image-results{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tool-modes{grid-template-columns:repeat(4,1fr) !important}
+  .blackboard-topbar{align-items:flex-start;flex-direction:column}
+  .blackboard-tools{width:100%}
+}
+@media(max-width:560px){
+  .quick-finder{
+    left:0 !important;top:0 !important;width:100vw !important;height:100vh !important;border-radius:0 !important
+  }
+  .qf-window-btn{width:33px;height:33px}
+  .qf-title-row h3{font-size:.96rem}
+  .image-results{grid-template-columns:1fr 1fr}
+  .image-card img{height:135px}
+  .board-size{width:75px}
+}
+
 </style>
 </head>
 <body data-theme="light">
@@ -307,6 +628,8 @@ body[data-theme="dark"] .example-clickable{color:#ffc26f}
 <footer><div class="foot"><strong>Plant Kingdom Master • NEET Biology Bengali</strong><br>Core content reviewed against the uploaded NCERT Plant Kingdom chapter, Reprint 2026-27. Blue “NEET Concept Bridge” boxes mark cross-chapter additions.</div></footer>
 
 
+<div class="finder-backdrop" id="finderBackdrop" aria-hidden="true"></div>
+
 <button class="quick-finder-toggle" id="quickFinderToggle" type="button" aria-expanded="false">
   <span class="pulse"></span> 💬 Quick Finder
 </button>
@@ -318,7 +641,14 @@ body[data-theme="dark"] .example-clickable{color:#ffc26f}
         <h3>🌿 Term & Example Finder</h3>
         <small>অ্যাপের ভেতরেই search করুন — internet বা image insert দরকার নেই</small>
       </div>
-      <button class="qf-close" id="qfClose" type="button" aria-label="Close quick finder">×</button>
+      
+      <div class="qf-window-controls">
+        <span class="finder-draw-hint">✍️ Draw on window</span>
+        <button class="qf-window-btn" id="qfMinimize" type="button" title="Minimize" aria-label="Minimize finder">—</button>
+        <button class="qf-window-btn" id="qfMaximize" type="button" title="Maximize / Restore" aria-label="Maximize finder">□</button>
+        <button class="qf-window-btn close" id="qfClose" type="button" title="Close" aria-label="Close quick finder">×</button>
+      </div>
+
     </div>
     <input class="qf-search" id="qfSearch" type="search" autocomplete="off"
       placeholder="যেমন: Volvox, Gemma, Cycas, Heterospory, Agar...">
@@ -328,9 +658,32 @@ body[data-theme="dark"] .example-clickable{color:#ffc26f}
       <button class="qf-filter" data-filter="example" type="button">উদাহরণ</button>
       <button class="qf-filter" data-filter="group" type="button">Class / Group</button>
     </div>
+
+    <div class="qf-mode-tabs" id="qfModeTabs">
+      <button class="qf-mode active" data-mode="local" type="button">📚 Local</button>
+      <button class="qf-mode" data-mode="web" type="button">🌐 Google</button>
+      <button class="qf-mode" data-mode="images" type="button">🖼 Images</button>
+      <button class="qf-mode" data-mode="ai" type="button">✨ AI</button>
+    </div>
+
   </div>
 
   <div class="qf-body" id="qfResults"></div>
+
+
+  <div class="qf-online" id="qfOnline">
+    <div class="qf-online-actions">
+      <button class="qf-web-btn primary" id="qfRunOnline" type="button">Search</button>
+      <button class="qf-web-btn" id="qfOpenGoogle" type="button">↗ Google Search</button>
+      <button class="qf-web-btn" id="qfOpenGoogleImages" type="button">↗ Google Images</button>
+      <button class="qf-settings-btn" id="qfApiSettings" type="button">⚙ API Settings</button>
+    </div>
+    <div class="web-status" id="qfWebStatus">
+      Google in-app results require a Google Programmable Search API key + Search Engine ID.
+      Without keys, this panel automatically uses Wikimedia/Wikipedia as an in-app fallback.
+    </div>
+    <div id="qfOnlineResults"></div>
+  </div>
 
   <div class="qf-detail" id="qfDetail">
     <button class="qf-back" id="qfBack" type="button">← ফলাফলে ফিরুন</button>
@@ -346,6 +699,138 @@ body[data-theme="dark"] .example-clickable{color:#ffc26f}
   <div class="qf-footer">
     Tip: পাতার মধ্যে কমলা dotted নাম = গুরুত্বপূর্ণ example; সবুজ dotted নাম = detailed term।
   </div>
+</aside>
+
+
+<div class="api-modal-overlay" id="apiModalOverlay" aria-hidden="true">
+  <div class="api-modal" role="dialog" aria-modal="true" aria-label="Web and AI API settings">
+    <div class="api-modal-head">
+      <div>
+        <h3>⚙ Google / AI Settings</h3>
+        <div class="api-help">Optional. The app still works without these keys using local data + Wikipedia/Wikimedia fallback.</div>
+      </div>
+      <button class="qf-close" id="apiModalClose" type="button">×</button>
+    </div>
+    <div class="api-modal-body">
+      <div class="api-field">
+        <label>Google Programmable Search API Key</label>
+        <input id="googleApiKey" type="password" autocomplete="off" placeholder="AIza...">
+      </div>
+      <div class="api-field">
+        <label>Google Search Engine ID (CX)</label>
+        <input id="googleCx" type="text" autocomplete="off" placeholder="Your programmable search engine ID">
+      </div>
+      <div class="api-field">
+        <label>Gemini API Key (for real AI answer)</label>
+        <input id="geminiApiKey" type="password" autocomplete="off" placeholder="Optional">
+      </div>
+      <div class="api-field">
+        <label>Gemini model</label>
+        <input id="geminiModel" type="text" value="gemini-2.5-flash" placeholder="gemini-2.5-flash">
+      </div>
+      <div class="stylus-row" style="margin:0">
+        <label><input type="checkbox" id="rememberApiKeys"> Remember on this browser</label>
+        <span class="api-help">Otherwise saved only for this tab/session.</span>
+      </div>
+      <div class="api-warning">
+        <b>Security:</b> A standalone HTML file cannot hide API keys. If this page will be public on GitHub Pages,
+        restrict Google keys by website origin/API or use your own server-side proxy. Do not publish an unrestricted private key.
+      </div>
+      <div class="api-help">
+        For Google results inside the speech bubble, enable the Custom Search JSON API / Programmable Search for your project
+        and use a Search Engine ID configured to search the web. Image search also needs image search enabled.
+        If Google blocks or quota is exhausted, the app falls back to Wikimedia inside the bubble and still provides direct Google buttons.
+      </div>
+      <div class="api-modal-actions">
+        <button class="qf-web-btn" id="apiClear" type="button">Clear Keys</button>
+        <button class="qf-web-btn primary" id="apiSave" type="button">Save Settings</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="customHandPointer" aria-hidden="true">👆</div>
+
+<section class="blackboard-overlay" id="blackboardOverlay" aria-hidden="true" aria-label="Digital blackboard">
+  <div class="blackboard-topbar">
+    <div class="blackboard-title">
+      <span class="board-dot"></span>
+      Digital Blackboard
+    </div>
+    <div class="blackboard-tools">
+      <button class="board-btn active" data-board-tool="chalk" type="button">✍ Chalk</button>
+      <button class="board-btn" data-board-tool="marker" type="button">🖍 Marker</button>
+      <button class="board-btn" data-board-tool="eraser" type="button">🧽 Eraser</button>
+      <input class="board-color" id="boardColor" type="color" value="#ffffff" title="Board colour">
+      <input class="board-size" id="boardSize" type="range" min="2" max="34" value="5" title="Board pen size">
+      <button class="board-btn" id="boardUndo" type="button">↶ Undo</button>
+      <button class="board-btn" id="boardRedo" type="button">↷ Redo</button>
+      <button class="board-btn" id="boardExport" type="button">⇩ PNG</button>
+      <button class="board-btn danger" id="boardClear" type="button">Clear</button>
+      <button class="board-btn" id="boardClose" type="button">✕ Close</button>
+    </div>
+  </div>
+  <div class="blackboard-stage" id="blackboardStage">
+    <canvas id="blackboardCanvas"></canvas>
+    <div class="blackboard-help">
+      Stylus pressure + coalesced pointer events supported • Smooth writing • Use two-finger/device gesture only after closing board
+    </div>
+  </div>
+</section>
+
+<canvas id="annotationCanvas" aria-hidden="true"></canvas>
+<div id="spotlightOverlay"></div>
+<div class="spotlight-ring" id="spotlightRing"></div>
+
+<button class="study-tools-toggle" id="studyToolsToggle" type="button">✍️ Pen & Spotlight</button>
+<aside class="study-tools" id="studyTools" aria-label="Study annotation tools">
+  <div class="study-tools-head">
+    <div>
+      <h3>✍️ Classroom Study Tools</h3>
+      <small style="color:var(--muted)">Touch • Stylus • Mouse</small>
+    </div>
+    <button class="study-close" id="studyToolsClose" type="button">×</button>
+  </div>
+  <div class="tool-modes">
+    <button class="tool-mode active" data-tool="off" type="button">☝️<br>Scroll</button>
+    <button class="tool-mode" data-tool="hand" type="button">👆<br>Pointer</button>
+    <button class="tool-mode" data-tool="pen" type="button">✏️<br>Pen</button>
+    <button class="tool-mode" data-tool="highlighter" type="button">🖍️<br>Highlight</button>
+    <button class="tool-mode" data-tool="eraser" type="button">🧽<br>Eraser</button>
+    <button class="tool-mode" data-tool="spotlight" type="button">🔦<br>Spotlight</button>
+    <button class="tool-mode" data-tool="blackboard" type="button">⬛<br>Board</button>
+  </div>
+  <div class="tool-options">
+    <div class="tool-option">
+      <label>Pen / Highlighter colour</label>
+      <input type="color" id="studyColor" value="#ffcf33">
+    </div>
+    <div class="tool-option">
+      <label>Pen / Highlighter size</label>
+      <input type="range" id="studySize" min="2" max="42" value="6">
+    </div>
+    <div class="tool-option">
+      <label>Spotlight radius</label>
+      <input type="range" id="spotRadius" min="70" max="320" value="150">
+    </div>
+    <div class="tool-option">
+      <label>Spotlight darkness</label>
+      <input type="range" id="spotDarkness" min="35" max="90" value="72">
+    </div>
+  </div>
+  <div class="stylus-row">
+    <label><input type="checkbox" id="autoStylus" checked> Auto-detect touch pen / stylus</label>
+    <span>Pressure supported</span>
+  </div>
+  <div class="tool-actions">
+    <button class="tool-action" id="undoStroke" type="button">↶ Undo</button>
+    <button class="tool-action" id="redoStroke" type="button">↷ Redo</button>
+    <button class="tool-action" id="saveStrokes" type="button">💾 Save</button>
+    <button class="tool-action" id="loadStrokes" type="button">↥ Load</button>
+    <button class="tool-action" id="clearStrokes" type="button">🗑 Clear</button>
+  </div>
+  <div class="tool-status" id="toolStatus">Scroll mode • Choose Pen/Highlighter or simply touch with a stylus.</div>
 </aside>
 
 <div class="concept-overlay" id="conceptOverlay" aria-hidden="true"></div>
@@ -866,6 +1351,861 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   renderResults();
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* =========================================================
+     WEB / GOOGLE / IMAGE / AI MODE INSIDE QUICK FINDER
+     ========================================================= */
+  const qf = document.getElementById("quickFinder");
+  const qfSearch = document.getElementById("qfSearch");
+  const localResults = document.getElementById("qfResults");
+  const localDetail = document.getElementById("qfDetail");
+  const onlinePane = document.getElementById("qfOnline");
+  const onlineResults = document.getElementById("qfOnlineResults");
+  const webStatus = document.getElementById("qfWebStatus");
+  const modeBtns = [...document.querySelectorAll(".qf-mode")];
+  const runOnline = document.getElementById("qfRunOnline");
+  let finderMode = "local";
+  let latestExternalSnippets = [];
+
+  const apiOverlay = document.getElementById("apiModalOverlay");
+  const apiClose = document.getElementById("apiModalClose");
+  const googleApiKey = document.getElementById("googleApiKey");
+  const googleCx = document.getElementById("googleCx");
+  const geminiApiKey = document.getElementById("geminiApiKey");
+  const geminiModel = document.getElementById("geminiModel");
+  const rememberApiKeys = document.getElementById("rememberApiKeys");
+
+  function storageForKeys(){
+    return rememberApiKeys.checked ? localStorage : sessionStorage;
+  }
+  function loadApiSettings(){
+    const remembered = localStorage.getItem("pkRememberApi") === "1";
+    rememberApiKeys.checked = remembered;
+    const s = remembered ? localStorage : sessionStorage;
+    googleApiKey.value = s.getItem("pkGoogleKey") || "";
+    googleCx.value = s.getItem("pkGoogleCx") || "";
+    geminiApiKey.value = s.getItem("pkGeminiKey") || "";
+    geminiModel.value = s.getItem("pkGeminiModel") || "gemini-2.5-flash";
+  }
+  loadApiSettings();
+
+  function openApiModal(){
+    loadApiSettings();
+    apiOverlay.classList.add("open");
+    apiOverlay.setAttribute("aria-hidden","false");
+  }
+  function closeApiModal(){
+    apiOverlay.classList.remove("open");
+    apiOverlay.setAttribute("aria-hidden","true");
+  }
+  document.getElementById("qfApiSettings").addEventListener("click",openApiModal);
+  apiClose.addEventListener("click",closeApiModal);
+  apiOverlay.addEventListener("click",e=>{ if(e.target===apiOverlay) closeApiModal(); });
+
+  document.getElementById("apiSave").addEventListener("click",()=>{
+    if(rememberApiKeys.checked){
+      localStorage.setItem("pkRememberApi","1");
+      localStorage.setItem("pkGoogleKey",googleApiKey.value.trim());
+      localStorage.setItem("pkGoogleCx",googleCx.value.trim());
+      localStorage.setItem("pkGeminiKey",geminiApiKey.value.trim());
+      localStorage.setItem("pkGeminiModel",geminiModel.value.trim() || "gemini-2.5-flash");
+      ["pkGoogleKey","pkGoogleCx","pkGeminiKey","pkGeminiModel"].forEach(k=>sessionStorage.removeItem(k));
+    }else{
+      localStorage.removeItem("pkRememberApi");
+      ["pkGoogleKey","pkGoogleCx","pkGeminiKey","pkGeminiModel"].forEach(k=>localStorage.removeItem(k));
+      sessionStorage.setItem("pkGoogleKey",googleApiKey.value.trim());
+      sessionStorage.setItem("pkGoogleCx",googleCx.value.trim());
+      sessionStorage.setItem("pkGeminiKey",geminiApiKey.value.trim());
+      sessionStorage.setItem("pkGeminiModel",geminiModel.value.trim() || "gemini-2.5-flash");
+    }
+    closeApiModal();
+    webStatus.textContent = "Settings saved. Google results will be used when API key + CX are present; AI mode will use Gemini when its key is present.";
+  });
+  document.getElementById("apiClear").addEventListener("click",()=>{
+    ["pkGoogleKey","pkGoogleCx","pkGeminiKey","pkGeminiModel","pkRememberApi"].forEach(k=>localStorage.removeItem(k));
+    ["pkGoogleKey","pkGoogleCx","pkGeminiKey","pkGeminiModel"].forEach(k=>sessionStorage.removeItem(k));
+    googleApiKey.value="";googleCx.value="";geminiApiKey.value="";geminiModel.value="gemini-2.5-flash";rememberApiKeys.checked=false;
+    webStatus.textContent = "Keys cleared. Wikimedia/Wikipedia fallback remains available.";
+  });
+
+  function currentSettings(){
+    const remembered = localStorage.getItem("pkRememberApi")==="1";
+    const s = remembered ? localStorage : sessionStorage;
+    return {
+      googleKey:s.getItem("pkGoogleKey") || "",
+      cx:s.getItem("pkGoogleCx") || "",
+      geminiKey:s.getItem("pkGeminiKey") || "",
+      model:s.getItem("pkGeminiModel") || "gemini-2.5-flash"
+    };
+  }
+
+  function switchFinderMode(mode){
+    finderMode = mode;
+    modeBtns.forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));
+    const online = mode !== "local";
+    onlinePane.classList.toggle("open",online);
+    localResults.style.display = online ? "none" : "block";
+    if(online) localDetail.classList.remove("open");
+    runOnline.textContent = mode==="web" ? "Search Google/Web" : mode==="images" ? "Search Images" : "Generate AI Answer";
+    if(online) renderOnlineIntro();
+  }
+  modeBtns.forEach(b=>b.addEventListener("click",()=>switchFinderMode(b.dataset.mode)));
+
+  function renderOnlineIntro(){
+    const q = qfSearch.value.trim();
+    const s = currentSettings();
+    if(finderMode==="web"){
+      webStatus.textContent = s.googleKey && s.cx
+        ? "Google Programmable Search is configured. Results will appear inside this speech bubble."
+        : "Google API is not configured. Search uses Wikipedia/Wikimedia inside the bubble; direct Google Search remains available.";
+    }else if(finderMode==="images"){
+      webStatus.textContent = s.googleKey && s.cx
+        ? "Google image search is configured. Image thumbnails and source links will appear here."
+        : "Google API is not configured. Wikimedia images are used inside the bubble; direct Google Images remains available.";
+    }else if(finderMode==="ai"){
+      webStatus.textContent = s.geminiKey
+        ? "Gemini is configured. The answer will combine local chapter context with available web snippets."
+        : "Gemini key is not configured. A local chapter-aware smart synthesis will be shown; add a Gemini key for a real external AI response.";
+    }
+    onlineResults.innerHTML = q
+      ? `<div class="qf-empty">Ready for <b>${escapeHtml(q)}</b>. Press the button above.</div>`
+      : `<div class="qf-empty">Type a biological term or example first.</div>`;
+  }
+
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+  }
+
+  document.getElementById("qfOpenGoogle").addEventListener("click",()=>{
+    const q = qfSearch.value.trim(); if(!q) return;
+    window.open("https://www.google.com/search?q="+encodeURIComponent(q+" plant kingdom biology"),"_blank","noopener");
+  });
+  document.getElementById("qfOpenGoogleImages").addEventListener("click",()=>{
+    const q = qfSearch.value.trim(); if(!q) return;
+    window.open("https://www.google.com/search?tbm=isch&q="+encodeURIComponent(q+" plant biology diagram"),"_blank","noopener");
+  });
+
+  async function googleSearch(q, imageMode=false){
+    const s = currentSettings();
+    if(!(s.googleKey && s.cx)) throw new Error("NO_GOOGLE_CONFIG");
+    const url = new URL("https://www.googleapis.com/customsearch/v1");
+    url.searchParams.set("key",s.googleKey);
+    url.searchParams.set("cx",s.cx);
+    url.searchParams.set("q",q + (imageMode ? " plant biology diagram" : " plant kingdom biology"));
+    url.searchParams.set("num", imageMode ? "8" : "6");
+    url.searchParams.set("safe","active");
+    if(imageMode) url.searchParams.set("searchType","image");
+    const r = await fetch(url);
+    if(!r.ok) throw new Error("Google API: HTTP "+r.status);
+    return await r.json();
+  }
+
+  async function wikiSearch(q){
+    const url = new URL("https://en.wikipedia.org/w/api.php");
+    const p = {
+      action:"query",format:"json",origin:"*",generator:"search",gsrsearch:q,
+      gsrlimit:"7",prop:"pageimages|extracts|info",inprop:"url",piprop:"thumbnail",
+      pithumbsize:"700",exintro:"1",explaintext:"1",exsentences:"4"
+    };
+    Object.entries(p).forEach(([k,v])=>url.searchParams.set(k,v));
+    const r = await fetch(url);
+    if(!r.ok) throw new Error("Wikipedia HTTP "+r.status);
+    const data = await r.json();
+    return Object.values(data.query?.pages || {}).sort((a,b)=>(a.index||99)-(b.index||99));
+  }
+
+  function renderWebItems(items,provider){
+    latestExternalSnippets = [];
+    if(!items?.length){
+      onlineResults.innerHTML = `<div class="qf-empty">No web result found.</div>`; return;
+    }
+    onlineResults.innerHTML = items.map(item=>{
+      const title = item.title || "";
+      const link = item.link || item.fullurl || "#";
+      const snippet = item.snippet || item.extract || "";
+      latestExternalSnippets.push(title+": "+snippet);
+      return `<div class="web-result">
+        <a href="${escapeHtml(link)}" target="_blank" rel="noopener">${escapeHtml(title)}</a>
+        <small>${escapeHtml(item.displayLink || provider)}</small>
+        <p>${escapeHtml(snippet.slice(0,450))}</p>
+      </div>`;
+    }).join("");
+  }
+
+  function renderImages(items,provider){
+    if(!items?.length){
+      onlineResults.innerHTML = `<div class="qf-empty">No image result found.</div>`; return;
+    }
+    const cards = items.map(item=>{
+      const img = item.link || item.thumbnail?.source || "";
+      const thumb = item.image?.thumbnailLink || item.thumbnail?.source || img;
+      const source = item.image?.contextLink || item.fullurl || item.link || "#";
+      const title = item.title || "Plant image";
+      return `<div class="image-card">
+        <a href="${escapeHtml(source)}" target="_blank" rel="noopener">
+          <img src="${escapeHtml(thumb)}" alt="${escapeHtml(title)}" loading="lazy" referrerpolicy="no-referrer">
+        </a>
+        <div><a href="${escapeHtml(source)}" target="_blank" rel="noopener">${escapeHtml(title.slice(0,100))}</a><br><small>${escapeHtml(provider)}</small></div>
+      </div>`;
+    }).join("");
+    onlineResults.innerHTML = `<div class="image-results">${cards}</div>`;
+  }
+
+  function localContext(q){
+    const cards = [...document.querySelectorAll(".content .card, .content .group-head")];
+    const qq = q.toLocaleLowerCase();
+    const hits = cards.filter(x=>x.textContent.toLocaleLowerCase().includes(qq)).slice(0,3);
+    return hits.map(x=>x.textContent.replace(/\s+/g," ").trim().slice(0,1200)).join("\n\n");
+  }
+
+  function smartLocalAnswer(q){
+    const context = localContext(q);
+    const ext = latestExternalSnippets.slice(0,3).join("\n");
+    if(!context && !ext) return `“${q}” সম্পর্কে এই chapter-এর indexed text-এ সরাসরি match কম পাওয়া গেছে। Google/Wikipedia search ব্যবহার করুন অথবা spelling পরিবর্তন করে দেখুন।`;
+    let answer = `বিষয়: ${q}\n\n`;
+    if(context) answer += `NCERT/অ্যাপের প্রাসঙ্গিক ধারণা:\n${context.slice(0,1800)}\n\n`;
+    if(ext) answer += `সাম্প্রতিক web snippet থেকে সহায়ক সূত্র:\n${ext.slice(0,1000)}\n\n`;
+    answer += `NEET Strategy: definition → identifying character → classic example → common confusion—এই চারটি দিক মিলিয়ে revise করুন।`;
+    return answer;
+  }
+
+  async function geminiAnswer(q){
+    const s = currentSettings();
+    if(!s.geminiKey) throw new Error("NO_GEMINI_CONFIG");
+    const context = localContext(q);
+    const web = latestExternalSnippets.slice(0,5).join("\n");
+    const prompt = `
+You are an expert NEET Biology educator.
+Answer in clear Indian Bengali. Every scientific/technical Bengali term should be followed by the English term in brackets where natural.
+The topic/query is: "${q}".
+
+Use the supplied local NCERT Plant Kingdom context first. If web snippets are supplied, treat them only as supplementary and do not invent unsupported facts.
+Clearly distinguish a cross-chapter fact when it is not from Plant Kingdom.
+Give:
+1) সহজ সংজ্ঞা
+2) 5-8 high-yield facts
+3) classic examples
+4) one NEET trap/common confusion
+5) one quick recall line.
+Keep the answer concise enough for a study bubble.
+
+LOCAL CONTEXT:
+${context || "(no direct local match)"}
+
+WEB SNIPPETS:
+${web || "(none fetched)"}
+`;
+    const model = encodeURIComponent(s.model || "gemini-2.5-flash");
+    const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,{
+      method:"POST",
+      headers:{"Content-Type":"application/json","x-goog-api-key":s.geminiKey},
+      body:JSON.stringify({
+        contents:[{parts:[{text:prompt}]}],
+        generationConfig:{temperature:0.2,maxOutputTokens:900}
+      })
+    });
+    if(!r.ok) throw new Error("Gemini API: HTTP "+r.status);
+    const data = await r.json();
+    return data.candidates?.[0]?.content?.parts?.map(p=>p.text||"").join("") || "No AI answer returned.";
+  }
+
+  runOnline.addEventListener("click",async()=>{
+    const q = qfSearch.value.trim();
+    if(!q){ onlineResults.innerHTML=`<div class="qf-empty">Search term লিখুন।</div>`; return; }
+    onlineResults.innerHTML=`<div class="qf-empty">Loading…</div>`;
+    try{
+      if(finderMode==="web"){
+        try{
+          const data = await googleSearch(q,false);
+          renderWebItems(data.items || [],"Google");
+          webStatus.textContent="Google Programmable Search results shown inside the bubble.";
+        }catch(err){
+          const pages = await wikiSearch(q);
+          renderWebItems(pages,"Wikipedia fallback");
+          webStatus.textContent = err.message==="NO_GOOGLE_CONFIG"
+            ? "Google API not configured — showing Wikipedia/Wikimedia fallback inside the bubble."
+            : "Google request failed — showing Wikipedia/Wikimedia fallback. "+err.message;
+        }
+      }else if(finderMode==="images"){
+        try{
+          const data = await googleSearch(q,true);
+          renderImages(data.items || [],"Google Images API");
+          webStatus.textContent="Google image results shown inside the bubble.";
+        }catch(err){
+          const pages = await wikiSearch(q);
+          renderImages(pages.filter(p=>p.thumbnail?.source),"Wikimedia fallback");
+          webStatus.textContent = err.message==="NO_GOOGLE_CONFIG"
+            ? "Google API not configured — showing Wikimedia images inside the bubble."
+            : "Google image request failed — showing Wikimedia fallback. "+err.message;
+        }
+      }else if(finderMode==="ai"){
+        const s = currentSettings();
+        if(s.googleKey && s.cx && latestExternalSnippets.length===0){
+          try{
+            const d = await googleSearch(q,false);
+            latestExternalSnippets = (d.items||[]).slice(0,5).map(x=>(x.title||"")+": "+(x.snippet||""));
+          }catch(_){}
+        }else if(latestExternalSnippets.length===0){
+          try{
+            const pages = await wikiSearch(q);
+            latestExternalSnippets = pages.slice(0,4).map(x=>(x.title||"")+": "+(x.extract||""));
+          }catch(_){}
+        }
+
+        if(s.geminiKey){
+          const ans = await geminiAnswer(q);
+          onlineResults.innerHTML = `<div class="ai-label">✨ Gemini AI + chapter context</div><div class="ai-answer">${escapeHtml(ans)}</div>
+            <div class="provider-note">AI answers can make mistakes. For exam-critical facts, compare with the chapter notes in this app.</div>`;
+          webStatus.textContent="Real Gemini AI answer generated inside the bubble.";
+        }else{
+          const ans = smartLocalAnswer(q);
+          onlineResults.innerHTML = `<div class="ai-label">🧠 Local smart synthesis</div><div class="ai-answer">${escapeHtml(ans)}</div>
+            <div class="provider-note">This is a local synthesis, not an external AI model. Add a Gemini API key in ⚙ Settings for a real AI-generated answer.</div>`;
+          webStatus.textContent="No Gemini key — showing local chapter-aware synthesis.";
+        }
+      }
+    }catch(err){
+      onlineResults.innerHTML=`<div class="qf-empty">Could not load result: ${escapeHtml(err.message)}<br><br>Use the direct Google button or check API settings.</div>`;
+    }
+  });
+
+  qfSearch.addEventListener("input",()=>{ if(finderMode!=="local") renderOnlineIntro(); });
+
+  /* =========================================================
+     PEN / HIGHLIGHTER / ERASER / TOUCH PEN / SPOTLIGHT
+     ========================================================= */
+  const canvas = document.getElementById("annotationCanvas");
+  const ctx = canvas.getContext("2d");
+  const tools = document.getElementById("studyTools");
+  const toolToggle = document.getElementById("studyToolsToggle");
+  const toolClose = document.getElementById("studyToolsClose");
+  const modeButtons = [...document.querySelectorAll(".tool-mode")];
+  const colorInput = document.getElementById("studyColor");
+  const sizeInput = document.getElementById("studySize");
+  const spotRadius = document.getElementById("spotRadius");
+  const spotDarkness = document.getElementById("spotDarkness");
+  const autoStylus = document.getElementById("autoStylus");
+  const status = document.getElementById("toolStatus");
+  const spotlight = document.getElementById("spotlightOverlay");
+  const spotRing = document.getElementById("spotlightRing");
+
+  let mode="off", drawing=false, currentStroke=null;
+  let strokes=[], redo=[];
+  let dpr=Math.max(1,window.devicePixelRatio||1);
+
+  function resizeCanvas(){
+    dpr=Math.max(1,window.devicePixelRatio||1);
+    canvas.width=Math.floor(innerWidth*dpr);
+    canvas.height=Math.floor(innerHeight*dpr);
+    canvas.style.width=innerWidth+"px";
+    canvas.style.height=innerHeight+"px";
+    renderStrokes();
+  }
+  window.addEventListener("resize",resizeCanvas);
+  window.addEventListener("scroll",()=>{renderStrokes();});
+  resizeCanvas();
+
+  function setMode(next){
+    mode=next;
+    modeButtons.forEach(b=>b.classList.toggle("active",b.dataset.tool===mode));
+    const drawingMode=["pen","highlighter","eraser"].includes(mode);
+    document.body.classList.toggle("annotating",drawingMode);
+    spotlight.classList.toggle("active",mode==="spotlight");
+    spotRing.classList.toggle("active",mode==="spotlight");
+    if(mode==="spotlight"){
+      updateSpotlight(innerWidth*.5,innerHeight*.45);
+      status.textContent="Spotlight mode • Move mouse, finger or stylus to focus attention.";
+    }else if(mode==="off"){
+      status.textContent="Scroll mode • Choose Pen/Highlighter or simply touch with a stylus.";
+    }else{
+      status.textContent=(mode==="pen"?"Pen":mode==="highlighter"?"Highlighter":"Eraser")+" mode • Touch/stylus/mouse drawing is active.";
+    }
+  }
+  modeButtons.forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.tool)));
+  toolToggle.addEventListener("click",()=>tools.classList.toggle("open"));
+  toolClose.addEventListener("click",()=>tools.classList.remove("open"));
+
+  function pointFromEvent(e){
+    return {x:e.clientX+scrollX,y:e.clientY+scrollY,p:(e.pressure&&e.pressure>0)?e.pressure:.5};
+  }
+  function drawStroke(s){
+    if(!s.points?.length) return;
+    ctx.save();
+    ctx.scale(dpr,dpr);
+    ctx.lineCap="round";ctx.lineJoin="round";
+    ctx.globalCompositeOperation=s.mode==="eraser"?"destination-out":"source-over";
+    ctx.strokeStyle=s.color;
+    ctx.globalAlpha=s.mode==="highlighter"?.28:1;
+    ctx.lineWidth=s.mode==="eraser"?Math.max(18,s.size*2.5):s.mode==="highlighter"?Math.max(14,s.size*3):s.size;
+    ctx.beginPath();
+    s.points.forEach((pt,i)=>{
+      const x=pt.x-scrollX,y=pt.y-scrollY;
+      if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+    ctx.restore();
+  }
+  function renderStrokes(){
+    ctx.setTransform(1,0,0,1,0,0);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    strokes.forEach(drawStroke);
+    if(currentStroke) drawStroke(currentStroke);
+  }
+  function isUIEvent(e){
+    const t=e.target;
+    return !!(t.closest && t.closest(".study-tools,.study-tools-toggle,.quick-finder,.quick-finder-toggle,.concept-drawer,.api-modal,.api-modal-overlay,.toolbar"));
+  }
+
+  document.addEventListener("pointerdown",e=>{
+    if(isUIEvent(e)) return;
+    if(mode==="off" && autoStylus.checked && e.pointerType==="pen"){
+      setMode("pen");
+    }
+    if(!["pen","highlighter","eraser"].includes(mode)) return;
+    e.preventDefault();
+    drawing=true;
+    currentStroke={
+      mode,color:colorInput.value,size:Number(sizeInput.value),
+      points:[pointFromEvent(e)]
+    };
+    redo=[];
+    renderStrokes();
+  },{capture:true});
+
+  document.addEventListener("pointermove",e=>{
+    if(mode==="spotlight"){
+      updateSpotlight(e.clientX,e.clientY);
+      return;
+    }
+    if(!drawing || !currentStroke) return;
+    e.preventDefault();
+    const pt=pointFromEvent(e);
+    currentStroke.points.push(pt);
+    renderStrokes();
+  },{capture:true});
+
+  document.addEventListener("pointerup",e=>{
+    if(!drawing || !currentStroke) return;
+    e.preventDefault();
+    currentStroke.points.push(pointFromEvent(e));
+    strokes.push(currentStroke);
+    currentStroke=null;drawing=false;
+    renderStrokes();
+    autoSaveMaybe();
+  },{capture:true});
+
+  document.addEventListener("pointercancel",()=>{
+    if(currentStroke){strokes.push(currentStroke);currentStroke=null;}
+    drawing=false;renderStrokes();
+  },{capture:true});
+
+  function updateSpotlight(x,y){
+    const r=Number(spotRadius.value);
+    const dark=Number(spotDarkness.value)/100;
+    spotlight.style.background=`radial-gradient(circle ${r}px at ${x}px ${y}px, transparent 0 ${Math.max(10,r-5)}px, rgba(0,0,0,${dark}) ${r}px 100%)`;
+    spotRing.style.width=(r*2)+"px";spotRing.style.height=(r*2)+"px";
+    spotRing.style.left=(x-r)+"px";spotRing.style.top=(y-r)+"px";
+  }
+  spotRadius.addEventListener("input",()=>updateSpotlight(innerWidth*.5,innerHeight*.45));
+  spotDarkness.addEventListener("input",()=>updateSpotlight(innerWidth*.5,innerHeight*.45));
+
+  document.getElementById("undoStroke").addEventListener("click",()=>{
+    if(strokes.length){redo.push(strokes.pop());renderStrokes();}
+  });
+  document.getElementById("redoStroke").addEventListener("click",()=>{
+    if(redo.length){strokes.push(redo.pop());renderStrokes();}
+  });
+  document.getElementById("clearStrokes").addEventListener("click",()=>{
+    if(confirm("সব pen/highlighter annotation মুছে ফেলবেন?")){
+      strokes=[];redo=[];renderStrokes();localStorage.removeItem("pkStudyStrokes");
+    }
+  });
+  function saveStrokes(){
+    try{
+      localStorage.setItem("pkStudyStrokes",JSON.stringify(strokes));
+      status.textContent="Annotations saved on this browser.";
+    }catch(err){status.textContent="Could not save annotations: "+err.message;}
+  }
+  function loadStrokes(){
+    try{
+      const raw=localStorage.getItem("pkStudyStrokes");
+      strokes=raw?JSON.parse(raw):[];
+      redo=[];renderStrokes();status.textContent=raw?"Saved annotations loaded.":"No saved annotations found.";
+    }catch(err){status.textContent="Could not load annotations.";}
+  }
+  function autoSaveMaybe(){
+    if(strokes.length<200) saveStrokes();
+  }
+  document.getElementById("saveStrokes").addEventListener("click",saveStrokes);
+  document.getElementById("loadStrokes").addEventListener("click",loadStrokes);
+
+  /* Keep spotlight responsive to touch as well as mouse. */
+  document.addEventListener("touchmove",e=>{
+    if(mode!=="spotlight" || !e.touches[0]) return;
+    updateSpotlight(e.touches[0].clientX,e.touches[0].clientY);
+  },{passive:true});
+
+  /* Keyboard shortcuts for presentation use */
+  document.addEventListener("keydown",e=>{
+    if(e.target.matches("input,textarea")) return;
+    if(e.key==="1")setMode("off");
+    if(e.key==="2")setMode("pen");
+    if(e.key==="3")setMode("highlighter");
+    if(e.key==="4")setMode("eraser");
+    if(e.key==="5")setMode("spotlight");
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="z"){e.preventDefault();document.getElementById("undoStroke").click();}
+  });
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* ======================================================
+     FINDER WINDOW MANAGEMENT
+     ====================================================== */
+  const finder = document.getElementById("quickFinder");
+  const backdrop = document.getElementById("finderBackdrop");
+  const minBtn = document.getElementById("qfMinimize");
+  const maxBtn = document.getElementById("qfMaximize");
+  const closeBtn = document.getElementById("qfClose");
+  const finderToggle = document.getElementById("quickFinderToggle");
+  const toolbarFinderBtn = document.getElementById("quickFinderToolbarBtn");
+
+  function syncFinderBackdrop(){
+    const open = finder.classList.contains("open");
+    const minimized = finder.classList.contains("minimized");
+    backdrop.classList.toggle("open",open && !minimized);
+    backdrop.setAttribute("aria-hidden", String(!(open && !minimized)));
+  }
+  const finderObserver = new MutationObserver(syncFinderBackdrop);
+  finderObserver.observe(finder,{attributes:true,attributeFilter:["class"]});
+  syncFinderBackdrop();
+
+  minBtn.addEventListener("click",(e)=>{
+    e.stopPropagation();
+    finder.classList.toggle("minimized");
+    if(finder.classList.contains("minimized")) finder.classList.remove("maximized");
+    maxBtn.textContent="□";
+    syncFinderBackdrop();
+  });
+
+  maxBtn.addEventListener("click",(e)=>{
+    e.stopPropagation();
+    finder.classList.remove("minimized");
+    finder.classList.toggle("maximized");
+    maxBtn.textContent = finder.classList.contains("maximized") ? "❐" : "□";
+    syncFinderBackdrop();
+  });
+
+  backdrop.addEventListener("click",()=>{
+    /* Clicking the dim area minimizes instead of destroying a search session. */
+    if(finder.classList.contains("open")){
+      finder.classList.add("minimized");
+      finder.classList.remove("maximized");
+      maxBtn.textContent="□";
+      syncFinderBackdrop();
+    }
+  });
+
+  [finderToggle,toolbarFinderBtn].filter(Boolean).forEach(b=>b.addEventListener("click",()=>{
+    setTimeout(()=>{
+      if(finder.classList.contains("open")) finder.classList.remove("minimized");
+      syncFinderBackdrop();
+    },0);
+  }));
+  closeBtn.addEventListener("click",()=>{
+    finder.classList.remove("minimized","maximized");
+    maxBtn.textContent="□";
+    setTimeout(syncFinderBackdrop,0);
+  });
+
+  /* Auto-run online search on Enter and when switching online mode. */
+  const qfSearch = document.getElementById("qfSearch");
+  const runOnline = document.getElementById("qfRunOnline");
+  const modeButtons = [...document.querySelectorAll(".qf-mode")];
+  qfSearch.addEventListener("keydown",e=>{
+    if(e.key==="Enter"){
+      const activeMode=document.querySelector(".qf-mode.active")?.dataset.mode || "local";
+      if(activeMode!=="local"){
+        e.preventDefault();
+        runOnline.click();
+      }
+    }
+  });
+  modeButtons.forEach(b=>b.addEventListener("click",()=>{
+    if(b.dataset.mode!=="local" && qfSearch.value.trim()){
+      setTimeout(()=>runOnline.click(),80);
+    }
+  }));
+
+  /* ======================================================
+     DRAWING ON TOP OF THE LARGE FINDER WINDOW
+     Existing page-annotation engine ignores UI targets.
+     Forward pointer events to BODY only when a writing tool
+     is active, so the same pen/highlighter/eraser works here.
+     ====================================================== */
+  function activeStudyTool(){
+    return document.querySelector(".tool-mode.active")?.dataset.tool || "off";
+  }
+  function isFinderControl(t){
+    return !!t.closest(
+      ".qf-window-controls,.qf-search,.qf-mode-tabs,.qf-filters,"+
+      ".qf-online-actions,.qf-actions,.qf-back,a,input,textarea,select,label"
+    );
+  }
+  function finderWritingActive(){
+    return ["pen","highlighter","eraser"].includes(activeStudyTool());
+  }
+  function syncFinderDrawClass(){
+    finder.classList.toggle("finder-annotating",finderWritingActive());
+  }
+  document.querySelectorAll(".tool-mode").forEach(b=>b.addEventListener("click",()=>setTimeout(syncFinderDrawClass,0)));
+  syncFinderDrawClass();
+
+  function forwardPointer(type,e){
+    const init={
+      bubbles:true,cancelable:true,composed:true,
+      clientX:e.clientX,clientY:e.clientY,screenX:e.screenX,screenY:e.screenY,
+      pointerId:e.pointerId || 1,pointerType:e.pointerType || "mouse",
+      isPrimary:e.isPrimary!==false,pressure:e.pressure || .5,
+      buttons:e.buttons,button:e.button,ctrlKey:e.ctrlKey,shiftKey:e.shiftKey,
+      altKey:e.altKey,metaKey:e.metaKey
+    };
+    try{
+      document.body.dispatchEvent(new PointerEvent(type,init));
+    }catch(_){
+      document.body.dispatchEvent(new MouseEvent(type.replace("pointer","mouse"),init));
+    }
+  }
+  let finderInkPointer=null;
+  finder.addEventListener("pointerdown",e=>{
+    if(!finderWritingActive() || isFinderControl(e.target)) return;
+    e.preventDefault();e.stopPropagation();
+    finderInkPointer=e.pointerId;
+    try{finder.setPointerCapture(e.pointerId)}catch(_){}
+    forwardPointer("pointerdown",e);
+  },true);
+  finder.addEventListener("pointermove",e=>{
+    if(finderInkPointer!==e.pointerId || !finderWritingActive()) return;
+    e.preventDefault();e.stopPropagation();
+    forwardPointer("pointermove",e);
+  },true);
+  finder.addEventListener("pointerup",e=>{
+    if(finderInkPointer!==e.pointerId) return;
+    e.preventDefault();e.stopPropagation();
+    forwardPointer("pointerup",e);
+    finderInkPointer=null;
+    try{finder.releasePointerCapture(e.pointerId)}catch(_){}
+  },true);
+  finder.addEventListener("pointercancel",e=>{
+    if(finderInkPointer!==e.pointerId) return;
+    forwardPointer("pointercancel",e);
+    finderInkPointer=null;
+  },true);
+
+  /* ======================================================
+     CUSTOM HAND POINTER
+     ====================================================== */
+  const hand = document.getElementById("customHandPointer");
+  const toolStatus = document.getElementById("toolStatus");
+  const handBtn = document.querySelector('.tool-mode[data-tool="hand"]');
+  const offBtn = document.querySelector('.tool-mode[data-tool="off"]');
+
+  function setHandPointer(on){
+    document.body.classList.toggle("hand-pointer-active",on);
+    if(on) toolStatus.textContent="Hand Pointer mode • Use the custom fingertip to point, click and present.";
+  }
+  if(handBtn){
+    handBtn.addEventListener("click",()=>setTimeout(()=>setHandPointer(true),0));
+  }
+  document.querySelectorAll(".tool-mode").forEach(b=>{
+    if(b.dataset.tool!=="hand") b.addEventListener("click",()=>setHandPointer(false));
+  });
+  document.addEventListener("pointermove",e=>{
+    if(!document.body.classList.contains("hand-pointer-active")) return;
+    hand.style.left=e.clientX+"px";
+    hand.style.top=e.clientY+"px";
+  },{passive:true});
+
+  /* ======================================================
+     HIGH-QUALITY DIGITAL BLACKBOARD
+     Separate smooth canvas with stylus pressure/coalesced input.
+     ====================================================== */
+  const board = document.getElementById("blackboardOverlay");
+  const boardStage = document.getElementById("blackboardStage");
+  const boardCanvas = document.getElementById("blackboardCanvas");
+  const bctx = boardCanvas.getContext("2d");
+  const boardBtn = document.querySelector('.tool-mode[data-tool="blackboard"]');
+  const boardClose = document.getElementById("boardClose");
+  const boardColor = document.getElementById("boardColor");
+  const boardSize = document.getElementById("boardSize");
+  const boardToolBtns = [...document.querySelectorAll("[data-board-tool]")];
+  let boardTool="chalk";
+  let boardStrokes=[],boardRedo=[],boardCurrent=null,boardDrawing=false,boardDpr=1;
+
+  function openBoard(){
+    setHandPointer(false);
+    board.classList.add("open");
+    board.setAttribute("aria-hidden","false");
+    document.body.style.overflow="hidden";
+    resizeBoard();
+    toolStatus.textContent="Digital Blackboard open • Smooth stylus/mouse writing is active.";
+  }
+  function closeBoard(){
+    board.classList.remove("open");
+    board.setAttribute("aria-hidden","true");
+    document.body.style.overflow="";
+    if(offBtn) offBtn.click();
+  }
+  if(boardBtn) boardBtn.addEventListener("click",()=>setTimeout(openBoard,0));
+  boardClose.addEventListener("click",closeBoard);
+
+  boardToolBtns.forEach(b=>b.addEventListener("click",()=>{
+    boardTool=b.dataset.boardTool;
+    boardToolBtns.forEach(x=>x.classList.toggle("active",x===b));
+  }));
+
+  function resizeBoard(){
+    const r=boardStage.getBoundingClientRect();
+    boardDpr=Math.max(1,window.devicePixelRatio||1);
+    boardCanvas.width=Math.max(1,Math.floor(r.width*boardDpr));
+    boardCanvas.height=Math.max(1,Math.floor(r.height*boardDpr));
+    boardCanvas.style.width=r.width+"px";
+    boardCanvas.style.height=r.height+"px";
+    redrawBoard();
+  }
+  window.addEventListener("resize",()=>{if(board.classList.contains("open"))resizeBoard();});
+
+  function boardPointFrom(e){
+    const r=boardCanvas.getBoundingClientRect();
+    return {
+      x:e.clientX-r.left,
+      y:e.clientY-r.top,
+      p:(e.pressure && e.pressure>0)?e.pressure:.55
+    };
+  }
+  function drawBoardStroke(s){
+    if(!s.points || s.points.length<1)return;
+    bctx.save();
+    bctx.scale(boardDpr,boardDpr);
+    bctx.lineCap="round";bctx.lineJoin="round";
+    bctx.globalCompositeOperation=s.tool==="eraser"?"destination-out":"source-over";
+    bctx.strokeStyle=s.color;
+    bctx.globalAlpha=s.tool==="marker"?.34:1;
+
+    if(s.points.length===1){
+      const p=s.points[0];
+      bctx.beginPath();
+      bctx.arc(p.x,p.y,Math.max(1,s.size*(.35+p.p*.45)),0,Math.PI*2);
+      bctx.fillStyle=s.tool==="eraser"?"rgba(0,0,0,1)":s.color;
+      if(s.tool==="eraser"){
+        bctx.globalCompositeOperation="destination-out";
+        bctx.fill();
+      }else bctx.fill();
+      bctx.restore();
+      return;
+    }
+
+    for(let i=1;i<s.points.length;i++){
+      const a=s.points[i-1],b=s.points[i];
+      const pressure=(a.p+b.p)/2;
+      const width=s.tool==="eraser"
+        ? Math.max(18,s.size*3)
+        : s.tool==="marker"
+          ? Math.max(10,s.size*2.3)
+          : Math.max(1.2,s.size*(.58+pressure*.9));
+
+      bctx.lineWidth=width;
+      bctx.beginPath();
+      if(i===1)bctx.moveTo(a.x,a.y);
+      else{
+        const prev=s.points[i-2];
+        bctx.moveTo((prev.x+a.x)/2,(prev.y+a.y)/2);
+      }
+      const mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+      bctx.quadraticCurveTo(a.x,a.y,mx,my);
+      bctx.stroke();
+    }
+    bctx.restore();
+  }
+  function redrawBoard(){
+    bctx.setTransform(1,0,0,1,0,0);
+    bctx.clearRect(0,0,boardCanvas.width,boardCanvas.height);
+    boardStrokes.forEach(drawBoardStroke);
+    if(boardCurrent)drawBoardStroke(boardCurrent);
+  }
+
+  boardCanvas.addEventListener("pointerdown",e=>{
+    e.preventDefault();
+    boardDrawing=true;
+    try{boardCanvas.setPointerCapture(e.pointerId)}catch(_){}
+    boardRedo=[];
+    boardCurrent={
+      tool:boardTool,color:boardColor.value,size:Number(boardSize.value),
+      points:[boardPointFrom(e)]
+    };
+    redrawBoard();
+  });
+  boardCanvas.addEventListener("pointermove",e=>{
+    if(!boardDrawing || !boardCurrent)return;
+    e.preventDefault();
+    const evs=e.getCoalescedEvents?e.getCoalescedEvents():[e];
+    evs.forEach(ev=>boardCurrent.points.push(boardPointFrom(ev)));
+    redrawBoard();
+  });
+  function finishBoardStroke(e){
+    if(!boardDrawing || !boardCurrent)return;
+    if(e && e.clientX!==undefined)boardCurrent.points.push(boardPointFrom(e));
+    boardStrokes.push(boardCurrent);
+    boardCurrent=null;boardDrawing=false;
+    redrawBoard();
+  }
+  boardCanvas.addEventListener("pointerup",e=>{e.preventDefault();finishBoardStroke(e);});
+  boardCanvas.addEventListener("pointercancel",()=>finishBoardStroke());
+
+  document.getElementById("boardUndo").addEventListener("click",()=>{
+    if(boardStrokes.length){boardRedo.push(boardStrokes.pop());redrawBoard();}
+  });
+  document.getElementById("boardRedo").addEventListener("click",()=>{
+    if(boardRedo.length){boardStrokes.push(boardRedo.pop());redrawBoard();}
+  });
+  document.getElementById("boardClear").addEventListener("click",()=>{
+    if(confirm("Blackboard পরিষ্কার করবেন?")){
+      boardStrokes=[];boardRedo=[];redrawBoard();
+    }
+  });
+  document.getElementById("boardExport").addEventListener("click",()=>{
+    /* Export with actual dark board background, not transparent canvas. */
+    const exp=document.createElement("canvas");
+    exp.width=boardCanvas.width;exp.height=boardCanvas.height;
+    const ec=exp.getContext("2d");
+    ec.fillStyle="#07150f";ec.fillRect(0,0,exp.width,exp.height);
+    ec.drawImage(boardCanvas,0,0);
+    const a=document.createElement("a");
+    a.download="plant-kingdom-blackboard.png";
+    a.href=exp.toDataURL("image/png");
+    a.click();
+  });
+
+  /* Keyboard convenience while board is open. */
+  document.addEventListener("keydown",e=>{
+    if(!board.classList.contains("open"))return;
+    if(e.key==="Escape"){e.preventDefault();closeBoard();}
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="z"){
+      e.preventDefault();
+      if(e.shiftKey)document.getElementById("boardRedo").click();
+      else document.getElementById("boardUndo").click();
+    }
+  });
+
+  /* When finder is maximized, spotlight remains above it;
+     keep study palette above both finder and board. */
 });
 </script>
 
