@@ -3,267 +3,319 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biology Learning Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Biology Mastery Hub | By Bholanath Debnath</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #4CAF50;
-            --primary-light: #e8f5e9;
-            --text-dark: #2c3e50;
-            --text-light: #546e7a;
-            --white: #ffffff;
-            --bg-color: #f4f9f4;
-            --shadow: 0 10px 20px rgba(0,0,0,0.05);
-            --shadow-hover: 0 15px 30px rgba(76, 175, 80, 0.15);
+            --primary: #059669; /* Biology Green */
+            --primary-dark: #047857;
+            --bg-color: #f3f4f6;
+            --surface: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
+        /* Animated Hero Header */
         header {
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--white) 100%);
-            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 5rem 2rem;
             text-align: center;
-            border-bottom: 2px solid var(--primary-light);
-            border-radius: 0 0 30px 30px;
-            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .floating-bg {
+            position: absolute;
+            width: 300px; height: 300px;
+            background: var(--primary);
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.2;
+            animation: float 6s ease-in-out infinite alternate;
+            top: -100px; left: -100px;
         }
 
-        .hero-title {
-            font-size: 2.5rem;
-            color: var(--primary);
-            font-weight: 700;
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100px, 50px); }
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 3rem auto;
-            padding: 0 2rem;
+        .hero-title { font-size: 3rem; font-weight: 800; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .hero-subtitle { font-size: 1.2rem; color: #9ca3af; position: relative; z-index: 1; }
+
+        .container { max-width: 1200px; margin: -2rem auto 3rem; padding: 0 1rem; position: relative; z-index: 10; }
+
+        /* Class Tabs */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            background: var(--surface);
+            padding: 1rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-sm);
         }
 
-        .section-title {
-            text-align: left;
-            font-size: 1.8rem;
-            margin: 2.5rem 0 1.5rem;
-            color: var(--text-dark);
-            border-bottom: 3px solid var(--primary);
-            display: inline-block;
-            padding-bottom: 5px;
+        .tab-btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            background: transparent;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: 0.5rem;
+            transition: var(--transition);
         }
 
+        .tab-btn:hover { background: #f3f4f6; }
+        .tab-btn.active { background: var(--primary); color: white; box-shadow: var(--shadow-sm); }
+
+        /* Tab Content Zones */
+        .tab-content { display: none; animation: fadeIn 0.5s ease-out forwards; }
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Accordion Units */
+        .unit-accordion {
+            background: var(--surface);
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        .unit-header {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: var(--surface);
+            transition: var(--transition);
+            border-left: 4px solid transparent;
+        }
+
+        .unit-header:hover { background: #f9fafb; border-left-color: var(--primary); }
+        .unit-title { font-size: 1.25rem; font-weight: 600; color: var(--text-main); }
+        .unit-subtitle { font-size: 0.9rem; color: var(--primary); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 0.25rem;}
+        
+        .chevron {
+            width: 24px; height: 24px;
+            fill: var(--text-muted);
+            transition: transform 0.4s ease;
+        }
+        .unit-accordion.open .chevron { transform: rotate(180deg); fill: var(--primary); }
+
+        /* Smooth Hide/Unhide Content */
+        .unit-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+            background: #f8fafc;
+        }
+        .unit-accordion.open .unit-content {
+            max-height: 2000px;
+            transition: max-height 0.5s ease-in-out;
+        }
+
+        /* Chapter Grid Cards */
         .chapter-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1.5rem;
+            padding: 2rem;
         }
 
         .card {
-            background: var(--white);
-            border-radius: 15px;
+            background: var(--surface);
+            border: 1px solid #e5e7eb;
+            border-radius: 1rem;
             padding: 1.5rem;
             text-decoration: none;
-            color: var(--text-dark);
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
+            color: inherit;
+            transition: var(--transition);
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         .card:hover:not(.upcoming) {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--primary-light);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
         }
 
-        .card-unit {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--primary);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: auto;
-        }
-
-        /* Upcoming Badge Styles */
-        .card.upcoming {
-            background: #f9f9f9;
-            opacity: 0.8;
-            cursor: default;
-        }
+        .card-number { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600; }
+        .card-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; }
         
+        /* Upcoming Badge */
+        .card.upcoming { opacity: 0.7; cursor: not-allowed; background: #f9fafb; }
         .badge {
             align-self: flex-start;
-            background: #ffe082;
-            color: #d35400;
-            font-size: 0.7rem;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-weight: 600;
-            margin-top: 1rem;
+            background: #fef3c7; color: #d97706;
+            font-size: 0.75rem; font-weight: 600;
+            padding: 0.25rem 0.75rem; border-radius: 999px;
+            margin-top: auto;
         }
 
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background: var(--white);
-            margin-top: 3rem;
-            border-radius: 30px 30px 0 0;
-        }
+        /* Finished App Badge */
+        .badge.ready { background: #d1fae5; color: #047857; }
+
     </style>
 </head>
 <body>
 
     <header>
-        <h1 class="hero-title">🌱 Biology Learning Hub</h1>
-        <p>Interactive modules and visual learning aids for NEET & Board Students.</p>
+        <div class="floating-bg"></div>
+        <h1 class="hero-title">Biology Mastery Hub</h1>
+        <p class="hero-subtitle">Interactive NEET & Board Modules by Bholanath Debnath</p>
     </header>
 
     <div class="container">
         
-        <h2 class="section-title">Class XI Syllabus</h2>
+        <!-- Class Navigation Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'class11')">Class XI</button>
+            <button class="tab-btn" onclick="openTab(event, 'class12')">Class XII</button>
+            <button class="tab-btn" onclick="openTab(event, 'neet')">NEET Quizzes</button>
+        </div>
 
-        <div class="chapter-grid">
+        <!-- ================= CLASS XI SECTION ================= -->
+        <div id="class11" class="tab-content active">
             
-            <!-- UNIT I: DIVERSITY IN THE LIVING WORLD -->
-            <div class="card upcoming">
-                <span class="card-unit">Unit I</span>
-                <h3 class="card-title">Chapter 1: The Living World</h3>
-                <span class="badge">Upcoming / Will update soon</span>
+            <!-- Unit 1 -->
+            <div class="unit-accordion open"> <!-- "open" class makes it unhidden by default -->
+                <div class="unit-header" onclick="toggleAccordion(this)">
+                    <div>
+                        <span class="unit-subtitle">Unit I</span>
+                        <h2 class="unit-title">Diversity in the Living World</h2>
+                    </div>
+                    <svg class="chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </div>
+                <div class="unit-content">
+                    <div class="chapter-grid">
+                        <div class="card upcoming">
+                            <span class="card-number">Chapter 1</span>
+                            <h3 class="card-title">The Living World</h3>
+                            <span class="badge">Upcoming</span>
+                        </div>
+                        <div class="card upcoming">
+                            <span class="card-number">Chapter 2</span>
+                            <h3 class="card-title">Biological Classification</h3>
+                            <span class="badge">Upcoming</span>
+                        </div>
+                        <a href="plant-kingdom.html" class="card">
+                            <span class="card-number">Chapter 3</span>
+                            <h3 class="card-title">Plant Kingdom</h3>
+                            <span class="badge ready">Interactive App Ready</span>
+                        </a>
+                        <div class="card upcoming">
+                            <span class="card-number">Chapter 4</span>
+                            <h3 class="card-title">Animal Kingdom</h3>
+                            <span class="badge">Upcoming</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="card upcoming">
-                <span class="card-unit">Unit I</span>
-                <h3 class="card-title">Chapter 2: Biological Classification</h3>
-                <span class="badge">Upcoming / Will update soon</span>
+            <!-- Unit 2 -->
+            <div class="unit-accordion">
+                <div class="unit-header" onclick="toggleAccordion(this)">
+                    <div>
+                        <span class="unit-subtitle">Unit II</span>
+                        <h2 class="unit-title">Structural Organisation in Plants and Animals</h2>
+                    </div>
+                    <svg class="chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </div>
+                <div class="unit-content">
+                    <div class="chapter-grid">
+                        <div class="card upcoming">
+                            <span class="card-number">Chapter 5</span>
+                            <h3 class="card-title">Morphology of Flowering Plants</h3>
+                            <span class="badge">Upcoming</span>
+                        </div>
+                        <div class="card upcoming">
+                            <span class="card-number">Chapter 6</span>
+                            <h3 class="card-title">Anatomy of Flowering Plants</h3>
+                            <span class="badge">Upcoming</span>
+                        </div>
+                        <div class="card upcoming">
+                            <span class="card-number">Chapter 7</span>
+                            <h3 class="card-title">Structural Organisation in Animals</h3>
+                            <span class="badge">Upcoming</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Active App from previous prompt -->
-            <a href="plant-kingdom.html" class="card">
-                <span class="card-unit">Unit I</span>
-                <h3 class="card-title">Chapter 3: Plant Kingdom</h3>
-            </a>
-
-            <div class="card upcoming">
-                <span class="card-unit">Unit I</span>
-                <h3 class="card-title">Chapter 4: Animal Kingdom</h3>
-                <span class="badge">Upcoming / Will update soon</span>
-            </div>
-
-            <!-- UNIT II: STRUCTURAL ORGANISATION -->
-            <div class="card upcoming">
-                <span class="card-unit">Unit II</span>
-                <h3 class="card-title">Chapter 5: Morphology of Flowering Plants</h3>
-                <span class="badge">Upcoming / Will update soon</span>
-            </div>
-
-            <div class="card upcoming">
-                <span class="card-unit">Unit II</span>
-                <h3 class="card-title">Chapter 6: Anatomy of Flowering Plants</h3>
-                <span class="badge">Upcoming / Will update soon</span>
-            </div>
-
-            <div class="card upcoming">
-                <span class="card-unit">Unit II</span>
-                <h3 class="card-title">Chapter 7: Structural Organisation in Animals</h3>
-                <span class="badge">Upcoming / Will update soon</span>
-            </div>
-
-            <!-- UNIT III: CELL -->
-            <a href="cell-biology.html" class="card">
-                <span class="card-unit">Unit III</span>
-                <h3 class="card-title">Chapter 8: Cell: The Unit of Life</h3>
-            </a>
-
-            <div class="card upcoming">
-                <span class="card-unit">Unit III</span>
-                <h3 class="card-title">Chapter 9: Biomolecules</h3>
-                <span class="badge">Upcoming / Will update soon</span>
-            </div>
-
-            <div class="card upcoming">
-                <span class="card-unit">Unit III</span>
-                <h3 class="card-title">Chapter 10: Cell Cycle and Cell Division</h3>
-                <span class="badge">Upcoming / Will update soon</span>
-            </div>
-
-            <!-- UNIT IV: PLANT PHYSIOLOGY -->
-            <div class="card upcoming">
-                <span class="card-unit">Unit IV</span>
-                <h3 class="card-title">Chapter 11: Photosynthesis in Higher Plants</h3>
-                <span class="badge">Upcoming / Will update soon</span>
-            </div>
-
-            <div class="card upcoming">
-                <span class="card-unit">Unit IV</span>
-                <h3 class="card-title">Chapter 12: Respiration in Plants</h3>
-                <span class="badge">Upcoming / Will update soon</span>
-            </div>
-
-            <div class="card upcoming">
-                <span class="card-unit">Unit IV</span>
-                <h3 class="card-title">Chapter 13: Plant Growth and Development</h3>
-                <span class="badge">Upcoming / Will update soon</span>
-            </div>
-
-            <!-- UNIT V: HUMAN PHYSIOLOGY -->
-            <a href="human-physiology.html" class="card">
-                <span class="card-unit">Unit V</span>
-                <h3 class="card-title">Chapter 14: Breathing and Exchange of Gases</h3>
-            </a>
-
-            <div class="card upcoming">
-                <span class="card-unit">Unit V</span>
-                <h3 class="card-title">Chapter 15: Body Fluids and Circulation</h3>
-                <span class="badge">Upcoming / Will update soon</span>
-            </div>
-
-            <div class="card upcoming">
-                <span class="card-unit">Unit V</span>
-                <h3 class="card-title">Chapter 16: Excretory Products and their Elimination</h3>
-                <span class="badge">Upcoming / Will update soon</span>
-            </div>
-
-            <div class="card upcoming">
-                <span class="card-unit">Unit V</span>
-                <h3 class="card-title">Chapter 17: Locomotion and Movement</h3>
-                <span class="badge">Upcoming / Will update soon</span>
-            </div>
-
-            <div class="card upcoming">
-                <span class="card-unit">Unit V</span>
-                <h3 class="card-title">Chapter 18: Neural Control and Coordination</h3>
-                <span class="badge">Upcoming / Will update soon</span>
-            </div>
-
-            <div class="card upcoming">
-                <span class="card-unit">Unit V</span>
-                <h3 class="card-title">Chapter 19: Coordination and Integration</h3>
-                <span class="badge">Upcoming / Will update soon</span>
-            </div>
+            <!-- You can copy-paste more unit-accordions here for Units III, IV, V -->
 
         </div>
+
+
+        <!-- ================= CLASS XII SECTION ================= -->
+        <div id="class12" class="tab-content">
+            <div class="unit-accordion open">
+                <div class="unit-header" onclick="toggleAccordion(this)">
+                    <div>
+                        <span class="unit-subtitle">Unit VI</span>
+                        <h2 class="unit-title">Reproduction</h2>
+                    </div>
+                    <svg class="chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </div>
+                <div class="unit-content">
+                    <div class="chapter-grid">
+                        <div class="card upcoming">
+                            <span class="card-number">Chapter 1</span>
+                            <h3 class="card-title">Reproduction in Organisms</h3>
+                            <span class="badge">Syllabus Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= NEET SECTION ================= -->
+        <div id="neet" class="tab-content">
+            <div class="chapter-grid">
+                <a href="#" class="card">
+                    <span class="card-number">Mock Test 1</span>
+                    <h3 class="card-title">Full Syllabus Biology Exam</h3>
+                    <span class="badge ready">Take Test</span>
+                </a>
+            </div>
+        </div>
+
     </div>
 
-    <footer>
-        <p>Created with ❤️ for Biology Students & Educators.</p>
-    </footer>
+    <script>
+        // Tab Switching Logic
+        function openTab(evt, tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
 
+        // Accordion Hide/Unhide Logic
+        function toggleAccordion(element) {
+            const accordion = element.parentElement;
+            accordion.classList.toggle('open');
+        }
+    </script>
 </body>
 </html>
