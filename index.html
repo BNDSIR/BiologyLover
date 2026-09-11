@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biology Mastery Hub | By Bholanath Debnath</title>
+    <title>Biology Mastery Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #059669; /* Biology Green */
+            --primary: #059669;
             --primary-dark: #047857;
             --bg-color: #f3f4f6;
             --surface: #ffffff;
@@ -62,6 +62,7 @@
             padding: 1rem;
             border-radius: 1rem;
             box-shadow: var(--shadow-sm);
+            flex-wrap: wrap;
         }
 
         .tab-btn {
@@ -79,7 +80,7 @@
         .tab-btn:hover { background: #f3f4f6; }
         .tab-btn.active { background: var(--primary); color: white; box-shadow: var(--shadow-sm); }
 
-        /* Tab Content Zones */
+        /* Tab Content */
         .tab-content { display: none; animation: fadeIn 0.5s ease-out forwards; }
         .tab-content.active { display: block; }
 
@@ -119,16 +120,16 @@
         }
         .unit-accordion.open .chevron { transform: rotate(180deg); fill: var(--primary); }
 
-        /* Smooth Hide/Unhide Content */
+        /* Hide/Unhide Content */
         .unit-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+            transition: max-height 0.6s cubic-bezier(0, 1, 0, 1);
             background: #f8fafc;
         }
         .unit-accordion.open .unit-content {
-            max-height: 2000px;
-            transition: max-height 0.5s ease-in-out;
+            max-height: 3000px;
+            transition: max-height 0.6s ease-in-out;
         }
 
         /* Chapter Grid Cards */
@@ -161,7 +162,7 @@
         .card-number { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600; }
         .card-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; }
         
-        /* Upcoming Badge */
+        /* Badges */
         .card.upcoming { opacity: 0.7; cursor: not-allowed; background: #f9fafb; }
         .badge {
             align-self: flex-start;
@@ -170,8 +171,6 @@
             padding: 0.25rem 0.75rem; border-radius: 999px;
             margin-top: auto;
         }
-
-        /* Finished App Badge */
         .badge.ready { background: #d1fae5; color: #047857; }
 
     </style>
@@ -181,12 +180,11 @@
     <header>
         <div class="floating-bg"></div>
         <h1 class="hero-title">Biology Mastery Hub</h1>
-        <p class="hero-subtitle">Interactive NEET & Board Modules by Bholanath Debnath</p>
+        <p class="hero-subtitle">Interactive NEET & Board Modules</p>
     </header>
 
     <div class="container">
         
-        <!-- Class Navigation Tabs -->
         <div class="tabs">
             <button class="tab-btn active" onclick="openTab(event, 'class11')">Class XI</button>
             <button class="tab-btn" onclick="openTab(event, 'class12')">Class XII</button>
@@ -197,7 +195,7 @@
         <div id="class11" class="tab-content active">
             
             <!-- Unit 1 -->
-            <div class="unit-accordion open"> <!-- "open" class makes it unhidden by default -->
+            <div class="unit-accordion open">
                 <div class="unit-header" onclick="toggleAccordion(this)">
                     <div>
                         <span class="unit-subtitle">Unit I</span>
@@ -207,26 +205,10 @@
                 </div>
                 <div class="unit-content">
                     <div class="chapter-grid">
-                        <div class="card upcoming">
-                            <span class="card-number">Chapter 1</span>
-                            <h3 class="card-title">The Living World</h3>
-                            <span class="badge">Upcoming</span>
-                        </div>
-                        <div class="card upcoming">
-                            <span class="card-number">Chapter 2</span>
-                            <h3 class="card-title">Biological Classification</h3>
-                            <span class="badge">Upcoming</span>
-                        </div>
-                        <a href="plant-kingdom.html" class="card">
-                            <span class="card-number">Chapter 3</span>
-                            <h3 class="card-title">Plant Kingdom</h3>
-                            <span class="badge ready">Interactive App Ready</span>
-                        </a>
-                        <div class="card upcoming">
-                            <span class="card-number">Chapter 4</span>
-                            <h3 class="card-title">Animal Kingdom</h3>
-                            <span class="badge">Upcoming</span>
-                        </div>
+                        <div class="card upcoming"><span class="card-number">Chapter 1</span><h3 class="card-title">The Living World</h3><span class="badge">Upcoming</span></div>
+                        <div class="card upcoming"><span class="card-number">Chapter 2</span><h3 class="card-title">Biological Classification</h3><span class="badge">Upcoming</span></div>
+                        <a href="plant-kingdom.html" class="card"><span class="card-number">Chapter 3</span><h3 class="card-title">Plant Kingdom</h3><span class="badge ready">Interactive App Ready</span></a>
+                        <div class="card upcoming"><span class="card-number">Chapter 4</span><h3 class="card-title">Animal Kingdom</h3><span class="badge">Upcoming</span></div>
                     </div>
                 </div>
             </div>
@@ -242,32 +224,75 @@
                 </div>
                 <div class="unit-content">
                     <div class="chapter-grid">
-                        <div class="card upcoming">
-                            <span class="card-number">Chapter 5</span>
-                            <h3 class="card-title">Morphology of Flowering Plants</h3>
-                            <span class="badge">Upcoming</span>
-                        </div>
-                        <div class="card upcoming">
-                            <span class="card-number">Chapter 6</span>
-                            <h3 class="card-title">Anatomy of Flowering Plants</h3>
-                            <span class="badge">Upcoming</span>
-                        </div>
-                        <div class="card upcoming">
-                            <span class="card-number">Chapter 7</span>
-                            <h3 class="card-title">Structural Organisation in Animals</h3>
-                            <span class="badge">Upcoming</span>
-                        </div>
+                        <div class="card upcoming"><span class="card-number">Chapter 5</span><h3 class="card-title">Morphology of Flowering Plants</h3><span class="badge">Upcoming</span></div>
+                        <div class="card upcoming"><span class="card-number">Chapter 6</span><h3 class="card-title">Anatomy of Flowering Plants</h3><span class="badge">Upcoming</span></div>
+                        <div class="card upcoming"><span class="card-number">Chapter 7</span><h3 class="card-title">Structural Organisation in Animals</h3><span class="badge">Upcoming</span></div>
                     </div>
                 </div>
             </div>
 
-            <!-- You can copy-paste more unit-accordions here for Units III, IV, V -->
+            <!-- Unit 3 -->
+            <div class="unit-accordion">
+                <div class="unit-header" onclick="toggleAccordion(this)">
+                    <div>
+                        <span class="unit-subtitle">Unit III</span>
+                        <h2 class="unit-title">Cell: Structure and Functions</h2>
+                    </div>
+                    <svg class="chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </div>
+                <div class="unit-content">
+                    <div class="chapter-grid">
+                        <div class="card upcoming"><span class="card-number">Chapter 8</span><h3 class="card-title">Cell: The Unit of Life</h3><span class="badge">Upcoming</span></div>
+                        <div class="card upcoming"><span class="card-number">Chapter 9</span><h3 class="card-title">Biomolecules</h3><span class="badge">Upcoming</span></div>
+                        <div class="card upcoming"><span class="card-number">Chapter 10</span><h3 class="card-title">Cell Cycle and Cell Division</h3><span class="badge">Upcoming</span></div>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Unit 4 -->
+            <div class="unit-accordion">
+                <div class="unit-header" onclick="toggleAccordion(this)">
+                    <div>
+                        <span class="unit-subtitle">Unit IV</span>
+                        <h2 class="unit-title">Plant Physiology</h2>
+                    </div>
+                    <svg class="chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </div>
+                <div class="unit-content">
+                    <div class="chapter-grid">
+                        <div class="card upcoming"><span class="card-number">Chapter 11</span><h3 class="card-title">Photosynthesis in Higher Plants</h3><span class="badge">Upcoming</span></div>
+                        <div class="card upcoming"><span class="card-number">Chapter 12</span><h3 class="card-title">Respiration in Plants</h3><span class="badge">Upcoming</span></div>
+                        <div class="card upcoming"><span class="card-number">Chapter 13</span><h3 class="card-title">Plant Growth and Development</h3><span class="badge">Upcoming</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 5 -->
+            <div class="unit-accordion">
+                <div class="unit-header" onclick="toggleAccordion(this)">
+                    <div>
+                        <span class="unit-subtitle">Unit V</span>
+                        <h2 class="unit-title">Human Physiology</h2>
+                    </div>
+                    <svg class="chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </div>
+                <div class="unit-content">
+                    <div class="chapter-grid">
+                        <div class="card upcoming"><span class="card-number">Chapter 14</span><h3 class="card-title">Breathing and Exchange of Gases</h3><span class="badge">Upcoming</span></div>
+                        <div class="card upcoming"><span class="card-number">Chapter 15</span><h3 class="card-title">Body Fluids and Circulation</h3><span class="badge">Upcoming</span></div>
+                        <div class="card upcoming"><span class="card-number">Chapter 16</span><h3 class="card-title">Excretory Products and their Elimination</h3><span class="badge">Upcoming</span></div>
+                        <div class="card upcoming"><span class="card-number">Chapter 17</span><h3 class="card-title">Locomotion and Movement</h3><span class="badge">Upcoming</span></div>
+                        <div class="card upcoming"><span class="card-number">Chapter 18</span><h3 class="card-title">Neural Control and Coordination</h3><span class="badge">Upcoming</span></div>
+                        <div class="card upcoming"><span class="card-number">Chapter 19</span><h3 class="card-title">Coordination and Integration</h3><span class="badge">Upcoming</span></div>
+                    </div>
+                </div>
+            </div>
         </div>
-
 
         <!-- ================= CLASS XII SECTION ================= -->
         <div id="class12" class="tab-content">
+            
+            <!-- Unit 6 -->
             <div class="unit-accordion open">
                 <div class="unit-header" onclick="toggleAccordion(this)">
                     <div>
@@ -278,14 +303,66 @@
                 </div>
                 <div class="unit-content">
                     <div class="chapter-grid">
-                        <div class="card upcoming">
-                            <span class="card-number">Chapter 1</span>
-                            <h3 class="card-title">Reproduction in Organisms</h3>
-                            <span class="badge">Syllabus Loading...</span>
-                        </div>
+                        <div class="card upcoming"><span class="card-number">Chapter 1</span><h3 class="card-title">Sexual Reproduction in Flowering Plants</h3><span class="badge">Upcoming</span></div>
+                        <div class="card upcoming"><span class="card-number">Chapter 2</span><h3 class="card-title">Human Reproduction</h3><span class="badge">Upcoming</span></div>
+                        <div class="card upcoming"><span class="card-number">Chapter 3</span><h3 class="card-title">Reproductive Health</h3><span class="badge">Upcoming</span></div>
                     </div>
                 </div>
             </div>
+
+            <!-- Unit 7 -->
+            <div class="unit-accordion">
+                <div class="unit-header" onclick="toggleAccordion(this)">
+                    <div>
+                        <span class="unit-subtitle">Unit VII</span>
+                        <h2 class="unit-title">Genetics and Evolution</h2>
+                    </div>
+                    <svg class="chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </div>
+                <div class="unit-content">
+                    <div class="chapter-grid">
+                        <div class="card upcoming"><span class="card-number">Chapter 4</span><h3 class="card-title">Principles of Inheritance</h3><span class="badge">Upcoming</span></div>
+                        <div class="card upcoming"><span class="card-number">Chapter 5</span><h3 class="card-title">Molecular Basis of Inheritance</h3><span class="badge">Upcoming</span></div>
+                        <div class="card upcoming"><span class="card-number">Chapter 6</span><h3 class="card-title">Evolution</h3><span class="badge">Upcoming</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Biotechnology Section -->
+            <div class="unit-accordion">
+                <div class="unit-header" onclick="toggleAccordion(this)">
+                    <div>
+                        <span class="unit-subtitle">Biotechnology</span>
+                        <h2 class="unit-title">Principles and Applications</h2>
+                    </div>
+                    <svg class="chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </div>
+                <div class="unit-content">
+                    <div class="chapter-grid">
+                        <div class="card upcoming"><span class="card-number">Chapter 9</span><h3 class="card-title">Biotechnology: Principles and Processes</h3><span class="badge">Upcoming</span></div>
+                        <div class="card upcoming"><span class="card-number">Chapter 10</span><h3 class="card-title">Biotechnology and its Applications</h3><span class="badge">Upcoming</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Unit 10 -->
+            <div class="unit-accordion">
+                <div class="unit-header" onclick="toggleAccordion(this)">
+                    <div>
+                        <span class="unit-subtitle">Unit X</span>
+                        <h2 class="unit-title">Ecology</h2>
+                    </div>
+                    <svg class="chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </div>
+                <div class="unit-content">
+                    <div class="chapter-grid">
+                        <div class="card upcoming"><span class="card-number">Chapter 11</span><h3 class="card-title">Organisms and Populations</h3><span class="badge">Upcoming</span></div>
+                        <div class="card upcoming"><span class="card-number">Chapter 12</span><h3 class="card-title">Ecosystem</h3><span class="badge">Upcoming</span></div>
+                        <div class="card upcoming"><span class="card-number">Chapter 13</span><h3 class="card-title">Biodiversity and Conservation</h3><span class="badge">Upcoming</span></div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- ================= NEET SECTION ================= -->
