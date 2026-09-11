@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<title>Plant Kingdom Master | NEET Biology Bengali</title>
+<style>
+:root{--bg:#f4faf6;--card:#fff;--card2:#f9fcfa;--text:#21352a;--muted:#68786d;--line:#dce9df;--green:#2f7d55;--green2:#4a9f70;--soft:#e4f4e9;--yellow:#fffbea;--rose:#fff0f4;--blue:#eaf5ff;--shadow:0 12px 34px rgba(35,86,56,.10);--radius:20px;--fontScale:1}
+body[data-theme="dark"]{--bg:#0f1813;--card:#18251d;--card2:#1d2b22;--text:#e8f2eb;--muted:#adbbb1;--line:#304237;--green:#62b981;--green2:#78c794;--soft:#203a2a;--yellow:#302c1d;--rose:#36252b;--blue:#1b2c38;--shadow:0 14px 38px rgba(0,0,0,.26)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at top right,rgba(87,176,117,.12),transparent 27%),var(--bg);color:var(--text);font-family:"Noto Sans Bengali","Hind Siliguri","Nirmala UI","Segoe UI",Arial,sans-serif;font-size:calc(16px * var(--fontScale));line-height:1.65;transition:.25s}button,input{font:inherit}button{color:inherit}
+.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#174f35,#2d7b53 56%,#5ca77b);color:#fff;padding:30px 24px 38px}.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.08)}.hero:before{width:320px;height:320px;right:-120px;top:-160px}.hero:after{width:220px;height:220px;left:-90px;bottom:-130px}.hero-in{max-width:1460px;margin:auto;position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:22px}.hero h1{margin:6px 0 8px;font-size:clamp(34px,5vw,60px);line-height:1.05}.hero h1 span{color:#d9ffe6}.hero p{max-width:900px;color:#ebfff2;margin:0;line-height:1.75}.badge{display:inline-flex;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);font-size:.84rem;font-weight:800}.hero-icon{width:150px;height:150px;border-radius:38px;display:grid;place-items:center;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.24);font-size:76px}
+.toolbar-wrap{max-width:1460px;margin:-19px auto 14px;padding:0 18px;position:relative;z-index:10}.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px;background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}.search{flex:1;min-width:240px}.search input{width:100%;border:1px solid var(--line);background:var(--card2);color:var(--text);border-radius:13px;padding:11px 14px;outline:none}.btn{border:1px solid var(--line);background:var(--card2);border-radius:12px;padding:9px 12px;cursor:pointer;font-weight:800}.themebox{display:flex;align-items:center;gap:8px;padding:6px 9px;border:1px solid var(--line);border-radius:13px;background:var(--card2)}.switch{position:relative;width:54px;height:29px;display:inline-block}.switch input{opacity:0;width:0;height:0}.slider{position:absolute;inset:0;border-radius:999px;background:#d8e5dc;cursor:pointer;transition:.25s}.slider:before{content:"☀";position:absolute;width:23px;height:23px;left:3px;top:3px;border-radius:50%;background:#fff;color:#c28b00;display:grid;place-items:center;font-size:13px;transition:.25s;box-shadow:0 2px 7px rgba(0,0,0,.18)}.switch input:checked+.slider{background:#315444}.switch input:checked+.slider:before{transform:translateX(25px);content:"☾";color:#26354d}
+.app{max-width:1460px;margin:auto;padding:4px 18px 60px;display:grid;grid-template-columns:315px minmax(0,1fr);gap:22px}.sidebar{align-self:start;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.side-head{padding:18px;border-bottom:1px solid var(--line)}.side-head small{color:var(--green);font-weight:900}.side-head h2{font-size:1.08rem;margin:4px 0 0}.menu{padding:9px}.menu-group{margin-bottom:7px;border-radius:14px;overflow:hidden}.menu-main,.flat{width:100%;border:0;background:transparent;cursor:pointer;text-align:left;padding:12px 13px;border-radius:12px;font-weight:900}.menu-main{display:flex;align-items:center;justify-content:space-between;gap:10px}.menu-main:hover,.flat:hover{background:var(--soft)}.menu-group.active .menu-main{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff}.menu-left{display:flex;align-items:center;gap:9px}.num{min-width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:var(--soft);color:var(--green);font-size:.75rem}.menu-group.active .num{background:rgba(255,255,255,.18);color:#fff}.arrow{font-size:.75rem;transition:.3s}.menu-group.active .arrow{transform:rotate(180deg)}.submenu{max-height:0;overflow:hidden;opacity:0;padding:0 8px;transition:max-height .35s,opacity .25s,padding .3s}.menu-group.active .submenu{max-height:380px;opacity:1;padding:8px}.submenu button{width:100%;border:0;background:transparent;color:var(--muted);cursor:pointer;padding:8px 10px 8px 36px;text-align:left;border-radius:9px;font-size:.84rem}.submenu button:hover{background:var(--soft);color:var(--green)}.flat.active{background:var(--soft);color:var(--green)}
+.content{min-width:0}.panel{display:none;animation:fade .28s}.panel.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}.head,.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.head{padding:25px;margin-bottom:15px;background:linear-gradient(135deg,var(--soft),var(--card) 58%)}.head .ey{color:var(--green);font-weight:900;font-size:.8rem;text-transform:uppercase}.head h2{font-size:clamp(26px,4vw,40px);margin:4px 0 8px}.head p{margin:0;color:var(--muted)}.card{padding:22px;margin-bottom:15px;scroll-margin-top:16px}.title{display:flex;gap:11px;align-items:center;padding-bottom:13px;border-bottom:1px solid var(--line);margin-bottom:16px}.icon{width:44px;height:44px;border-radius:13px;background:var(--soft);display:grid;place-items:center;font-size:21px}.title h3{margin:0;color:var(--green);font-size:1.2rem}.title small{color:var(--muted)}.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.mini{background:var(--card2);border:1px solid var(--line);border-radius:15px;padding:15px}.mini h4{margin:0 0 7px;color:var(--green)}.mini p{margin:0;color:var(--muted)}.mini ul{margin:8px 0 0;padding-left:21px}.facts{display:grid;gap:9px}.fact{display:grid;grid-template-columns:33px 1fr;gap:10px;background:var(--card2);border:1px solid var(--line);border-radius:13px;padding:12px}.fact>b{width:29px;height:29px;border-radius:9px;background:var(--soft);color:var(--green);display:grid;place-items:center;font-size:.78rem}.note,.trap,.bridge{margin-top:14px;padding:14px 16px;border-radius:13px}.note{background:var(--yellow);border-left:5px solid #d5b63e}.trap{background:var(--rose);border-left:5px solid #c45e75}.bridge{background:var(--blue);border-left:5px solid #5b8fb4}.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.chip{padding:6px 10px;border-radius:999px;background:var(--soft);color:var(--green);font-size:.78rem;font-weight:900}.table{overflow:auto;border:1px solid var(--line);border-radius:15px}.table table{width:100%;border-collapse:collapse;min-width:720px}.table th{background:var(--green);color:#fff;text-align:left;padding:11px;font-size:.84rem}.table td{padding:11px;border-bottom:1px solid var(--line);vertical-align:top;font-size:.9rem}.table tr:nth-child(even) td{background:var(--card2)}.parts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.part{border:1px solid var(--line);background:var(--card2);border-radius:14px;padding:13px}.part strong{display:block;color:var(--green);margin-bottom:4px}.diagrams{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:13px}.figure{margin:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--card2)}.ph{height:210px;display:grid;place-items:center;text-align:center;padding:18px;background:linear-gradient(135deg,rgba(75,159,112,.10),transparent),repeating-linear-gradient(45deg,transparent 0 16px,rgba(75,159,112,.035) 16px 32px)}.ph b{font-size:1.15rem;color:var(--green)}.figure figcaption{padding:11px 13px;text-align:center;color:var(--muted);font-size:.84rem}
+.question{border:1px solid var(--line);border-radius:15px;overflow:hidden;background:var(--card);margin-bottom:11px}.qhead{display:flex;gap:10px;padding:14px}.qno{min-width:32px;height:32px;border-radius:9px;background:var(--green);color:#fff;display:grid;place-items:center;font-size:.75rem;font-weight:900}.qtext{font-weight:800}.options{padding:0 14px 12px 56px;display:grid;gap:6px}.option{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:.9rem}.ansbtn{margin:0 14px 14px 56px;border:0;border-radius:10px;padding:8px 12px;background:var(--soft);color:var(--green);font-weight:900;cursor:pointer}.answer{max-height:0;overflow:hidden;opacity:0;background:var(--soft);padding:0 15px;transition:.3s}.question.open .answer{max-height:240px;opacity:1;padding:13px 15px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.tab{border:1px solid var(--line);background:var(--card2);padding:9px 12px;border-radius:11px;cursor:pointer;font-weight:900}.tab.active{background:var(--green);color:#fff}.view{display:none}.view.active{display:block}.quizcard{border:1px solid var(--line);border-radius:15px;padding:14px;margin-bottom:10px;background:var(--card2)}.quizcard h4{margin:0 0 10px}.qopt{display:block;width:100%;text-align:left;border:1px solid var(--line);background:var(--card);padding:9px 10px;border-radius:10px;margin:6px 0;cursor:pointer}.qopt.correct{background:#dbf3e3;border-color:#70b889;color:#174c2e}.qopt.wrong{background:#ffe4e4;border-color:#d68a8a;color:#7b2929}.score{position:sticky;top:8px;z-index:4;display:flex;justify-content:space-between;align-items:center;padding:11px 13px;background:var(--card);border:1px solid var(--line);border-radius:13px;margin-bottom:12px}.glossary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.gloss{border:1px solid var(--line);background:var(--card2);border-radius:13px;padding:12px}.gloss strong{color:var(--green);display:block;margin-bottom:3px}.hit{outline:3px solid rgba(224,188,55,.45);outline-offset:2px}footer{max-width:1460px;margin:0 auto 30px;padding:0 18px}.foot{background:#163c29;color:#dbefe2;border-radius:20px;padding:20px;text-align:center;font-size:.84rem}.foot strong{color:#fff}
+@media(max-width:1050px){.app{grid-template-columns:1fr}.sidebar{position:relative;top:auto;max-height:none}.menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.menu-group.active{grid-column:1/-1}}@media(max-width:760px){.hero{padding:26px 16px 35px}.hero-icon{display:none}.toolbar-wrap,.app,footer{padding-left:11px;padding-right:11px}.g2,.g3,.parts,.diagrams,.glossary{grid-template-columns:1fr}.card{padding:17px}.head{padding:19px}.menu{grid-template-columns:1fr}.menu-group.active{grid-column:auto}.options{padding-left:14px}.ansbtn{margin-left:14px}}
+
+/* ===== INTERACTIVE CONCEPT EXPLORER (V2) ===== */
+.concept-hint{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  margin:0 0 15px;padding:12px 14px;border:1px dashed var(--green);
+  border-radius:14px;background:var(--soft);color:var(--text)
+}
+.concept-hint b{color:var(--green)}
+.class-explorer{
+  margin:0 0 15px;padding:18px;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)
+}
+.class-explorer h3{margin:0 0 4px;color:var(--green)}
+.class-explorer p{margin:0 0 12px;color:var(--muted)}
+.class-tabs{display:flex;gap:8px;flex-wrap:wrap}
+.class-tab{
+  border:1px solid var(--line);background:var(--card2);color:var(--text);
+  border-radius:999px;padding:9px 13px;cursor:pointer;font-weight:900;
+  transition:transform .15s,background .2s,border-color .2s
+}
+.class-tab:hover{background:var(--soft);border-color:var(--green);transform:translateY(-1px)}
+.class-tab:focus-visible,.concept-term:focus-visible,.drawer-close:focus-visible{
+  outline:3px solid rgba(87,176,117,.4);outline-offset:2px
+}
+.concept-term{
+  color:var(--green);font-weight:850;cursor:pointer;
+  text-decoration-line:underline;text-decoration-style:dotted;
+  text-decoration-thickness:1.5px;text-underline-offset:3px;
+  border-radius:5px;padding:0 1px
+}
+.concept-term:hover{background:var(--soft);text-decoration-style:solid}
+body.drawer-open{overflow:hidden}
+.concept-overlay{
+  position:fixed;inset:0;background:rgba(5,18,11,.42);backdrop-filter:blur(2px);
+  opacity:0;pointer-events:none;transition:.25s;z-index:9998
+}
+.concept-overlay.open{opacity:1;pointer-events:auto}
+.concept-drawer{
+  position:fixed;right:0;top:0;height:100vh;width:min(560px,94vw);
+  background:var(--card);border-left:1px solid var(--line);box-shadow:-18px 0 45px rgba(0,0,0,.18);
+  transform:translateX(105%);transition:transform .3s ease;z-index:9999;
+  display:flex;flex-direction:column
+}
+.concept-drawer.open{transform:translateX(0)}
+.drawer-head{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+  padding:18px;border-bottom:1px solid var(--line);
+  background:linear-gradient(135deg,var(--soft),var(--card))
+}
+.drawer-head small{display:block;color:var(--green);font-weight:900;text-transform:uppercase;letter-spacing:.5px}
+.drawer-head h2{margin:3px 0 0;font-size:1.5rem;line-height:1.25}
+.drawer-close{
+  flex:0 0 auto;width:40px;height:40px;border-radius:12px;border:1px solid var(--line);
+  background:var(--card2);cursor:pointer;font-size:22px;display:grid;place-items:center
+}
+.drawer-body{overflow:auto;padding:18px 18px 30px}
+.drawer-source{
+  display:inline-flex;align-items:center;gap:6px;margin-bottom:12px;
+  padding:6px 9px;border-radius:999px;background:var(--soft);color:var(--green);
+  font-size:.78rem;font-weight:900
+}
+.drawer-section{
+  margin:0 0 13px;padding:13px 14px;border:1px solid var(--line);
+  border-radius:14px;background:var(--card2)
+}
+.drawer-section h4{margin:0 0 6px;color:var(--green)}
+.drawer-section p{margin:0;color:var(--text)}
+.drawer-section ul{margin:6px 0 0;padding-left:21px}
+.drawer-section li{margin:5px 0}
+.drawer-tip{background:var(--yellow);border-left:5px solid #d5b63e}
+.drawer-trap{background:var(--rose);border-left:5px solid #c45e75}
+.related-wrap{display:flex;gap:7px;flex-wrap:wrap}
+.related-chip{
+  border:1px solid var(--line);background:var(--card);color:var(--green);
+  border-radius:999px;padding:7px 10px;cursor:pointer;font-weight:800;font-size:.82rem
+}
+.related-chip:hover{background:var(--soft)}
+.drawer-nav{
+  padding:12px 18px;border-top:1px solid var(--line);background:var(--card);
+  display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--muted);font-size:.82rem
+}
+.explorer-count{font-weight:900;color:var(--green)}
+.deep-dive{
+  margin-top:14px;padding:15px;border-radius:15px;background:var(--blue);
+  border:1px solid var(--line)
+}
+.deep-dive h4{margin:0 0 7px;color:var(--green)}
+.deep-dive ul{margin:0;padding-left:21px}
+.deep-dive li{margin:5px 0}
+@media(max-width:760px){
+  .concept-drawer{width:100vw}
+  .drawer-head{padding:15px}.drawer-body{padding:15px 14px 26px}
+  .class-tab{flex:1 1 calc(50% - 8px);text-align:center}
+}
+
+
+/* ===== V3: INBUILT TERM + EXAMPLE QUICK SEARCH SPEECH BUBBLE ===== */
+:root{
+  --soft:var(--green-soft);
+  --card2:var(--card-2);
+  --rose:var(--rose-soft);
+  --blue:var(--blue-soft);
+  --yellow:var(--yellow-soft);
+}
+.quick-finder-toggle{
+  position:fixed;right:20px;bottom:20px;z-index:10020;
+  border:0;border-radius:999px;padding:12px 15px;
+  background:linear-gradient(135deg,var(--green),var(--green-2));color:#fff;
+  box-shadow:0 10px 28px rgba(26,90,58,.28);cursor:pointer;font-weight:900;
+  display:flex;align-items:center;gap:8px
+}
+.quick-finder-toggle .pulse{
+  width:9px;height:9px;border-radius:50%;background:#dfffe9;box-shadow:0 0 0 0 rgba(223,255,233,.6);
+  animation:qfpulse 2s infinite
+}
+@keyframes qfpulse{70%{box-shadow:0 0 0 10px rgba(223,255,233,0)}100%{box-shadow:0 0 0 0 rgba(223,255,233,0)}}
+
+.quick-finder{
+  position:fixed;right:20px;bottom:76px;width:min(430px,calc(100vw - 28px));
+  max-height:min(72vh,650px);z-index:10019;
+  background:var(--card);border:1px solid var(--line);border-radius:22px;
+  box-shadow:0 20px 55px rgba(0,0,0,.22);
+  transform:translateY(15px) scale(.97);opacity:0;pointer-events:none;
+  transition:.23s ease;display:flex;flex-direction:column;overflow:hidden
+}
+.quick-finder:after{
+  content:"";position:absolute;right:28px;bottom:-10px;width:20px;height:20px;
+  background:var(--card);transform:rotate(45deg);border-right:1px solid var(--line);border-bottom:1px solid var(--line)
+}
+.quick-finder.open{opacity:1;transform:none;pointer-events:auto}
+.qf-head{
+  padding:15px 15px 12px;border-bottom:1px solid var(--line);
+  background:linear-gradient(135deg,var(--green-soft),var(--card))
+}
+.qf-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.qf-title-row h3{margin:0;color:var(--green);font-size:1.05rem}
+.qf-title-row small{display:block;color:var(--muted);margin-top:2px}
+.qf-close{
+  width:35px;height:35px;border:1px solid var(--line);background:var(--card-2);
+  border-radius:10px;cursor:pointer;font-size:20px;display:grid;place-items:center
+}
+.qf-search{
+  width:100%;margin-top:11px;border:1px solid var(--line);background:var(--card-2);color:var(--text);
+  border-radius:12px;padding:10px 12px;outline:none
+}
+.qf-search:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(75,159,112,.14)}
+.qf-filters{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+.qf-filter{
+  border:1px solid var(--line);background:var(--card);color:var(--muted);
+  border-radius:999px;padding:6px 9px;cursor:pointer;font-size:.78rem;font-weight:900
+}
+.qf-filter.active{background:var(--green);color:#fff;border-color:var(--green)}
+.qf-body{padding:10px;overflow:auto;min-height:140px}
+.qf-empty{padding:22px 12px;text-align:center;color:var(--muted)}
+.qf-result{
+  width:100%;text-align:left;border:1px solid var(--line);background:var(--card-2);color:var(--text);
+  border-radius:14px;padding:11px 12px;margin-bottom:8px;cursor:pointer;transition:.18s
+}
+.qf-result:hover{border-color:var(--green);background:var(--green-soft);transform:translateY(-1px)}
+.qf-result-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.qf-result-name{font-weight:900;color:var(--green)}
+.qf-badge{
+  flex:0 0 auto;padding:3px 7px;border-radius:999px;background:var(--card);border:1px solid var(--line);
+  font-size:.69rem;font-weight:900;color:var(--muted)
+}
+.qf-result-sub{font-size:.79rem;color:var(--muted);margin-top:3px;line-height:1.45}
+.qf-result-fact{font-size:.84rem;margin-top:5px;line-height:1.5}
+.qf-detail{
+  border-top:1px solid var(--line);padding:13px 14px;background:var(--card);
+  display:none;max-height:42vh;overflow:auto
+}
+.qf-detail.open{display:block}
+.qf-back{
+  border:0;background:var(--green-soft);color:var(--green);border-radius:9px;padding:7px 9px;
+  cursor:pointer;font-weight:900;margin-bottom:10px
+}
+.qf-detail h3{margin:0 0 3px;color:var(--green)}
+.qf-meta{color:var(--muted);font-size:.78rem;margin-bottom:10px}
+.qf-box{border:1px solid var(--line);background:var(--card-2);border-radius:12px;padding:10px 11px;margin-top:8px}
+.qf-box b{display:block;color:var(--green);margin-bottom:3px}
+.qf-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.qf-action{
+  border:1px solid var(--line);background:var(--card);color:var(--green);
+  border-radius:10px;padding:8px 10px;cursor:pointer;font-weight:900;font-size:.8rem
+}
+.qf-action.primary{background:var(--green);color:#fff;border-color:var(--green)}
+.qf-footer{
+  border-top:1px solid var(--line);padding:9px 12px;color:var(--muted);font-size:.73rem;
+  background:var(--card-2)
+}
+.example-clickable{
+  color:#b36b00;font-weight:850;cursor:pointer;text-decoration:underline dotted;
+  text-underline-offset:3px;border-radius:4px
+}
+body[data-theme="dark"] .example-clickable{color:#ffc26f}
+.example-clickable:hover{background:var(--yellow-soft)}
+.qf-toolbar-btn{
+  border:1px solid var(--line);background:var(--card-2);color:var(--text);
+  border-radius:12px;padding:10px 12px;cursor:pointer;font-weight:900
+}
+.qf-toolbar-btn:hover{background:var(--green-soft)}
+@media(max-width:760px){
+  .quick-finder-toggle{right:12px;bottom:12px;padding:11px 13px}
+  .quick-finder{right:12px;bottom:67px;width:calc(100vw - 24px);max-height:76vh}
+  .quick-finder:after{right:25px}
+}
+
+</style>
+</head>
+<body data-theme="light">
+<header class="hero"><div class="hero-in"><div><span class="badge">🌿 NCERT Reprint 2026-27 • NEET Master Revision</span><h1>উদ্ভিদ রাজ্য <span>(Plant Kingdom)</span></h1><p>শ্রেণিবিন্যাস (Classification), শৈবাল (Algae), ব্রায়োফাইটা (Bryophytes), টেরিডোফাইটা (Pteridophytes), নগ্নবীজী (Gymnosperms) ও আবৃতবীজী (Angiosperms)-এর বৈশিষ্ট্য, গঠন, প্রজনন, গুরুত্বপূর্ণ পরিভাষা, উদাহরণ, diagram labels, NCERT facts এবং NEET exercise—একটি চোখে আরামদায়ক অ্যাপে।</p></div><div class="hero-icon">🌱</div></div></header>
+<div class="toolbar-wrap"><div class="toolbar"><div class="search"><input id="searchInput" type="search" placeholder="খুঁজুন: Heterospory, Gemma, Pyrenoid, Coralloid root..."></div><span id="searchInfo" style="font-size:.82rem;color:var(--muted)">NCERT key-term search</span><button class="btn" id="fontMinus">A−</button><button class="btn" id="fontPlus">A+</button><div class="themebox"><span>☀</span><label class="switch"><input type="checkbox" id="themeToggle"><span class="slider"></span></label><span>☾</span></div></div></div>
+
+<div class="toolbar-wrap" style="margin-top:0">
+  <div class="concept-hint">
+    <span>💡</span>
+    <span><b>Interactive mode:</b> যেকোনো dotted-underlined scientific term বা নিচের class/group tab-এ click করলে পাশে বিস্তারিত Concept Explorer খুলবে। আগের সব note ও exercise অপরিবর্তিত রাখা হয়েছে।</span>
+    <span class="explorer-count" id="termCountBadge"></span>
+  </div>
+</div>
+
+<main class="app"><aside class="sidebar"><div class="side-head"><small>SMART REVISION MENU</small><h2>একটি বিভাগ খুলুন</h2></div><nav class="menu">
+<button class="flat active" data-panel="overview">🧭 ভিত্তি ও শ্রেণিবিন্যাস</button>
+<div class="menu-group" data-panel="algae"><button class="menu-main"><span class="menu-left"><span class="num">01</span>শৈবাল (Algae)</span><span class="arrow">▼</span></button><div class="submenu"><button data-target="algae-core">মূল বৈশিষ্ট্য</button><button data-target="algae-classes">তিন শ্রেণি</button><button data-target="algae-parts">গঠন ও অংশ</button><button data-target="algae-repro">প্রজনন</button><button data-target="algae-value">গুরুত্ব</button><button data-target="algae-neet">NEET Focus</button></div></div>
+<div class="menu-group" data-panel="bryophytes"><button class="menu-main"><span class="menu-left"><span class="num">02</span>ব্রায়োফাইটা (Bryophytes)</span><span class="arrow">▼</span></button><div class="submenu"><button data-target="bryo-core">মূল বৈশিষ্ট্য</button><button data-target="bryo-groups">Liverwort বনাম Moss</button><button data-target="bryo-parts">গঠন ও অংশ</button><button data-target="bryo-cycle">জীবনচক্র</button><button data-target="bryo-value">গুরুত্ব</button><button data-target="bryo-neet">NEET Focus</button></div></div>
+<div class="menu-group" data-panel="pteridophytes"><button class="menu-main"><span class="menu-left"><span class="num">03</span>টেরিডোফাইটা (Pteridophytes)</span><span class="arrow">▼</span></button><div class="submenu"><button data-target="pteri-core">মূল বৈশিষ্ট্য</button><button data-target="pteri-classes">চার শ্রেণি</button><button data-target="pteri-parts">গঠন ও অংশ</button><button data-target="pteri-spores">Homo / Heterospory</button><button data-target="pteri-cycle">জীবনচক্র</button><button data-target="pteri-neet">NEET Focus</button></div></div>
+<div class="menu-group" data-panel="gymnosperms"><button class="menu-main"><span class="menu-left"><span class="num">04</span>নগ্নবীজী (Gymnosperms)</span><span class="arrow">▼</span></button><div class="submenu"><button data-target="gym-core">মূল বৈশিষ্ট্য</button><button data-target="gym-parts">Root-Stem-Leaf</button><button data-target="gym-repro">Cone ও প্রজনন</button><button data-target="gym-ex">উদাহরণ ও ফাঁদ</button><button data-target="gym-neet">NEET Focus</button></div></div>
+<div class="menu-group" data-panel="angiosperms"><button class="menu-main"><span class="menu-left"><span class="num">05</span>আবৃতবীজী (Angiosperms)</span><span class="arrow">▼</span></button><div class="submenu"><button data-target="angio-core">মূল বৈশিষ্ট্য</button><button data-target="angio-range">Range ও গুরুত্ব</button><button data-target="angio-groups">Dicot / Monocot</button><button data-target="angio-bridge">NEET Bridge</button><button data-target="angio-neet">NEET Focus</button></div></div>
+<button class="flat" data-panel="compare">⚖️ High-Yield তুলনা</button><button class="flat" data-panel="glossary">📚 পরিভাষা ভাণ্ডার</button><button class="flat" data-panel="exercise">🧠 Exercise Arena</button>
+</nav></aside><section class="content">
+<article class="panel active" id="panel-overview"><div class="head"><div class="ey">Foundation</div><h2>উদ্ভিদ রাজ্যের শ্রেণিবিন্যাস (Classification)</h2><p>এই অধ্যায়ে পাঁচটি প্রধান গোষ্ঠীর পাশাপাশি classification system-এর ভিত্তিও গুরুত্বপূর্ণ।</p></div>
+<section class="card"><div class="title"><div class="icon">🧭</div><div><h3>Artificial → Natural → Phylogenetic</h3><small>Classification-এর বিবর্তন</small></div></div><div class="g3">
+<div class="mini"><h4>কৃত্রিম শ্রেণিবিন্যাস (Artificial Classification)</h4><p>অভ্যাস (Habit), রং (Colour), পাতার সংখ্যা/আকৃতি ও পুংকেশরচক্র (Androecium)-এর মতো সীমিত বাহ্যিক বৈশিষ্ট্য ব্যবহার করত। লিনিয়াস (Linnaeus)-এর পদ্ধতি এর উদাহরণ।</p></div>
+<div class="mini"><h4>প্রাকৃতিক শ্রেণিবিন্যাস (Natural Classification)</h4><p>প্রাকৃতিক আত্মীয়তা (Natural Affinity), বাহ্যিক ও অন্তর্গঠন, অঙ্গসংস্থান (Anatomy), ভ্রূণতত্ত্ব (Embryology) ও উদ্ভিদ-রাসায়ন (Phytochemistry) বিবেচনা করে। বেন্থাম (Bentham) ও হুকার (Hooker) গুরুত্বপূর্ণ।</p></div>
+<div class="mini"><h4>বংশগত শ্রেণিবিন্যাস (Phylogenetic Classification)</h4><p>বিবর্তনীয় সম্পর্ক (Evolutionary Relationship) ও সাধারণ পূর্বপুরুষ (Common Ancestor)-এর ধারণার উপর ভিত্তি করে আধুনিকভাবে গ্রহণযোগ্য।</p></div></div><div class="note"><strong>Exam point:</strong> উদ্ভিজ্জ বৈশিষ্ট্য (Vegetative Characters) পরিবেশ দ্বারা সহজে প্রভাবিত হতে পারে; তাই artificial system-এ vegetative ও sexual characters-কে সমান weight দেওয়া সমস্যা তৈরি করে।</div></section>
+<section class="card"><div class="title"><div class="icon">🔬</div><div><h3>আধুনিক Taxonomy Tools</h3><small>NEET one-liners</small></div></div><div class="g3"><div class="mini"><h4>সংখ্যাতাত্ত্বিক শ্রেণিবিন্যাস (Numerical Taxonomy)</h4><p>পর্যবেক্ষণযোগ্য বৈশিষ্ট্যকে সংখ্যা/কোডে রূপান্তর; বহু character-কে একসঙ্গে analyse; প্রতিটি character সমান গুরুত্ব পায়।</p></div><div class="mini"><h4>কোষতাত্ত্বিক শ্রেণিবিন্যাস (Cytotaxonomy)</h4><p>Chromosome number, structure ও behaviour-এর মতো cytological information ব্যবহার করে।</p></div><div class="mini"><h4>রাসায়নিক শ্রেণিবিন্যাস (Chemotaxonomy)</h4><p>উদ্ভিদের chemical constituents ব্যবহার করে taxonomic confusion সমাধান করে।</p></div></div><div class="trap"><strong>NCERT Alert:</strong> সায়ানোব্যাকটেরিয়া (Cyanobacteria), যাদের blue-green algae বলা হত, আধুনিকভাবে Plantae-এর algae হিসেবে গণ্য নয়।</div></section></article>
+
+<article class="panel" id="panel-algae"><div class="head"><div class="ey">Group 01</div><h2>শৈবাল (Algae)</h2><p>ক্লোরোফিলধারী (Chlorophyll-bearing), সরল, থ্যালাসীয় (Thalloid), স্বপোষী (Autotrophic) ও প্রধানত জলজ (Aquatic) জীব।</p></div>
+<section class="card" id="algae-core"><div class="title"><div class="icon">🌿</div><div><h3>সব গুরুত্বপূর্ণ বৈশিষ্ট্য</h3><small>Core characters</small></div></div><div class="facts"><div class="fact"><b>1</b><div>বাসস্থান: মিঠা জল, সামুদ্রিক জল, স্যাঁতসেঁতে পাথর, মাটি ও কাঠ; কিছু fungus-এর সঙ্গে লাইকেন (Lichen) বা প্রাণীর সঙ্গে association-এ থাকে।</div></div><div class="fact"><b>2</b><div>দেহ সাধারণত থ্যালাস (Thallus); প্রকৃত root-stem-leaf পৃথক নয়।</div></div><div class="fact"><b>3</b><div>রূপ: colonial Volvox; filamentous Ulothrix ও Spirogyra; কিছু marine kelp বিশাল plant body তৈরি করে।</div></div><div class="fact"><b>4</b><div>প্রজনন: অঙ্গজ (Vegetative), অযৌন (Asexual), যৌন (Sexual)—তিন ধরনের।</div></div></div></section>
+<section class="card" id="algae-classes"><div class="title"><div class="icon">🧪</div><div><h3>তিনটি শ্রেণি (Classes)</h3><small>Most-tested comparison</small></div></div><div class="table"><table><thead><tr><th>বৈশিষ্ট্য</th><th>Chlorophyceae</th><th>Phaeophyceae</th><th>Rhodophyceae</th></tr></thead><tbody>
+<tr><td>সাধারণ নাম</td><td>Green algae</td><td>Brown algae</td><td>Red algae</td></tr><tr><td>প্রধান রঞ্জক (Pigment)</td><td>Chlorophyll-a, b</td><td>Chlorophyll-a, c; carotenoids; xanthophylls; fucoxanthin</td><td>Chlorophyll-a, d; r-phycoerythrin</td></tr><tr><td>সঞ্চিত খাদ্য (Stored Food)</td><td>Starch; pyrenoid-এ protein + starch; কখনও oil droplets</td><td>Laminarin + Mannitol</td><td>Floridean starch</td></tr><tr><td>কোষপ্রাচীর (Cell Wall)</td><td>Inner cellulose + outer pectose</td><td>Cellulose + outer gelatinous algin</td><td>Cellulose + pectin + polysulphate esters</td></tr><tr><td>Flagella</td><td>2-8, equal, apical</td><td>2, unequal, lateral</td><td>Absent</td></tr><tr><td>বাসস্থান</td><td>Fresh, brackish, salt water</td><td>Primarily marine; fresh water rare</td><td>Mostly marine; warmer areas; surface to greater depths</td></tr><tr><td>উদাহরণ</td><td>Chlamydomonas, Volvox, Ulothrix, Spirogyra, Chara</td><td>Ectocarpus, Dictyota, Laminaria, Sargassum, Fucus</td><td>Polysiphonia, Porphyra, Gracilaria, Gelidium</td></tr></tbody></table></div>
+<div class="g3" style="margin-top:12px"><div class="mini"><h4>Chloroplast shapes</h4><p>Discoid, plate-like, reticulate, cup-shaped, spiral বা ribbon-shaped হতে পারে।</p></div><div class="mini"><h4>Brown algae size</h4><p>Ectocarpus-এর simple branched filament থেকে kelp; কিছু kelp প্রায় 100 m পর্যন্ত হতে পারে।</p></div><div class="mini"><h4>Red algae depth</h4><p>r-Phycoerythrin-এর আধিক্য; অধিকাংশ marine, উষ্ণ অঞ্চলে বেশি এবং কম আলো পৌঁছায় এমন গভীরতায়ও দেখা যায়।</p></div></div></section>
+<section class="card" id="algae-parts"><div class="title"><div class="icon">🧩</div><div><h3>গঠন ও গুরুত্বপূর্ণ অংশ</h3><small>Diagram labels</small></div></div><div class="parts"><div class="part"><strong>পাইরেনয়েড (Pyrenoid)</strong>Green algae chloroplast-এর storage body; protein-এর সঙ্গে starch থাকে।</div><div class="part"><strong>হোল্ডফাস্ট (Holdfast)</strong>Brown algal body-কে substratum-এ ধরে রাখে।</div><div class="part"><strong>স্টাইপ (Stipe)</strong>ডাঁটা-সদৃশ অংশ।</div><div class="part"><strong>ফ্রন্ড (Frond)</strong>পাতা-সদৃশ photosynthetic অংশ।</div><div class="part"><strong>এয়ার ব্লাডার (Air Bladder)</strong>NCERT brown algae figure-এর গুরুত্বপূর্ণ label।</div><div class="part"><strong>মিডরিব (Midrib)</strong>Fucus-এর frond-এ diagram label হিসেবে গুরুত্বপূর্ণ।</div></div><div class="diagrams"><figure class="figure"><div class="ph"><div><b>Volvox</b><br>Parent colony • Daughter colony</div></div><figcaption>নিজের Volvox diagram বসানোর placeholder।</figcaption></figure><figure class="figure"><div class="ph"><div><b>Brown Alga</b><br>Holdfast • Stipe • Frond • Air bladder • Midrib</div></div><figcaption>Laminaria/Fucus/Dictyota-এর diagram replacement box।</figcaption></figure></div></section>
+<section class="card" id="algae-repro"><div class="title"><div class="icon">🔁</div><div><h3>প্রজনন (Reproduction)</h3><small>Concept clarity</small></div></div><div class="g3"><div class="mini"><h4>অঙ্গজ (Vegetative)</h4><p>খণ্ডীভবন (Fragmentation); প্রতিটি fragment নতুন thallus তৈরি করতে পারে।</p></div><div class="mini"><h4>অযৌন (Asexual)</h4><p>বিভিন্ন spore; সবচেয়ে সাধারণ জুওস্পোর (Zoospore)—flagellated ও motile।</p></div><div class="mini"><h4>যৌন (Sexual)</h4><p>Gamete fusion; Isogamy, Anisogamy বা Oogamy দেখা যায়।</p></div></div><div class="table" style="margin-top:12px"><table><thead><tr><th>ধরন</th><th>ধারণা</th><th>উদাহরণ</th></tr></thead><tbody><tr><td>সমযুগ্মতা (Isogamy)</td><td>সমআকার gamete; motile বা non-motile হতে পারে</td><td>Ulothrix - motile; Spirogyra - non-motile</td></tr><tr><td>অসমযুগ্মতা (Anisogamy)</td><td>দুই gamete আকারে ভিন্ন</td><td>Eudorina</td></tr><tr><td>ডিম্বযুগ্মতা (Oogamy)</td><td>বড় non-motile female + ছোট motile male</td><td>Volvox, Fucus</td></tr></tbody></table></div><div class="trap"><strong>Trap:</strong> Isogamy মানেই উভয় gamete motile নয়—Spirogyra-তে isogamous gametes non-motile।</div></section>
+<section class="card" id="algae-value"><div class="title"><div class="icon">🌍</div><div><h3>পরিবেশগত ও অর্থনৈতিক গুরুত্ব</h3><small>High-yield facts</small></div></div><div class="facts"><div class="fact"><b>1</b><div>পৃথিবীর মোট CO₂ fixation-এর অন্তত প্রায় অর্ধেক algae photosynthesis-এর মাধ্যমে সম্পন্ন করে।</div></div><div class="fact"><b>2</b><div>জলজ পরিবেশে dissolved oxygen বাড়ায় এবং aquatic food cycle-এর primary producer।</div></div><div class="fact"><b>3</b><div>Porphyra, Laminaria, Sargassum-এর বহু species food হিসেবে ব্যবহৃত।</div></div><div class="fact"><b>4</b><div>Brown algae → algin; red algae → carrageen ধরনের hydrocolloid।</div></div><div class="fact"><b>5</b><div>Gelidium + Gracilaria → agar; microbial culture, ice-cream ও jelly preparation-এ ব্যবহৃত।</div></div><div class="fact"><b>6</b><div>Chlorella → unicellular protein-rich food supplement; space travellers-এর food হিসেবে উল্লেখিত।</div></div></div></section>
+<section class="card" id="algae-neet"><div class="title"><div class="icon">🎯</div><div><h3>NEET Focus</h3><small>Quick check</small></div></div>
+<div class="question"><div class="qhead"><span class="qno">Q1</span><div class="qtext">Fucoxanthin কোন class-এর প্রধান diagnostic pigment?</div></div><div class="options"><div class="option">A. Chlorophyceae</div><div class="option">B. Phaeophyceae</div><div class="option">C. Rhodophyceae</div><div class="option">D. Bryophytes</div></div><button class="ansbtn">উত্তর দেখুন</button><div class="answer"><b>B. Phaeophyceae</b></div></div>
+<div class="question"><div class="qhead"><span class="qno">Q2</span><div class="qtext">Floridean starch কোথায় সঞ্চিত হয়?</div></div><div class="options"><div class="option">A. Green algae</div><div class="option">B. Brown algae</div><div class="option">C. Red algae</div><div class="option">D. Moss</div></div><button class="ansbtn">উত্তর দেখুন</button><div class="answer"><b>C. Red algae</b></div></div>
+<div class="question"><div class="qhead"><span class="qno">Q3</span><div class="qtext">Agar-এর source কোন জোড়া?</div></div><div class="options"><div class="option">A. Gelidium + Gracilaria</div><div class="option">B. Laminaria + Fucus</div><div class="option">C. Volvox + Chara</div><div class="option">D. Marchantia + Funaria</div></div><button class="ansbtn">উত্তর দেখুন</button><div class="answer"><b>A. Gelidium + Gracilaria</b></div></div></section></article>
+<article class="panel" id="panel-bryophytes"><div class="head"><div class="ey">Group 02</div><h2>ব্রায়োফাইটা (Bryophytes)</h2><p>মস (Moss) ও লিভারওয়ার্ট (Liverwort)-সমৃদ্ধ গোষ্ঠী; স্থলে বাস করলেও যৌন প্রজননের জন্য জলের উপর নির্ভরশীল।</p></div>
+<section class="card" id="bryo-core"><div class="title"><div class="icon">☘️</div><div><h3>মূল বৈশিষ্ট্য</h3><small>Complete concept</small></div></div><div class="facts"><div class="fact"><b>1</b><div>সাধারণত damp, humid, shady locality; bare rock/soil-এ plant succession-এ গুরুত্বপূর্ণ।</div></div><div class="fact"><b>2</b><div>দেহ algae-এর তুলনায় বেশি differentiated; thallus-like, prostrate বা erect; unicellular/multicellular rhizoid দ্বারা substrate-এ attached।</div></div><div class="fact"><b>3</b><div>True root, stem, leaf নেই; root-like, stem-like, leaf-like structure থাকতে পারে।</div></div><div class="fact"><b>4</b><div>প্রধান plant body haploid gametophyte।</div></div><div class="fact"><b>5</b><div>Male organ = antheridium; biflagellate antherozoid তৈরি করে। Female organ = flask-shaped archegonium; single egg তৈরি করে।</div></div><div class="fact"><b>6</b><div>Fertilisation-এ জল দরকার। Zygote সঙ্গে সঙ্গে reduction division করে না; multicellular sporophyte তৈরি করে।</div></div><div class="fact"><b>7</b><div>Sporophyte free-living নয়; photosynthetic gametophyte-এর সঙ্গে attached থেকে nourishment নেয়। Sporophyte-এর কিছু cell meiosis করে haploid spore তৈরি করে।</div></div></div></section>
+<section class="card" id="bryo-groups"><div class="title"><div class="icon">🍀</div><div><h3>Liverwort বনাম Moss</h3><small>High-yield distinction</small></div></div><div class="table"><table><thead><tr><th>বৈশিষ্ট্য</th><th>Liverwort</th><th>Moss</th></tr></thead><tbody><tr><td>উদাহরণ</td><td>Marchantia</td><td>Funaria, Polytrichum, Sphagnum</td></tr><tr><td>দেহ</td><td>Marchantia-তে thalloid, dorsiventral, substrate-এ closely appressed</td><td>Gametophyte-এর protonema stage + leafy stage</td></tr><tr><td>Leaf-like arrangement</td><td>Leafy form-এ stem-like structure-এ দুই সারি</td><td>Upright slender axis-এ spirally arranged leaf-like structures</td></tr><tr><td>Rhizoid</td><td>উপস্থিত</td><td>Multicellular এবং branched</td></tr><tr><td>Vegetative/Asexual</td><td>Fragmentation + gemma</td><td>Fragmentation + secondary protonema-তে budding</td></tr><tr><td>Sporophyte</td><td>Foot + seta + capsule</td><td>Foot + seta + capsule; liverwort-এর তুলনায় বেশি elaborate</td></tr></tbody></table></div></section>
+<section class="card" id="bryo-parts"><div class="title"><div class="icon">🧩</div><div><h3>সব গুরুত্বপূর্ণ অংশ</h3><small>Figure labels + meaning</small></div></div><div class="parts"><div class="part"><strong>রাইজয়েড (Rhizoid)</strong>Attachment; true root নয়।</div><div class="part"><strong>জেমা (Gemma)</strong>Green, multicellular asexual bud।</div><div class="part"><strong>জেমা কাপ (Gemma Cup)</strong>Marchantia thallus-এর small receptacle যেখানে gemma থাকে।</div><div class="part"><strong>অ্যান্থেরিডিওফোর (Antheridiophore)</strong>Marchantia male reproductive stalk/structure—figure label।</div><div class="part"><strong>আর্কিগোনিওফোর (Archegoniophore)</strong>Marchantia female reproductive stalk/structure—figure label।</div><div class="part"><strong>ফুট (Foot)</strong>Sporophyte-এর basal attached part।</div><div class="part"><strong>সেটা (Seta)</strong>Sporophyte stalk-like region।</div><div class="part"><strong>ক্যাপসুল (Capsule)</strong>Spore-producing region; meiosis-এর পরে haploid spores।</div><div class="part"><strong>প্রোটোনিমা (Protonema)</strong>Spore-derived first moss gametophyte stage; creeping, green, branched, often filamentous।</div><div class="part"><strong>লিফি স্টেজ (Leafy Stage)</strong>Secondary protonema-র lateral bud থেকে; sex organs এই stage-এ থাকে।</div></div><div class="diagrams"><figure class="figure"><div class="ph"><div><b>Marchantia</b><br>Archegoniophore • Antheridiophore • Gemma cup • Rhizoids</div></div><figcaption>NCERT page 6 figure labels অনুশীলনের box।</figcaption></figure><figure class="figure"><div class="ph"><div><b>Funaria</b><br>Gametophyte • Sporophyte • Seta • Capsule • Leaves • Main axis • Rhizoids</div></div><figcaption>Funaria-এর gametophyte-sporophyte relationship পরিষ্কার করুন।</figcaption></figure></div></section>
+<section class="card" id="bryo-cycle"><div class="title"><div class="icon">🔁</div><div><h3>জীবনচক্র (Life Cycle)</h3><small>Flow concept</small></div></div><div class="note"><strong>Flow:</strong> Gametophyte (n) → gamete → fertilisation → zygote (2n) → attached sporophyte (2n) → meiosis → spores (n) → gametophyte।</div><div class="trap"><strong>ভুল এড়ান:</strong> Bryophyte-এর dominant phase = gametophyte; sporophyte independent নয়।</div></section>
+<section class="card" id="bryo-value"><div class="title"><div class="icon">🌍</div><div><h3>Ecological / Economic Importance</h3><small>NCERT facts</small></div></div><div class="facts"><div class="fact"><b>1</b><div>Mosses + lichens rocks-এর first coloniser; rock decomposition করে higher plant growth-এর substrate তৈরি করে।</div></div><div class="fact"><b>2</b><div>Dense moss mat falling rain-এর impact কমিয়ে soil erosion কমায়।</div></div><div class="fact"><b>3</b><div>Sphagnum → peat; fuel এবং living material transport-এ water-holding packing material হিসেবে ব্যবহৃত।</div></div><div class="fact"><b>4</b><div>কিছু moss herbaceous mammals, birds ও অন্যান্য animals-এর food।</div></div></div></section>
+<section class="card" id="bryo-neet"><div class="title"><div class="icon">🎯</div><div><h3>NEET Focus</h3></div></div><div class="question"><div class="qhead"><span class="qno">Q1</span><div class="qtext">Bryophytes-কে amphibians of plant kingdom বলা হয় কেন?</div></div><div class="options"><div class="option">A. Water-এ only live</div><div class="option">B. Land-এ থাকে, sexual reproduction-এ water দরকার</div><div class="option">C. Seed produce করে</div><div class="option">D. Vascular tissue আছে</div></div><button class="ansbtn">উত্তর দেখুন</button><div class="answer"><b>B.</b></div></div><div class="question"><div class="qhead"><span class="qno">Q2</span><div class="qtext">Marchantia-এর gemma কী?</div></div><div class="options"><div class="option">A. Male gamete</div><div class="option">B. Multicellular asexual bud</div><div class="option">C. Spore mother cell</div><div class="option">D. Capsule</div></div><button class="ansbtn">উত্তর দেখুন</button><div class="answer"><b>B.</b> Green multicellular asexual bud।</div></div><div class="question"><div class="qhead"><span class="qno">Q3</span><div class="qtext">Moss protonema সরাসরি কোথা থেকে তৈরি হয়?</div></div><div class="options"><div class="option">A. Zygote</div><div class="option">B. Spore</div><div class="option">C. Capsule wall</div><div class="option">D. Antheridium</div></div><button class="ansbtn">উত্তর দেখুন</button><div class="answer"><b>B. Spore</b></div></div></section></article>
+
+<article class="panel" id="panel-pteridophytes"><div class="head"><div class="ey">Group 03</div><h2>টেরিডোফাইটা (Pteridophytes)</h2><p>Horsetail ও fern-সহ বিবর্তনীয়ভাবে প্রথম terrestrial plants যাদের well-developed vascular tissues—xylem ও phloem—রয়েছে।</p></div>
+<section class="card" id="pteri-core"><div class="title"><div class="icon">🌱</div><div><h3>মূল বৈশিষ্ট্য</h3><small>Core facts</small></div></div><div class="facts"><div class="fact"><b>1</b><div>Medicinal purpose, soil-binder ও ornamental plant হিসেবে ব্যবহৃত।</div></div><div class="fact"><b>2</b><div>First terrestrial vascular plants; main plant body = sporophyte।</div></div><div class="fact"><b>3</b><div>Sporophyte true root, stem, leaf-এ differentiated এবং vascular tissue well developed।</div></div><div class="fact"><b>4</b><div>Selaginella-তে small leaf = microphyll; fern-এ large leaf = macrophyll।</div></div><div class="fact"><b>5</b><div>Sporangia, sporophyll-এর উপর থাকে; কিছুতে sporophyll compact strobilus/cone তৈরি করে—Selaginella, Equisetum।</div></div><div class="fact"><b>6</b><div>Spore mother cell meiosis করে spores তৈরি করে। Spore germination → inconspicuous small multicellular mostly photosynthetic thalloid gametophyte = prothallus।</div></div><div class="fact"><b>7</b><div>Prothallus-এর জন্য cool, damp, shady condition এবং fertilisation-এর জন্য water দরকার—spread সীমিত করতে পারে।</div></div></div></section>
+<section class="card" id="pteri-classes"><div class="title"><div class="icon">🧬</div><div><h3>চারটি শ্রেণি (Classes)</h3><small>NCERT examples</small></div></div><div class="g2"><div class="mini"><h4>Psilopsida</h4><p>Psilotum</p></div><div class="mini"><h4>Lycopsida</h4><p>Selaginella, Lycopodium</p></div><div class="mini"><h4>Sphenopsida</h4><p>Equisetum</p></div><div class="mini"><h4>Pteropsida</h4><p>Dryopteris, Pteris, Adiantum</p></div></div></section>
+<section class="card" id="pteri-parts"><div class="title"><div class="icon">🧩</div><div><h3>গঠন ও Figure Labels</h3></div></div><div class="parts"><div class="part"><strong>মাইক্রোফিল (Microphyll)</strong>Small leaf; Selaginella।</div><div class="part"><strong>ম্যাক্রোফিল (Macrophyll)</strong>Large leaf; fern।</div><div class="part"><strong>স্পোরোফিল (Sporophyll)</strong>Sporangium-bearing leaf-like appendage।</div><div class="part"><strong>স্পোরাঞ্জিয়াম (Sporangium)</strong>Spore formation site।</div><div class="part"><strong>স্ট্রোবিলাস (Strobilus)</strong>Compact cone-like structure; Selaginella, Equisetum।</div><div class="part"><strong>প্রোথ্যালাস (Prothallus)</strong>Small free-living gametophyte।</div><div class="part"><strong>Node / Internode</strong>Equisetum figure-এর গুরুত্বপূর্ণ label।</div><div class="part"><strong>রাইজোম (Rhizome)</strong>Equisetum figure-এর underground stem label।</div></div><div class="diagrams"><figure class="figure"><div class="ph"><div><b>Selaginella</b><br>Leaves • Stem • Roots</div></div><figcaption>Selaginella figure placeholder।</figcaption></figure><figure class="figure"><div class="ph"><div><b>Equisetum</b><br>Strobilus • Node • Internode • Branch • Rhizome</div></div><figcaption>NCERT page 9 labels অনুশীলন করুন।</figcaption></figure></div></section>
+<section class="card" id="pteri-spores"><div class="title"><div class="icon">⚖️</div><div><h3>Homosporous বনাম Heterosporous</h3><small>Seed habit precursor</small></div></div><div class="g2"><div class="mini"><h4>সমস্পোরী (Homosporous)</h4><p>Majority pteridophytes একই ধরনের spores তৈরি করে।</p></div><div class="mini"><h4>বিষমস্পোরী (Heterosporous)</h4><p>Selaginella ও Salvinia → microspore + megaspore।</p></div></div><div class="note"><strong>Evolution concept:</strong> Microspore → male gametophyte; megaspore → female gametophyte। Female gametophyte parent sporophyte-এ কিছু সময় retained থাকে এবং zygote থেকে young embryo female gametophyte-এর ভেতরে develop করে। এটি seed habit-এর precursor।</div></section>
+<section class="card" id="pteri-cycle"><div class="title"><div class="icon">🔁</div><div><h3>জীবনচক্র (Life Cycle)</h3></div></div><div class="facts"><div class="fact"><b>1</b><div>Prothallus male antheridium ও female archegonium বহন করে।</div></div><div class="fact"><b>2</b><div>Antherozoid-কে archegonium-এ পৌঁছাতে water দরকার।</div></div><div class="fact"><b>3</b><div>Fertilisation → zygote → well-differentiated dominant sporophyte।</div></div></div></section>
+<section class="card" id="pteri-neet"><div class="title"><div class="icon">🎯</div><div><h3>NEET Focus</h3></div></div><div class="question"><div class="qhead"><span class="qno">Q1</span><div class="qtext">First vascular terrestrial plant group?</div></div><div class="options"><div class="option">A. Bryophytes</div><div class="option">B. Pteridophytes</div><div class="option">C. Gymnosperms</div><div class="option">D. Algae</div></div><button class="ansbtn">উত্তর দেখুন</button><div class="answer"><b>B. Pteridophytes</b></div></div><div class="question"><div class="qhead"><span class="qno">Q2</span><div class="qtext">Seed habit-এর precursor হিসেবে কোন বৈশিষ্ট্য সবচেয়ে গুরুত্বপূর্ণ?</div></div><div class="options"><div class="option">A. Fragmentation</div><div class="option">B. Heterospory</div><div class="option">C. Isogamy</div><div class="option">D. Protonema</div></div><button class="ansbtn">উত্তর দেখুন</button><div class="answer"><b>B. Heterospory</b></div></div><div class="question"><div class="qhead"><span class="qno">Q3</span><div class="qtext">Pteridophyte gametophyte-এর নাম কী?</div></div><div class="options"><div class="option">A. Protonema</div><div class="option">B. Prothallus</div><div class="option">C. Gemma</div><div class="option">D. Cone</div></div><button class="ansbtn">উত্তর দেখুন</button><div class="answer"><b>B. Prothallus</b></div></div></section></article>
+<article class="panel" id="panel-gymnosperms"><div class="head"><div class="ey">Group 04</div><h2>নগ্নবীজী (Gymnosperms)</h2><p>ডিম্বক (Ovule) ovary wall-এর মধ্যে enclosed নয়; fertilisation-এর আগে ও পরে exposed থাকে। তাই mature seed-ও fruit-এর মধ্যে covered থাকে না।</p></div>
+<section class="card" id="gym-core"><div class="title"><div class="icon">🌲</div><div><h3>মূল বৈশিষ্ট্য</h3><small>Complete NCERT summary</small></div></div><div class="facts"><div class="fact"><b>1</b><div>Medium-sized tree, tall tree বা shrub; Sequoia বিশ্বের অন্যতম tallest tree species।</div></div><div class="fact"><b>2</b><div>Root সাধারণত tap root। Pinus-এ mycorrhiza; Cycas-এ N₂-fixing cyanobacteria-যুক্ত coralloid roots।</div></div><div class="fact"><b>3</b><div>Stem Cycas-এ unbranched; Pinus ও Cedrus-এ branched।</div></div><div class="fact"><b>4</b><div>Leaf simple বা compound হতে পারে; Cycas-এর pinnate leaves কয়েক বছর persist করে।</div></div><div class="fact"><b>5</b><div>Extreme temperature, humidity ও wind সহ্য করার adaptation; conifer needle-like leaf surface area কমায়; thick cuticle + sunken stomata water loss কমায়।</div></div><div class="fact"><b>6</b><div>Gymnosperms heterosporous—haploid microspore ও megaspore তৈরি করে।</div></div></div></section>
+<section class="card" id="gym-parts"><div class="title"><div class="icon">🧩</div><div><h3>Root-Stem-Leaf ও Figure Parts</h3></div></div><div class="parts"><div class="part"><strong>কোরালয়েড মূল (Coralloid Root)</strong>Cycas-এর specialised root; N₂-fixing cyanobacteria-এর association।</div><div class="part"><strong>মাইকোরাইজা (Mycorrhiza)</strong>Pinus root + fungus association।</div><div class="part"><strong>Needle-like Leaf</strong>Surface area কমায়।</div><div class="part"><strong>Thick Cuticle</strong>Water loss কমাতে সাহায্য করে।</div><div class="part"><strong>Sunken Stomata</strong>Transpirational water loss কমায়।</div><div class="part"><strong>Dwarf Shoot / Long Shoot</strong>Pinus figure-এর গুরুত্বপূর্ণ labels।</div></div></section>
+<section class="card" id="gym-repro"><div class="title"><div class="icon">🌰</div><div><h3>Cones, Spores ও Gametophytes</h3><small>Reproductive concept</small></div></div><div class="facts"><div class="fact"><b>1</b><div>Microspore ও megaspore sporangia-তে তৈরি হয়; sporangia sporophyll-এর উপর থাকে এবং sporophyll spiral arrangement-এ strobilus/cone গঠন করতে পারে।</div></div><div class="fact"><b>2</b><div>Microsporophyll + microsporangium → microsporangiate/male strobilus।</div></div><div class="fact"><b>3</b><div>Microspore → highly reduced male gametophyte = pollen grain; pollen microsporangium-এর ভিতরে develop করে।</div></div><div class="fact"><b>4</b><div>Megasporophyll + ovule/megasporangium → macrosporangiate/female strobilus।</div></div><div class="fact"><b>5</b><div>Pinus: male + female cones same tree। Cycas: male cone ও megasporophyll different trees।</div></div><div class="fact"><b>6</b><div>Nucellus-এর একটি cell → megaspore mother cell। Nucellus protective envelope দ্বারা covered; composite structure = ovule।</div></div><div class="fact"><b>7</b><div>Megaspore mother cell meiosis → 4 megaspores; একটি megaspore → multicellular female gametophyte; তাতে 2 বা তার বেশি archegonia থাকতে পারে।</div></div><div class="fact"><b>8</b><div>Male ও female gametophytes independent free-living নয়; sporophyte-এর sporangia-তে retained।</div></div><div class="fact"><b>9</b><div>Pollen air current-এ ovule opening-এ পৌঁছে; pollen tube male gamete archegonium-এর কাছে পৌঁছায়; fertilisation → zygote → embryo, ovule → seed।</div></div></div><div class="diagrams"><figure class="figure"><div class="ph"><div><b>Cycas</b><br>Coralloid root • Pinnate leaf • Male/Female plant</div></div><figcaption>Cycas diagram placeholder।</figcaption></figure><figure class="figure"><div class="ph"><div><b>Pinus / Ginkgo</b><br>Needle leaf • Dwarf shoot • Long shoot • Seeds</div></div><figcaption>NCERT page 11 figure labels-এর জন্য placeholder।</figcaption></figure></div></section>
+<section class="card" id="gym-ex"><div class="title"><div class="icon">⚠️</div><div><h3>উদাহরণ ও NEET Traps</h3></div></div><div class="g3"><div class="mini"><h4>Cycas</h4><p>Unbranched stem, pinnate persistent leaves, coralloid root; male cone ও megasporophyll different trees।</p></div><div class="mini"><h4>Pinus</h4><p>Branched stem, mycorrhiza, needle leaves; male ও female cones same tree।</p></div><div class="mini"><h4>Cedrus / Ginkgo / Sequoia</h4><p>Cedrus branched stem; Ginkgo figure example; Sequoia tallest tree species-এর মধ্যে একটি।</p></div></div><div class="trap"><strong>Trap:</strong> Naked seed মানে seed coat absent নয়; seed fruit/ovary-এর মধ্যে enclosed নয়।</div></section>
+<section class="card" id="gym-neet"><div class="title"><div class="icon">🎯</div><div><h3>NEET Focus</h3></div></div><div class="question"><div class="qhead"><span class="qno">Q1</span><div class="qtext">Cycas coralloid root কোন association-এর জন্য পরিচিত?</div></div><div class="options"><div class="option">A. N₂-fixing cyanobacteria</div><div class="option">B. Rhizobium only</div><div class="option">C. Protozoa</div><div class="option">D. Moss</div></div><button class="ansbtn">উত্তর দেখুন</button><div class="answer"><b>A.</b></div></div><div class="question"><div class="qhead"><span class="qno">Q2</span><div class="qtext">Gymnosperm male gametophyte-এর reduced form?</div></div><div class="options"><div class="option">A. Pollen grain</div><div class="option">B. Ovule</div><div class="option">C. Archegonium</div><div class="option">D. Megaspore mother cell</div></div><button class="ansbtn">উত্তর দেখুন</button><div class="answer"><b>A. Pollen grain</b></div></div><div class="question"><div class="qhead"><span class="qno">Q3</span><div class="qtext">Pinus-এ male ও female cones কীভাবে থাকে?</div></div><div class="options"><div class="option">A. Different trees</div><div class="option">B. Same tree</div><div class="option">C. Only male</div><div class="option">D. No cone</div></div><button class="ansbtn">উত্তর দেখুন</button><div class="answer"><b>B. Same tree</b></div></div></section></article>
+
+<article class="panel" id="panel-angiosperms"><div class="head"><div class="ey">Group 05</div><h2>আবৃতবীজী (Angiosperms)</h2><p>Flowering plants; pollen grain ও ovule specialised flower-এ develop করে এবং seed fruit-এর মধ্যে enclosed থাকে। এই PDF-এ Angiosperm অংশ সংক্ষিপ্ত—তাই PDF facts ও cross-chapter NEET bridge আলাদা করে দেখানো হয়েছে।</p></div>
+<section class="card" id="angio-core"><div class="title"><div class="icon">🌸</div><div><h3>PDF-সমর্থিত মূল বৈশিষ্ট্য</h3></div></div><div class="facts"><div class="fact"><b>1</b><div>Gymnosperm-এর বিপরীতে ovule naked নয়; pollen grain ও ovule flower-এর specialised structures-এ develop করে।</div></div><div class="fact"><b>2</b><div>Seeds fruits-এর মধ্যে enclosed।</div></div><div class="fact"><b>3</b><div>Exceptionally large group; wide range of habitats।</div></div><div class="fact"><b>4</b><div>Size range: smallest Wolffia থেকে tall Eucalyptus (>100 m) পর্যন্ত।</div></div><div class="fact"><b>5</b><div>Food, fodder, fuel, medicine ও commercially important products-এর প্রধান উৎস।</div></div><div class="fact"><b>6</b><div>দুই class: Dicotyledons ও Monocotyledons।</div></div></div></section>
+<section class="card" id="angio-range"><div class="title"><div class="icon">📏</div><div><h3>Range ও গুরুত্ব</h3></div></div><div class="g2"><div class="mini"><h4>Wolffia</h4><p>Chapter-এ smallest angiosperm example হিসেবে উল্লেখিত।</p></div><div class="mini"><h4>Eucalyptus</h4><p>100 m-এর বেশি height-এর tall angiosperm tree পর্যন্ত হতে পারে।</p></div></div></section>
+<section class="card" id="angio-groups"><div class="title"><div class="icon">🌾</div><div><h3>Dicotyledons ও Monocotyledons</h3><small>এই PDF যা সরাসরি বলে</small></div></div><div class="g2"><div class="mini"><h4>দ্বিবীজপত্রী (Dicotyledons)</h4><p>Angiosperm-এর দুই major class-এর একটি; chapter figure-এ dicotyledon plant দেখানো হয়েছে।</p></div><div class="mini"><h4>একবীজপত্রী (Monocotyledons)</h4><p>Angiosperm-এর অন্য major class; chapter figure-এ monocotyledon plant দেখানো হয়েছে।</p></div></div></section>
+<section class="card" id="angio-bridge"><div class="title"><div class="icon">🧠</div><div><h3>NEET Concept Bridge</h3><small>PDF-বহির্ভূত cross-chapter extension</small></div></div><div class="bridge"><strong>Source distinction:</strong> এই box-এর তথ্য Plant Kingdom PDF-এর সরাসরি পাঠ্য নয়। NEET-এর অন্য chapter-এর সঙ্গে সংযোগের জন্য মনে রাখুন—Angiosperm-এ double fertilisation, pollen grain = male gametophyte, embryo sac = female gametophyte, এবং monocot-dicot-এর detailed anatomy/morphology অন্য সংশ্লিষ্ট chapter-এ পড়তে হবে।</div></section>
+<section class="card" id="angio-neet"><div class="title"><div class="icon">🎯</div><div><h3>NEET Focus</h3></div></div><div class="question"><div class="qhead"><span class="qno">Q1</span><div class="qtext">Gymnosperm বনাম Angiosperm-এর seed-level distinction?</div></div><div class="options"><div class="option">A. Both naked</div><div class="option">B. Gymnosperm exposed, Angiosperm fruit-enclosed</div><div class="option">C. Both seedless</div><div class="option">D. Angiosperm no flower</div></div><button class="ansbtn">উত্তর দেখুন</button><div class="answer"><b>B.</b></div></div><div class="question"><div class="qhead"><span class="qno">Q2</span><div class="qtext">Smallest angiosperm example?</div></div><div class="options"><div class="option">A. Wolffia</div><div class="option">B. Sequoia</div><div class="option">C. Cycas</div><div class="option">D. Chlorella</div></div><button class="ansbtn">উত্তর দেখুন</button><div class="answer"><b>A. Wolffia</b></div></div></section></article>
+
+<article class="panel" id="panel-compare"><div class="head"><div class="ey">High-Yield Compare</div><h2>এক নজরে পাঁচটি গোষ্ঠী</h2><p>Single-statement, match-the-column ও assertion-reason-এর জন্য concept separation table।</p></div><section class="card"><div class="title"><div class="icon">⚖️</div><div><h3>Master Comparison</h3></div></div><div class="table"><table><thead><tr><th>Feature</th><th>Algae</th><th>Bryophytes</th><th>Pteridophytes</th><th>Gymnosperms</th><th>Angiosperms</th></tr></thead><tbody><tr><td>প্রধান দেহ</td><td>Thallus</td><td>Gametophyte</td><td>Sporophyte</td><td>Sporophyte</td><td>Sporophyte</td></tr><tr><td>True root/stem/leaf</td><td>না</td><td>না</td><td>হ্যাঁ</td><td>হ্যাঁ</td><td>হ্যাঁ</td></tr><tr><td>Vascular tissue</td><td>না</td><td>না</td><td>হ্যাঁ</td><td>হ্যাঁ</td><td>হ্যাঁ</td></tr><tr><td>Archegonium</td><td>না</td><td>হ্যাঁ</td><td>হ্যাঁ</td><td>হ্যাঁ</td><td>Plant Kingdom PDF-এ আলোচিত নয়</td></tr><tr><td>Seed</td><td>না</td><td>না</td><td>না</td><td>হ্যাঁ, naked</td><td>হ্যাঁ, fruit-enclosed</td></tr><tr><td>Key exam term</td><td>Pigment + stored food</td><td>Dominant gametophyte</td><td>Prothallus + heterospory</td><td>Cones + naked ovule/seed</td><td>Flower + enclosed seed</td></tr></tbody></table></div></section><section class="card"><div class="title"><div class="icon">⚡</div><div><h3>Ultra High-Yield Lines</h3></div></div><div class="g2"><div class="mini"><h4>Algae</h4><p>Green → starch; Brown → laminarin + mannitol; Red → floridean starch.</p></div><div class="mini"><h4>Bryophytes</h4><p>Dominant gametophyte; dependent sporophyte; water required for sex.</p></div><div class="mini"><h4>Pteridophytes</h4><p>First terrestrial vascular plants; prothallus; Selaginella + Salvinia heterosporous.</p></div><div class="mini"><h4>Gymnosperms</h4><p>Pinus → mycorrhiza; Cycas → coralloid root; naked seed.</p></div><div class="mini"><h4>Angiosperms</h4><p>Seed enclosed in fruit; Wolffia small; Eucalyptus tall.</p></div><div class="mini"><h4>Taxonomy</h4><p>Numerical = coded observable characters; Cyto = chromosomes; Chemo = chemical constituents.</p></div></div></section></article>
+<article class="panel" id="panel-glossary"><div class="head"><div class="ey">Terminology</div><h2>পরিভাষা ভাণ্ডার (Glossary)</h2><p>NCERT statement বুঝতে শব্দের সঙ্গে concept জুড়ে পড়ুন।</p></div><section class="card"><div class="glossary">
+<div class="gloss"><strong>থ্যালাস (Thallus)</strong>True root-stem-leaf-এ বিভক্ত নয় এমন সরল body।</div><div class="gloss"><strong>পাইরেনয়েড (Pyrenoid)</strong>Green algal chloroplast-এর storage body; protein + starch।</div><div class="gloss"><strong>জুওস্পোর (Zoospore)</strong>Flagellated motile asexual spore।</div><div class="gloss"><strong>সমযুগ্মতা (Isogamy)</strong>Similar-sized gametes-এর fusion।</div><div class="gloss"><strong>অসমযুগ্মতা (Anisogamy)</strong>Dissimilar-sized gametes-এর fusion।</div><div class="gloss"><strong>ডিম্বযুগ্মতা (Oogamy)</strong>Large non-motile female + small motile male gamete।</div><div class="gloss"><strong>রাইজয়েড (Rhizoid)</strong>Attachment-এর root-like structure; true root নয়।</div><div class="gloss"><strong>জেমা (Gemma)</strong>Marchantia-র green multicellular asexual bud।</div><div class="gloss"><strong>প্রোটোনিমা (Protonema)</strong>Moss gametophyte-এর spore-derived first stage।</div><div class="gloss"><strong>অ্যান্থেরিডিয়াম (Antheridium)</strong>Male sex organ।</div><div class="gloss"><strong>আর্কিগোনিয়াম (Archegonium)</strong>Flask-shaped female sex organ; egg বহন করে।</div><div class="gloss"><strong>প্রোথ্যালাস (Prothallus)</strong>Pteridophyte-এর small free-living gametophyte।</div><div class="gloss"><strong>স্পোরোফিল (Sporophyll)</strong>Sporangium-bearing leaf-like appendage।</div><div class="gloss"><strong>স্ট্রোবিলাস (Strobilus)</strong>Compact cone-like sporophyll arrangement।</div><div class="gloss"><strong>সমস্পোরী (Homosporous)</strong>এক ধরনের spore produce করে।</div><div class="gloss"><strong>বিষমস্পোরী (Heterosporous)</strong>Microspore + megaspore produce করে।</div><div class="gloss"><strong>মাইক্রোফিল (Microphyll)</strong>Small leaf; Selaginella।</div><div class="gloss"><strong>ম্যাক্রোফিল (Macrophyll)</strong>Large leaf; fern।</div><div class="gloss"><strong>মাইকোরাইজা (Mycorrhiza)</strong>Root-fungus association; Pinus example।</div><div class="gloss"><strong>কোরালয়েড মূল (Coralloid Root)</strong>Cycas specialised root with N₂-fixing cyanobacteria।</div><div class="gloss"><strong>মাইক্রোস্পোর (Microspore)</strong>Male gametophyte lineage-এর spore।</div><div class="gloss"><strong>মেগাস্পোর (Megaspore)</strong>Female gametophyte lineage-এর spore।</div><div class="gloss"><strong>নিউসেলাস (Nucellus)</strong>Ovule tissue যেখানে megaspore mother cell differentiates।</div><div class="gloss"><strong>নগ্ন বীজ (Naked Seed)</strong>Fruit/ovary wall-এর মধ্যে enclosed নয় এমন seed।</div><div class="gloss"><strong>Numerical Taxonomy</strong>Observable characters-কে number/code দিয়ে computational analysis।</div><div class="gloss"><strong>Cytotaxonomy</strong>Chromosome number, structure, behaviour-ভিত্তিক taxonomy।</div><div class="gloss"><strong>Chemotaxonomy</strong>Chemical constituents-ভিত্তিক taxonomic analysis।</div></div></section></article>
+
+<article class="panel" id="panel-exercise"><div class="head"><div class="ey">Exercise Arena</div><h2>অনুশীলন (Exercise) + NEET Challenge</h2><p>NCERT exercise themes-এর সাথে interactive MCQ, assertion-reason এবং ploidy drill।</p></div><section class="card"><div class="tabs"><button class="tab active" data-ex="ncert">NCERT Exercise Themes</button><button class="tab" data-ex="mcq">Interactive MCQ</button><button class="tab" data-ex="assertion">Assertion-Reason</button><button class="tab" data-ex="ploidy">Ploidy Drill</button></div>
+<div class="view active" id="ex-ncert"><div class="g2"><div class="mini"><h4>1. Algae classification basis</h4><p>Pigment, stored food, cell wall, flagella ও habitat ধরে comparative table লিখুন।</p></div><div class="mini"><h4>2. Reduction division map</h4><p>Liverwort, moss, fern, gymnosperm ও angiosperm-এ meiosis কোথায় ঘটে—নিজস্ব flowchart বানান। Angiosperm meiosis detail এই PDF-এ নেই; cross-chapter পড়ুন।</p></div><div class="mini"><h4>3. Archegonia-bearing groups</h4><p>Bryophytes, Pteridophytes, Gymnosperms—তিনটিকে compare করুন এবং একটির life cycle লিখুন।</p></div><div class="mini"><h4>4. Ploidy practice</h4><p>Protonema, primary endosperm nucleus, moss leaf cell, fern prothallus, Marchantia gemma, monocot meristem, liverwort ovum, fern zygote।</p></div><div class="mini"><h4>5. Economic importance</h4><p>Algae-এর CO₂ fixation, food, hydrocolloid, agar, Chlorella; gymnosperm-এর useful structural/ecological facts পুনরাবৃত্তি করুন।</p></div><div class="mini"><h4>6. Gymnosperm vs Angiosperm</h4><p>Ovule exposure + seed enclosure + flower/fruit context—table তৈরি করুন।</p></div><div class="mini"><h4>7. Heterospory</h4><p>Definition + Selaginella + Salvinia + significance as seed habit precursor।</p></div><div class="mini"><h4>8. Define terms</h4><p>Protonema, Antheridium, Archegonium, Diplontic, Sporophyll, Isogamy—1 line definition + example।</p></div><div class="mini"><h4>9. Differentiate</h4><p>Red vs Brown algae; Liverwort vs Moss; Homosporous vs Heterosporous Pteridophyte।</p></div><div class="mini"><h4>10. Match concept</h4><p>Chlamydomonas → Algae; Cycas → Gymnosperm; Selaginella → Pteridophyte; Sphagnum → Moss।</p></div><div class="mini"><h4>11. Gymnosperm long answer</h4><p>Naked ovule/seed, root, stem, leaf adaptation, heterospory, cones, reduced gametophytes ও pollen tube—heading ধরে উত্তর লিখুন।</p></div></div></div>
+<div class="view" id="ex-mcq"><div class="score"><strong id="scoreText">Score: 0 / 0</strong><button class="btn" id="resetQuiz">Reset Quiz</button></div><div id="quizContainer"></div></div>
+<div class="view" id="ex-assertion"><div class="question"><div class="qhead"><span class="qno">A1</span><div class="qtext">Assertion: Bryophyte sporophyte free-living নয়। Reason: এটি photosynthetic gametophyte-এর সঙ্গে attached থেকে nourishment গ্রহণ করে।</div></div><div class="options"><div class="option">A. Both true; Reason explains Assertion</div><div class="option">B. Both true; Reason not explanation</div><div class="option">C. Assertion true; Reason false</div><div class="option">D. Assertion false; Reason true</div></div><button class="ansbtn">উত্তর দেখুন</button><div class="answer"><b>A.</b></div></div><div class="question"><div class="qhead"><span class="qno">A2</span><div class="qtext">Assertion: Selaginella seed-bearing plant। Reason: এটি heterosporous এবং seed habit-এর precursor দেখায়।</div></div><div class="options"><div class="option">A. Both true</div><div class="option">B. Assertion false; Reason true</div><div class="option">C. Assertion true; Reason false</div><div class="option">D. Both false</div></div><button class="ansbtn">উত্তর দেখুন</button><div class="answer"><b>B.</b> Selaginella seed produce করে না; heterospory seed habit precursor।</div></div><div class="question"><div class="qhead"><span class="qno">A3</span><div class="qtext">Assertion: Rhodophyceae-তে flagellar stage absent। Reason: এদের asexual spores ও sexual gametes non-motile।</div></div><div class="options"><div class="option">A. Both true; Reason supports Assertion</div><div class="option">B. Both true; unrelated</div><div class="option">C. Assertion true; Reason false</div><div class="option">D. Assertion false</div></div><button class="ansbtn">উত্তর দেখুন</button><div class="answer"><b>A.</b></div></div><div class="question"><div class="qhead"><span class="qno">A4</span><div class="qtext">Assertion: Conifer needle leaves water loss কমায়। Reason: Reduced surface area, thick cuticle ও sunken stomata water loss কমাতে সাহায্য করে।</div></div><div class="options"><div class="option">A. Both true; Reason explains</div><div class="option">B. Both true; no relation</div><div class="option">C. Assertion true; Reason false</div><div class="option">D. Both false</div></div><button class="ansbtn">উত্তর দেখুন</button><div class="answer"><b>A.</b></div></div></div>
+<div class="view" id="ex-ploidy"><div class="bridge"><strong>Cross-chapter note:</strong> এই table-এর কিছু উত্তর Plant Kingdom PDF-এর exercise theme-এ আছে, কিন্তু explanatory text-এ সব answer সরাসরি দেওয়া নেই। Standard NEET biology concept হিসেবে দেখানো হয়েছে।</div><div class="table" style="margin-top:12px"><table><thead><tr><th>Structure</th><th>Ploidy</th><th>Why</th></tr></thead><tbody><tr><td>Moss protonemal cell</td><td>n</td><td>Gametophyte stage</td></tr><tr><td>Moss leaf cell</td><td>n</td><td>Leafy gametophyte</td></tr><tr><td>Fern prothallus cell</td><td>n</td><td>Gametophyte</td></tr><tr><td>Marchantia gemma cell</td><td>n</td><td>Gametophyte-derived propagule</td></tr><tr><td>Liverwort ovum</td><td>n</td><td>Gamete</td></tr><tr><td>Fern zygote</td><td>2n</td><td>Post-fertilisation</td></tr><tr><td>Monocot meristem cell</td><td>2n</td><td>Sporophyte tissue</td></tr><tr><td>Dicot primary endosperm nucleus</td><td>3n</td><td>Cross-chapter angiosperm concept</td></tr></tbody></table></div></div></section></article>
+
+</section></main>
+<footer><div class="foot"><strong>Plant Kingdom Master • NEET Biology Bengali</strong><br>Core content reviewed against the uploaded NCERT Plant Kingdom chapter, Reprint 2026-27. Blue “NEET Concept Bridge” boxes mark cross-chapter additions.</div></footer>
+
+
+<button class="quick-finder-toggle" id="quickFinderToggle" type="button" aria-expanded="false">
+  <span class="pulse"></span> 💬 Quick Finder
+</button>
+
+<aside class="quick-finder" id="quickFinder" aria-hidden="true" aria-label="Inbuilt term and example search">
+  <div class="qf-head">
+    <div class="qf-title-row">
+      <div>
+        <h3>🌿 Term & Example Finder</h3>
+        <small>অ্যাপের ভেতরেই search করুন — internet বা image insert দরকার নেই</small>
+      </div>
+      <button class="qf-close" id="qfClose" type="button" aria-label="Close quick finder">×</button>
+    </div>
+    <input class="qf-search" id="qfSearch" type="search" autocomplete="off"
+      placeholder="যেমন: Volvox, Gemma, Cycas, Heterospory, Agar...">
+    <div class="qf-filters">
+      <button class="qf-filter active" data-filter="all" type="button">সব</button>
+      <button class="qf-filter" data-filter="term" type="button">পরিভাষা</button>
+      <button class="qf-filter" data-filter="example" type="button">উদাহরণ</button>
+      <button class="qf-filter" data-filter="group" type="button">Class / Group</button>
+    </div>
+  </div>
+
+  <div class="qf-body" id="qfResults"></div>
+
+  <div class="qf-detail" id="qfDetail">
+    <button class="qf-back" id="qfBack" type="button">← ফলাফলে ফিরুন</button>
+    <h3 id="qfDetailName"></h3>
+    <div class="qf-meta" id="qfDetailMeta"></div>
+    <div class="qf-box"><b>সহজ পরিচয়</b><div id="qfDetailIntro"></div></div>
+    <div class="qf-box"><b>গুরুত্বপূর্ণ বৈশিষ্ট্য / Fact</b><div id="qfDetailFacts"></div></div>
+    <div class="qf-box"><b>🎯 NEET Focus</b><div id="qfDetailNeet"></div></div>
+    <div class="qf-box"><b>🔗 সম্পর্কিত</b><div id="qfDetailRelated"></div></div>
+    <div class="qf-actions" id="qfActions"></div>
+  </div>
+
+  <div class="qf-footer">
+    Tip: পাতার মধ্যে কমলা dotted নাম = গুরুত্বপূর্ণ example; সবুজ dotted নাম = detailed term।
+  </div>
+</aside>
+
+<div class="concept-overlay" id="conceptOverlay" aria-hidden="true"></div>
+<aside class="concept-drawer" id="conceptDrawer" aria-hidden="true" aria-label="Concept Explorer">
+  <div class="drawer-head">
+    <div>
+      <small id="drawerCategory">Concept Explorer</small>
+      <h2 id="drawerTitle">বিস্তারিত ধারণা</h2>
+    </div>
+    <button class="drawer-close" id="drawerClose" aria-label="Close concept details">×</button>
+  </div>
+  <div class="drawer-body">
+    <div class="drawer-source" id="drawerSource">📘 NCERT Plant Kingdom</div>
+    <div class="drawer-section">
+      <h4>সহজ সংজ্ঞা (Core Meaning)</h4>
+      <p id="drawerDefinition"></p>
+    </div>
+    <div class="drawer-section">
+      <h4>গভীর ধারণা (Detailed Concept)</h4>
+      <div id="drawerDetails"></div>
+    </div>
+    <div class="drawer-section">
+      <h4>উদাহরণ / কোথায় দেখা যায়</h4>
+      <div id="drawerExamples"></div>
+    </div>
+    <div class="drawer-section drawer-tip">
+      <h4>🎯 NEET Focus</h4>
+      <div id="drawerNeet"></div>
+    </div>
+    <div class="drawer-section drawer-trap">
+      <h4>⚠️ Common Confusion</h4>
+      <div id="drawerTrap"></div>
+    </div>
+    <div class="drawer-section">
+      <h4>সম্পর্কিত ধারণা (Related Terms)</h4>
+      <div class="related-wrap" id="drawerRelated"></div>
+    </div>
+  </div>
+  <div class="drawer-nav">
+    <span>Click a related term to continue learning without leaving the page.</span>
+    <button class="btn" id="drawerCloseBottom">Close</button>
+  </div>
+</aside>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+ const body=document.body,toggle=document.getElementById('themeToggle');if(localStorage.getItem('pkTheme')==='dark'){body.dataset.theme='dark';toggle.checked=true}toggle.onchange=()=>{body.dataset.theme=toggle.checked?'dark':'light';localStorage.setItem('pkTheme',body.dataset.theme)};
+ let scale=Number(localStorage.getItem('pkScale')||1);const apply=()=>{scale=Math.max(.9,Math.min(1.18,scale));document.documentElement.style.setProperty('--fontScale',scale);localStorage.setItem('pkScale',scale)};apply();document.getElementById('fontPlus').onclick=()=>{scale+=.04;apply()};document.getElementById('fontMinus').onclick=()=>{scale-=.04;apply()};
+ const panels=[...document.querySelectorAll('.panel')],groups=[...document.querySelectorAll('.menu-group')],flats=[...document.querySelectorAll('.flat')];
+ function show(name,scroll=true){panels.forEach(p=>p.classList.toggle('active',p.id==='panel-'+name));flats.forEach(b=>b.classList.toggle('active',b.dataset.panel===name));groups.forEach(g=>g.classList.toggle('active',g.dataset.panel===name));if(scroll){const p=document.getElementById('panel-'+name);if(p)window.scrollTo({top:p.getBoundingClientRect().top+scrollY-12,behavior:'smooth'})}}
+ flats.forEach(b=>b.onclick=()=>show(b.dataset.panel));groups.forEach(g=>g.querySelector('.menu-main').onclick=()=>show(g.dataset.panel));document.querySelectorAll('.submenu button').forEach(b=>b.onclick=()=>{const t=document.getElementById(b.dataset.target);if(t)t.scrollIntoView({behavior:'smooth',block:'start'})});
+ document.querySelectorAll('.ansbtn').forEach(b=>b.onclick=()=>{const q=b.closest('.question');q.classList.toggle('open');b.textContent=q.classList.contains('open')?'উত্তর লুকান':'উত্তর দেখুন'});
+ document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.getElementById('ex-'+t.dataset.ex).classList.add('active')});
+ const data=[
+ ['কোন taxonomy chromosome number, structure ও behaviour ব্যবহার করে?',['Numerical taxonomy','Cytotaxonomy','Chemotaxonomy','Artificial classification'],1],
+ ['Green algae cell wall-এর সাধারণ বিন্যাস?',['Inner cellulose + outer pectose','Cellulose + algin','Only pectin','No cell wall'],0],
+ ['Phaeophyceae stored food?',['Starch + protein','Laminarin + mannitol','Floridean starch','Oil only'],1],
+ ['Rhodophyceae-এর প্রধান red pigment?',['Fucoxanthin','r-Phycoerythrin','Chlorophyll-b','Carotene only'],1],
+ ['Oogamy-এর NCERT example?',['Volvox + Fucus','Ulothrix + Spirogyra','Eudorina + Chara','Gelidium + Gracilaria'],0],
+ ['Bryophyte dominant plant body?',['Sporophyte','Gametophyte','Seed','Embryo'],1],
+ ['Marchantia asexual propagule?',['Protonema','Gemma','Prothallus','Pollen'],1],
+ ['Moss-এর প্রথম gametophyte stage?',['Leafy stage','Protonema','Capsule','Seta'],1],
+ ['Selaginella small leaf?',['Macrophyll','Microphyll','Frond','Sporangium'],1],
+ ['Selaginella + Salvinia common feature?',['Homosporous','Heterosporous','Non-vascular','Seed-bearing'],1],
+ ['Pteridophyte gametophyte?',['Protonema','Prothallus','Gemma','Cone'],1],
+ ['Equisetum কোন class?',['Psilopsida','Lycopsida','Sphenopsida','Pteropsida'],2],
+ ['Cycas special root?',['Mycorrhiza only','Coralloid root','Fibrous root','Pneumatophore'],1],
+ ['Pinus root association?',['Lichen','Mycorrhiza','Rhizobium nodule','Gemma'],1],
+ ['Gymnosperm male gametophyte reduced form?',['Pollen grain','Ovule','Archegonium','Megaspore mother cell'],0],
+ ['Pinus male + female cones?',['Different trees','Same tree','Only underground','Absent'],1],
+ ['Gymnosperm seed কেন naked?',['No embryo','No seed coat','Not enclosed in fruit/ovary','No food reserve'],2],
+ ['Angiosperm seed অবস্থান?',['Exposed','Enclosed in fruit','Inside cone','Inside protonema'],1],
+ ['Smallest angiosperm example?',['Wolffia','Sequoia','Cycas','Chlorella'],0],
+ ['Agar source?',['Gelidium + Gracilaria','Sargassum + Fucus','Ulothrix + Volvox','Marchantia + Funaria'],0]
+ ];
+ const qc=document.getElementById('quizContainer');let score=0,answered=0;function update(){document.getElementById('scoreText').textContent=`Score: ${score} / ${answered}`}function render(){score=0;answered=0;qc.innerHTML='';data.forEach((x,i)=>{const c=document.createElement('div');c.className='quizcard';c.innerHTML=`<h4>${i+1}. ${x[0]}</h4>`+x[1].map((o,j)=>`<button class="qopt" data-q="${i}" data-o="${j}">${String.fromCharCode(65+j)}. ${o}</button>`).join('');qc.appendChild(c)});update()}qc.onclick=e=>{if(!e.target.classList.contains('qopt'))return;const qi=+e.target.dataset.q,oi=+e.target.dataset.o,c=e.target.closest('.quizcard'),bs=[...c.querySelectorAll('.qopt')];if(bs.some(b=>b.disabled))return;bs.forEach((b,j)=>{b.disabled=true;if(j===data[qi][2])b.classList.add('correct')});if(oi===data[qi][2])score++;else e.target.classList.add('wrong');answered++;update()};document.getElementById('resetQuiz').onclick=render;render();
+ const si=document.getElementById('searchInput'),info=document.getElementById('searchInfo');si.oninput=()=>{document.querySelectorAll('.hit').forEach(x=>x.classList.remove('hit'));const q=si.value.trim().toLowerCase();if(q.length<2){info.textContent='NCERT key-term search';return}const els=[...document.querySelectorAll('.mini,.fact,.part,.gloss,.table td,.note,.trap,.bridge')],hits=els.filter(x=>x.textContent.toLowerCase().includes(q));info.textContent=hits.length+' match';if(hits.length){const p=hits[0].closest('.panel');if(p)show(p.id.replace('panel-',''),false);hits.slice(0,30).forEach(x=>x.classList.add('hit'));setTimeout(()=>hits[0].scrollIntoView({behavior:'smooth',block:'center'}),60)}};
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const CONCEPTS = {"Artificial Classification": {"aliases": ["Artificial Classification", "কৃত্রিম শ্রেণিবিন্যাস"], "category": "Classification", "source": "📘 NCERT Plant Kingdom", "definition": "সীমিত কয়েকটি বাহ্যিক বা সহজে পর্যবেক্ষণযোগ্য বৈশিষ্ট্যের উপর ভিত্তি করে জীবকে শ্রেণিবদ্ধ করার পদ্ধতি।", "details": ["অভ্যাস (Habit), রং (Colour), পাতার সংখ্যা ও আকৃতি এবং পুংকেশরচক্র (Androecium)-এর মতো বৈশিষ্ট্য ব্যবহার করা হত।", "এতে কাছাকাছি সম্পর্কিত প্রজাতি কখনও আলাদা হয়ে যেতে পারে, কারণ অল্প সংখ্যক বৈশিষ্ট্যকে অতিরিক্ত গুরুত্ব দেওয়া হয়।", "উদ্ভিজ্জ বৈশিষ্ট্য (Vegetative Characters) পরিবেশে সহজে পরিবর্তিত হতে পারে।"], "examples": "লিনিয়াস (Linnaeus)-এর system-এ androecium structure-এর গুরুত্ব ছিল।", "neet": "Artificial বনাম Natural বনাম Phylogenetic classification-এর basis আলাদা করে মনে রাখুন।", "trap": "Artificial classification-কে evolutionary relationship-based system ভাববেন না।", "related": ["Natural Classification", "Phylogenetic Classification", "Numerical Taxonomy"]}, "Natural Classification": {"aliases": ["Natural Classification", "প্রাকৃতিক শ্রেণিবিন্যাস"], "category": "Classification", "source": "📘 NCERT Plant Kingdom", "definition": "জীবের প্রাকৃতিক আত্মীয়তা (Natural Affinity) বোঝাতে বহু বাহ্যিক ও অভ্যন্তরীণ বৈশিষ্ট্য একসঙ্গে ব্যবহার করা হয়।", "details": ["External morphology-এর পাশাপাশি ultrastructure, anatomy, embryology ও phytochemistry বিবেচনা করা যায়।", "Artificial system-এর তুলনায় বেশি সামগ্রিক।"], "examples": "Flowering plants-এর জন্য George Bentham ও Joseph Dalton Hooker-এর system।", "neet": "Bentham–Hooker নামটি Natural Classification-এর সঙ্গে জুড়ুন।", "trap": "Natural classification এবং modern phylogenetic classification এক জিনিস নয়।", "related": ["Artificial Classification", "Phylogenetic Classification", "Chemotaxonomy"]}, "Phylogenetic Classification": {"aliases": ["Phylogenetic Classification", "বংশগত শ্রেণিবিন্যাস", "Phylogenetic"], "category": "Classification", "source": "📘 NCERT Plant Kingdom", "definition": "বিভিন্ন জীবের বিবর্তনীয় সম্পর্ক (Evolutionary Relationship) ও common ancestor-এর ধারণার উপর ভিত্তি করে শ্রেণিবিন্যাস।", "details": ["একই taxon-এর সদস্যদের common ancestry আছে বলে ধরা হয়।", "Fossil evidence না থাকলে অন্য ধরনের data-ও relationship বুঝতে ব্যবহৃত হয়।"], "examples": "বর্তমান সময়ে evolutionary relationship-based classification গ্রহণযোগ্য।", "neet": "‘Common ancestor’ phrase দেখলে phylogenetic classification ভাবুন।", "trap": "শুধু বাহ্যিক similarity থাকলেই phylogenetic relationship প্রমাণ হয় না।", "related": ["Natural Classification", "Cytotaxonomy", "Chemotaxonomy"]}, "Numerical Taxonomy": {"aliases": ["Numerical Taxonomy", "সংখ্যাতাত্ত্বিক শ্রেণিবিন্যাস"], "category": "Classification", "source": "📘 NCERT Plant Kingdom", "definition": "পর্যবেক্ষণযোগ্য বৈশিষ্ট্যকে number/code দিয়ে computer-এ process করে taxonomy বিশ্লেষণ করার পদ্ধতি।", "details": ["প্রতিটি character-কে সমান গুরুত্ব দেওয়া হয়।", "একসঙ্গে শত শত character বিবেচনা করা সম্ভব।"], "examples": "Computer-based character coding and processing।", "neet": "‘Each character equal importance’ = Numerical Taxonomy।", "trap": "Chromosome number-based system Numerical Taxonomy নয়; সেটি Cytotaxonomy।", "related": ["Cytotaxonomy", "Chemotaxonomy", "Artificial Classification"]}, "Cytotaxonomy": {"aliases": ["Cytotaxonomy", "কোষতাত্ত্বিক শ্রেণিবিন্যাস"], "category": "Classification", "source": "📘 NCERT Plant Kingdom", "definition": "ক্রোমোজোম সংখ্যা, গঠন ও আচরণের মতো cytological information ব্যবহার করে taxonomy করা।", "details": ["Chromosome number", "Chromosome structure", "Chromosomal behaviour"], "examples": "Closely related taxa আলাদা করতে chromosome data সহায়ক হতে পারে।", "neet": "Chromosome শব্দ দেখলেই Cytotaxonomy চিনুন।", "trap": "Chemical constituent-based analysis = Chemotaxonomy, Cytotaxonomy নয়।", "related": ["Numerical Taxonomy", "Chemotaxonomy"]}, "Chemotaxonomy": {"aliases": ["Chemotaxonomy", "রাসায়নিক শ্রেণিবিন্যাস"], "category": "Classification", "source": "📘 NCERT Plant Kingdom", "definition": "উদ্ভিদের chemical constituents ব্যবহার করে taxonomic confusion সমাধান করা।", "details": ["Biochemical composition-কে supporting taxonomic evidence হিসেবে ব্যবহার করা হয়।"], "examples": "Plant chemical constituents-এর তুলনা।", "neet": "Chemical constituent → Chemotaxonomy।", "trap": "এটি numerical coding system নয়।", "related": ["Cytotaxonomy", "Numerical Taxonomy", "Natural Classification"]}, "Algae": {"aliases": ["Algae", "শৈবাল"], "category": "Plant Group", "source": "📘 NCERT Plant Kingdom", "definition": "ক্লোরোফিলধারী, সরল, থ্যালাসীয়, স্বপোষী এবং প্রধানত জলজ জীবের একটি উদ্ভিদগোষ্ঠী।", "details": ["Freshwater ও marine habitat ছাড়াও moist stone, soil, wood-এ জন্মাতে পারে।", "Colonial, filamentous বা massive kelp body হতে পারে।", "Vegetative, asexual ও sexual reproduction—তিনটিই দেখা যায়।"], "examples": "Volvox, Ulothrix, Spirogyra; marine kelps।", "neet": "Three main classes: Chlorophyceae, Phaeophyceae, Rhodophyceae।", "trap": "Cyanobacteria/blue-green algae আধুনিকভাবে Plantae-এর algae নয়।", "related": ["Chlorophyceae", "Phaeophyceae", "Rhodophyceae", "Thallus", "Zoospore"]}, "Chlorophyceae": {"aliases": ["Chlorophyceae", "ক্লোরোফাইসি", "Green Algae", "সবুজ শৈবাল"], "category": "Algal Class", "source": "📘 NCERT Plant Kingdom", "definition": "সবুজ শৈবাল (Green Algae); chlorophyll-a ও chlorophyll-b-এর আধিক্যে সাধারণত grass-green রঙের।", "details": ["Body unicellular, colonial বা filamentous হতে পারে।", "Chloroplast discoid, plate-like, reticulate, cup-shaped, spiral বা ribbon-shaped হতে পারে।", "Pyrenoid chloroplast-এর মধ্যে থাকে; protein-এর সঙ্গে starch সঞ্চিত থাকে।", "Cell wall: inner cellulose + outer pectose.", "Asexual reproduction: flagellated zoospore in zoosporangia; sexual reproduction isogamous/anisogamous/oogamous হতে পারে।"], "examples": "Chlamydomonas, Volvox, Ulothrix, Spirogyra, Chara।", "neet": "Pigment a+b, stored food starch, equal apical flagella—এই triad খুব গুরুত্বপূর্ণ।", "trap": "Pyrenoid-কে শুধু starch granule ভাববেন না; protein-ও থাকে।", "related": ["Pyrenoid", "Chlamydomonas", "Volvox", "Ulothrix", "Spirogyra", "Isogamy"]}, "Phaeophyceae": {"aliases": ["Phaeophyceae", "ফিওফাইসি", "Brown Algae", "বাদামি শৈবাল"], "category": "Algal Class", "source": "📘 NCERT Plant Kingdom", "definition": "প্রধানত সামুদ্রিক বাদামি শৈবাল; fucoxanthin-এর পরিমাণের কারণে olive-green থেকে brown রঙের বিভিন্নতা দেখা যায়।", "details": ["Pigments: chlorophyll-a, c, carotenoids, xanthophylls; key xanthophyll = fucoxanthin.", "Stored food: laminarin + mannitol.", "Cellulosic wall-এর বাইরে gelatinous algin coating থাকতে পারে.", "Body often differentiated into holdfast, stipe, frond.", "Zoospore pear-shaped, biflagellate, unequal, laterally attached flagella.", "Sexual reproduction isogamous/anisogamous/oogamous হতে পারে।"], "examples": "Ectocarpus, Dictyota, Laminaria, Sargassum, Fucus।", "neet": "Holdfast–Stipe–Frond, fucoxanthin, laminarin+mannitol, 2 unequal lateral flagella—একসঙ্গে মনে রাখুন।", "trap": "Fucoxanthin red algae-র pigment নয়।", "related": ["Fucoxanthin", "Holdfast", "Stipe", "Frond", "Laminarin", "Mannitol", "Fucus"]}, "Rhodophyceae": {"aliases": ["Rhodophyceae", "রোডোফাইসি", "Red Algae", "লাল শৈবাল"], "category": "Algal Class", "source": "📘 NCERT Plant Kingdom", "definition": "r-Phycoerythrin-এর আধিক্যের কারণে লাল রঙের শৈবাল; অধিকাংশ সামুদ্রিক।", "details": ["Warm marine regions-এ বেশি; surface ও relatively deep water উভয় ক্ষেত্রেই থাকতে পারে.", "Most red thalli multicellular.", "Stored food = floridean starch, structure amylopectin ও glycogen-এর মতো.", "Vegetative reproduction fragmentation; asexual spores non-motile; sexual gametes non-motile.", "Sexual reproduction oogamous and followed by complex post-fertilisation development."], "examples": "Polysiphonia, Porphyra, Gracilaria, Gelidium।", "neet": "Flagellar stage absent + floridean starch + phycoerythrin।", "trap": "Rhodophyceae-তে motile gamete/zoospore ধরে নেবেন না।", "related": ["Phycoerythrin", "Floridean Starch", "Gelidium", "Gracilaria", "Agar"]}, "Thallus": {"aliases": ["Thallus", "থ্যালাস", "Thalloid", "থ্যালাসীয়"], "category": "Body Organisation", "source": "📘 NCERT Plant Kingdom", "definition": "এমন সরল উদ্ভিদদেহ যা প্রকৃত root, stem ও leaf-এ সুস্পষ্টভাবে বিভক্ত নয়।", "details": ["Algae-তে typical body plan.", "Bryophyte body-ও অনেক ক্ষেত্রে thallus-like হতে পারে।"], "examples": "Marchantia thallus; many algae।", "neet": "True root/stem/leaf absent হলে thalloid organisation মনে রাখুন।", "trap": "Thallus মানেই single-celled নয়।", "related": ["Algae", "Marchantia", "Rhizoid"]}, "Pyrenoid": {"aliases": ["Pyrenoid", "পাইরেনয়েড", "Pyrenoids"], "category": "Algal Cell Structure", "source": "📘 NCERT Plant Kingdom", "definition": "Chlorophyceae-র chloroplast-এর মধ্যে থাকা storage body।", "details": ["Protein থাকে এবং তার সঙ্গে starch সঞ্চিত থাকে.", "এক বা একাধিক pyrenoid থাকতে পারে।"], "examples": "Green algae chloroplasts।", "neet": "Pyrenoid → chloroplast → protein + starch।", "trap": "এটি nucleus বা zoosporangium নয়।", "related": ["Chlorophyceae", "Chloroplast", "Starch"]}, "Holdfast": {"aliases": ["Holdfast", "হোল্ডফাস্ট"], "category": "Brown Algal Part", "source": "📘 NCERT Plant Kingdom", "definition": "Brown alga-র basal anchoring structure যা substratum-এর সঙ্গে দেহকে যুক্ত রাখে।", "details": ["Root-এর মতো anchorage দেয়, কিন্তু true root নয়.", "Stipe ও frond-এর সঙ্গে brown algal body organisation-এর অংশ।"], "examples": "Laminaria/Fucus-type brown algal body diagrams।", "neet": "Diagram label: Holdfast → Stipe → Frond।", "trap": "Holdfast-কে vascular root ভাববেন না।", "related": ["Phaeophyceae", "Stipe", "Frond"]}, "Stipe": {"aliases": ["Stipe", "স্টাইপ"], "category": "Brown Algal Part", "source": "📘 NCERT Plant Kingdom", "definition": "Brown alga-র stalk-like অংশ, holdfast ও frond-এর মধ্যে থাকে।", "details": ["Stem-like appearance থাকলেও true stem নয়।"], "examples": "Large brown algae/kelp body।", "neet": "Figure label-based MCQ-তে আসে।", "trap": "Stipe ≠ vascular stem।", "related": ["Holdfast", "Frond", "Phaeophyceae"]}, "Frond": {"aliases": ["Frond", "ফ্রন্ড"], "category": "Brown Algal Part", "source": "📘 NCERT Plant Kingdom", "definition": "Brown alga-র leaf-like photosynthetic organ।", "details": ["Primary photosynthetic surface হিসেবে কাজ করে.", "কিছু species-এর figure-এ midrib বা air bladder দেখা যায়।"], "examples": "Fucus, Laminaria-type body।", "neet": "Frond leaf-like হলেও true leaf নয়।", "trap": "Fern leaf-কে-ও frond বলা হয়, কিন্তু context আলাদা—এখানে brown algal frond বোঝানো হয়েছে।", "related": ["Holdfast", "Stipe", "Phaeophyceae", "Air Bladder"]}, "Air Bladder": {"aliases": ["Air Bladder", "এয়ার ব্লাডার"], "category": "Algal Diagram Term", "source": "📘 NCERT Figure", "definition": "কিছু brown algae-র frond-এ বায়ুভর্তি অংশ, যা ভাসমানতা বজায় রাখতে সহায়তা করে।", "details": ["Surface-এর দিকে photosynthetic part ধরে রাখতে সহায়ক হতে পারে।"], "examples": "NCERT brown alga figure label।", "neet": "Image-based label recognition।", "trap": "এটি reproductive sporangium নয়।", "related": ["Frond", "Phaeophyceae", "Midrib"]}, "Zoospore": {"aliases": ["Zoospore", "জুওস্পোর", "Zoospores"], "category": "Reproduction", "source": "📘 NCERT Plant Kingdom", "definition": "Flagellated, motile asexual spore।", "details": ["Algae-তে common asexual propagule.", "Germination-এর পরে new plant body তৈরি করতে পারে।"], "examples": "Many algae; Chlorophyceae-তে zoosporangia-তে flagellated zoospores।", "neet": "Asexual + motile + flagella—three keywords।", "trap": "Zoospore sexual gamete নয়।", "related": ["Asexual Reproduction", "Zoosporangium", "Algae"]}, "Isogamy": {"aliases": ["Isogamy", "সমযুগ্মতা", "Isogamous"], "category": "Sexual Reproduction", "source": "📘 NCERT Plant Kingdom", "definition": "সমআকার বা morphologically similar দুই gamete-এর fusion।", "details": ["Gametes motile হতে পারে—Ulothrix.", "Gametes non-motile-ও হতে পারে—Spirogyra."], "examples": "Ulothrix, Spirogyra।", "neet": "Isogamy মানেই motile gametes নয়।", "trap": "Eudorina = anisogamy; Volvox/Fucus = oogamy।", "related": ["Anisogamy", "Oogamy", "Ulothrix", "Spirogyra"]}, "Anisogamy": {"aliases": ["Anisogamy", "অসমযুগ্মতা", "Anisogamous"], "category": "Sexual Reproduction", "source": "📘 NCERT Plant Kingdom", "definition": "আকারে অসম দুই gamete-এর fusion।", "details": ["Gametes dissimilar in size।"], "examples": "Eudorina species।", "neet": "Eudorina ↔ Anisogamy pair মনে রাখুন।", "trap": "Large immotile egg + small motile male specifically oogamy।", "related": ["Isogamy", "Oogamy", "Eudorina"]}, "Oogamy": {"aliases": ["Oogamy", "ডিম্বযুগ্মতা", "Oogamous"], "category": "Sexual Reproduction", "source": "📘 NCERT Plant Kingdom", "definition": "বড় অচল female gamete ও ছোট চলনশীল male gamete-এর fusion।", "details": ["Advanced gametic differentiation-এর একটি form।"], "examples": "Volvox, Fucus।", "neet": "Volvox + Fucus = classic NCERT pair।", "trap": "Eudorina-কে oogamy example হিসেবে না লিখে anisogamy হিসেবে মনে রাখুন।", "related": ["Isogamy", "Anisogamy", "Volvox", "Fucus"]}, "Fucoxanthin": {"aliases": ["Fucoxanthin", "ফিউকোজ্যানথিন"], "category": "Pigment", "source": "📘 NCERT Plant Kingdom", "definition": "Phaeophyceae-র গুরুত্বপূর্ণ xanthophyll pigment যা brown colour-এ বড় ভূমিকা রাখে।", "details": ["Amount-এর ভিন্নতায় olive green থেকে brown shades দেখা যায়।"], "examples": "Brown algae।", "neet": "Fucoxanthin → Phaeophyceae।", "trap": "Rhodophyceae → phycoerythrin।", "related": ["Phaeophyceae", "Phycoerythrin", "Chlorophyll"]}, "Phycoerythrin": {"aliases": ["Phycoerythrin", "ফাইকোএরিথ্রিন", "r-Phycoerythrin"], "category": "Pigment", "source": "📘 NCERT Plant Kingdom", "definition": "Rhodophyceae-র predominant red pigment।", "details": ["Red algal colour-এর প্রধান কারণ।"], "examples": "Red algae।", "neet": "Phycoerythrin → Rhodophyceae।", "trap": "Fucoxanthin-এর সঙ্গে গুলিয়ে ফেলবেন না।", "related": ["Rhodophyceae", "Fucoxanthin", "Floridean Starch"]}, "Floridean Starch": {"aliases": ["Floridean Starch", "ফ্লোরিডিয়ান স্টার্চ"], "category": "Stored Food", "source": "📘 NCERT Plant Kingdom", "definition": "Rhodophyceae-র সঞ্চিত খাদ্য।", "details": ["Structure amylopectin ও glycogen-এর সঙ্গে সাদৃশ্যপূর্ণ।"], "examples": "Red algae।", "neet": "Stored food matching question-এ খুব common।", "trap": "Brown algae = laminarin + mannitol।", "related": ["Rhodophyceae", "Laminarin", "Mannitol"]}, "Laminarin": {"aliases": ["Laminarin", "ল্যামিনারিন"], "category": "Stored Food", "source": "📘 NCERT Plant Kingdom", "definition": "Phaeophyceae-র complex carbohydrate stored food-এর একটি প্রধান form।", "details": ["Mannitol-এর সঙ্গে brown algae-তে stored food হিসেবে থাকে।"], "examples": "Brown algae।", "neet": "Laminarin + Mannitol pair।", "trap": "Green algae-তে main stored food starch।", "related": ["Phaeophyceae", "Mannitol", "Floridean Starch"]}, "Mannitol": {"aliases": ["Mannitol", "ম্যানিটল"], "category": "Stored Food", "source": "📘 NCERT Plant Kingdom", "definition": "Phaeophyceae-র একটি stored food substance।", "details": ["Laminarin-এর সঙ্গে pair হিসেবে মনে রাখা সহজ।"], "examples": "Brown algae।", "neet": "Brown algae → Mannitol + Laminarin।", "trap": "Floridean starch red algae-র।", "related": ["Laminarin", "Phaeophyceae"]}, "Agar": {"aliases": ["Agar", "আগার"], "category": "Economic Importance", "source": "📘 NCERT Plant Kingdom", "definition": "Gelidium ও Gracilaria থেকে পাওয়া বাণিজ্যিক product।", "details": ["Microbe culture-এ medium হিসেবে ব্যবহৃত হয়.", "Ice-cream ও jelly preparation-এ ব্যবহার আছে।"], "examples": "Gelidium, Gracilaria।", "neet": "Agar source pair সরাসরি প্রশ্ন হতে পারে।", "trap": "Algin = brown algae; agar source = specific red algae।", "related": ["Gelidium", "Gracilaria", "Rhodophyceae", "Algin"]}, "Algin": {"aliases": ["Algin", "অ্যালজিন"], "category": "Economic Importance", "source": "📘 NCERT Plant Kingdom", "definition": "Brown algae থেকে পাওয়া water-holding hydrocolloid।", "details": ["Commercially useful hydrocolloid।"], "examples": "Marine brown algae।", "neet": "Brown algae → Algin; Red algae → Carrageen।", "trap": "Agar-এর সঙ্গে গুলিয়ে ফেলবেন না।", "related": ["Phaeophyceae", "Agar", "Carrageen"]}, "Carrageen": {"aliases": ["Carrageen", "ক্যারাজিন", "Carrageenan", "ক্যারাজেন"], "category": "Economic Importance", "source": "📘 NCERT Plant Kingdom", "definition": "Red algae থেকে পাওয়া commercial hydrocolloid।", "details": ["Water-holding substance হিসেবে ব্যবহৃত।"], "examples": "Marine red algae।", "neet": "Hydrocolloid matching: Algin—brown; Carrageen—red।", "trap": "Agar Gelidium/Gracilaria থেকে; Carrageen broader red algal product।", "related": ["Rhodophyceae", "Algin", "Agar"]}, "Chlorella": {"aliases": ["Chlorella", "ক্লোরেলা"], "category": "Algal Example", "source": "📘 NCERT Plant Kingdom", "definition": "প্রোটিনসমৃদ্ধ এককোষী শৈবাল যা food supplement হিসেবে ব্যবহৃত হয়।", "details": ["Space travellers-এর food supplement হিসেবেও NCERT-এ উল্লেখ আছে।"], "examples": "Unicellular alga।", "neet": "Chlorella ↔ protein-rich food supplement।", "trap": "Agar source নয়।", "related": ["Algae", "Agar"]}, "Bryophytes": {"aliases": ["Bryophytes", "ব্রায়োফাইটা", "Bryophyte"], "category": "Plant Group", "source": "📘 NCERT Plant Kingdom", "definition": "মস ও লিভারওয়ার্টের গোষ্ঠী; স্থলে বাস করলেও যৌন প্রজননের জন্য জলের উপর নির্ভরশীল।", "details": ["Main plant body haploid gametophyte.", "True root/stem/leaf absent; rhizoids present.", "Multicellular sex organs: antheridium and archegonium.", "Sporophyte attached to and nutritionally dependent on gametophyte."], "examples": "Marchantia, Funaria, Polytrichum, Sphagnum।", "neet": "‘Amphibians of plant kingdom’ phrase।", "trap": "Bryophyte dominant phase = gametophyte, not sporophyte।", "related": ["Gametophyte", "Sporophyte", "Antheridium", "Archegonium", "Rhizoid", "Liverworts", "Mosses"]}, "Liverworts": {"aliases": ["Liverworts", "Liverwort", "লিভারওয়ার্ট"], "category": "Bryophyte Group", "source": "📘 NCERT Plant Kingdom", "definition": "Bryophyte-এর একটি প্রধান group, সাধারণত moist shady habitat-এ জন্মায়।", "details": ["Marchantia-তে thallus dorsiventral এবং substrate-এর সঙ্গে closely appressed.", "Leafy members-এ stem-like structure-এর উপর দুই সারিতে leaf-like appendages.", "Asexual reproduction: fragmentation ও gemmae.", "Sporophyte: foot, seta, capsule."], "examples": "Marchantia।", "neet": "Gemma cup + dorsiventral thallus = liverwort/Marchantia clue।", "trap": "Moss-এর protonema stage liverwort-এর typical feature নয়।", "related": ["Marchantia", "Gemma", "Gemma Cup", "Mosses", "Bryophytes"]}, "Mosses": {"aliases": ["Mosses", "Moss", "মস"], "category": "Bryophyte Group", "source": "📘 NCERT Plant Kingdom", "definition": "Bryophyte group যেখানে dominant gametophyte দুইটি স্পষ্ট stage—protonema ও leafy stage—দিয়ে গঠিত।", "details": ["Protonema spore থেকে সরাসরি তৈরি হয়.", "Leafy stage secondary protonema-র lateral bud থেকে তৈরি.", "Leaves spirally arranged; rhizoids multicellular and branched.", "Sex organs leafy shoot-এর apex-এ.", "Sporophyte foot, seta, capsule—liverwort-এর তুলনায় more elaborate."], "examples": "Funaria, Polytrichum, Sphagnum।", "neet": "Protonema → Leafy stage sequence মনে রাখুন।", "trap": "Bryophyte visible dominant plant = gametophyte।", "related": ["Protonema", "Funaria", "Sphagnum", "Liverworts", "Rhizoid"]}, "Rhizoid": {"aliases": ["Rhizoid", "রাইজয়েড", "Rhizoids"], "category": "Plant Part", "source": "📘 NCERT Plant Kingdom", "definition": "Root-like anchoring structure; true root নয়।", "details": ["Bryophytes substrate-এর সঙ্গে attached থাকে rhizoids দ্বারা.", "Unicellular বা multicellular হতে পারে; moss-এ multicellular and branched।"], "examples": "Marchantia, mosses।", "neet": "Rhizoid ≠ true vascular root।", "trap": "Pteridophytes-এ true root থাকে।", "related": ["Bryophytes", "Mosses", "Thallus"]}, "Gemma": {"aliases": ["Gemma", "জেমা", "Gemmae"], "category": "Asexual Reproduction", "source": "📘 NCERT Plant Kingdom", "definition": "Green, multicellular asexual bud যা parent body থেকে detached হয়ে নতুন individual তৈরি করতে পারে।", "details": ["Marchantia-র thallus-এ ছোট receptacle gemma cup-এর মধ্যে থাকে।"], "examples": "Marchantia।", "neet": "Gemma = multicellular asexual propagule; Gemma cup = receptacle।", "trap": "Gemma spore নয়।", "related": ["Gemma Cup", "Marchantia", "Liverworts"]}, "Gemma Cup": {"aliases": ["Gemma Cup", "জেমা কাপ", "Gemma cups"], "category": "Bryophyte Structure", "source": "📘 NCERT Plant Kingdom", "definition": "Marchantia thallus-এর ছোট receptacle যেখানে gemmae তৈরি/রক্ষিত থাকে।", "details": ["Gemma detached হয়ে নতুন thallus তৈরি করে।"], "examples": "Marchantia।", "neet": "Figure label-based favourite।", "trap": "Capsule sporophyte-এর অংশ; Gemma cup gametophyte thallus-এর structure।", "related": ["Gemma", "Marchantia", "Capsule"]}, "Antheridium": {"aliases": ["Antheridium", "অ্যান্থেরিডিয়াম", "Antheridia"], "category": "Sex Organ", "source": "📘 NCERT Plant Kingdom", "definition": "Bryophytes ও pteridophytes-এ male sex organ।", "details": ["Bryophyte antheridium biflagellate antherozoids উৎপন্ন করে.", "Pteridophyte prothallus-এও antheridium থাকে."], "examples": "Bryophyte gametophyte, pteridophyte prothallus।", "neet": "Male = antheridium; Female = archegonium।", "trap": "Antheridium flower-এর anther নয়।", "related": ["Archegonium", "Antherozoid", "Gametophyte"]}, "Archegonium": {"aliases": ["Archegonium", "আর্কিগোনিয়াম", "Archegonia"], "category": "Sex Organ", "source": "📘 NCERT Plant Kingdom", "definition": "Flask-shaped female sex organ যা একটি egg উৎপন্ন করে; bryophytes, pteridophytes ও gymnosperms-এ গুরুত্বপূর্ণ।", "details": ["Bryophyte ও pteridophyte-এ fertilisation-এর জন্য male gamete archegonium-এ পৌঁছায়.", "Gymnosperm female gametophyte দুই বা ততোধিক archegonia বহন করতে পারে."], "examples": "Bryophyte gametophyte; fern prothallus; gymnosperm female gametophyte।", "neet": "Three archegonia-bearing plant groups: Bryophytes, Pteridophytes, Gymnosperms।", "trap": "Angiosperm reproductive system-এ archegonium typical structure হিসেবে থাকে না।", "related": ["Antheridium", "Antherozoid", "Gymnosperms", "Pteridophytes"]}, "Antherozoid": {"aliases": ["Antherozoid", "অ্যান্থেরোজয়েড", "Antherozoids"], "category": "Male Gamete", "source": "📘 NCERT Plant Kingdom", "definition": "Antheridium থেকে উৎপন্ন চলনশীল male gamete।", "details": ["Bryophytes-এ biflagellate.", "Water মাধ্যমে archegonium-এর দিকে যায়."], "examples": "Bryophytes, pteridophytes।", "neet": "Water requirement-এর mechanistic reason।", "trap": "Pollen grain-এর সঙ্গে গুলিয়ে ফেলবেন না।", "related": ["Antheridium", "Archegonium", "Water for Fertilisation"]}, "Protonema": {"aliases": ["Protonema", "প্রোটোনিমা", "Protonemal"], "category": "Moss Life Cycle", "source": "📘 NCERT Plant Kingdom", "definition": "Moss gametophyte-এর প্রথম stage; spore থেকে সরাসরি তৈরি হয়।", "details": ["Creeping, green, branched এবং প্রায়ই filamentous.", "Secondary protonema-এর lateral bud থেকে leafy stage তৈরি হয়."], "examples": "Moss life cycle, Funaria concept।", "neet": "Spore → Protonema → Leafy stage।", "trap": "Pteridophyte gametophyte = prothallus, protonema নয়।", "related": ["Mosses", "Leafy Stage", "Prothallus", "Funaria"]}, "Foot": {"aliases": ["Foot", "ফুট"], "category": "Bryophyte Sporophyte Part", "source": "📘 NCERT Plant Kingdom", "definition": "Bryophyte sporophyte-এর basal অংশ যা gametophyte-এর সঙ্গে সংযুক্ত থাকে।", "details": ["Seta ও capsule-এর সঙ্গে sporophyte-এর তিনটি প্রধান অংশের একটি।"], "examples": "Liverwort and moss sporophyte।", "neet": "Foot–Seta–Capsule order।", "trap": "Foot true root নয়।", "related": ["Seta", "Capsule", "Sporophyte"]}, "Seta": {"aliases": ["Seta", "সেটা"], "category": "Bryophyte Sporophyte Part", "source": "📘 NCERT Plant Kingdom", "definition": "Bryophyte sporophyte-এর stalk-like অংশ।", "details": ["Foot-এর উপরে capsule বহন করে।"], "examples": "Marchantia/Funaria sporophyte।", "neet": "Foot + Seta + Capsule।", "trap": "Phaeophyceae stipe-এর সঙ্গে গুলিয়ে ফেলবেন না।", "related": ["Foot", "Capsule", "Sporophyte"]}, "Capsule": {"aliases": ["Capsule", "ক্যাপসুল"], "category": "Bryophyte Sporophyte Part", "source": "📘 NCERT Plant Kingdom", "definition": "Bryophyte sporophyte-এর spore-producing terminal অংশ।", "details": ["Meiosis-এর পরে haploid spores তৈরি হয়.", "Mosses-এ spore dispersal mechanism elaborate।"], "examples": "Funaria sporophyte।", "neet": "Meiosis location concept-এ capsule/sporophyte মনে রাখুন।", "trap": "Gemma cup এবং capsule ভিন্ন generation-এর structure।", "related": ["Foot", "Seta", "Meiosis", "Spore"]}, "Sphagnum": {"aliases": ["Sphagnum", "স্ফ্যাগনাম"], "category": "Moss Example", "source": "📘 NCERT Plant Kingdom", "definition": "একটি moss যা peat formation এবং জলধারণক্ষমতার জন্য গুরুত্বপূর্ণ।", "details": ["Peat fuel হিসেবে ব্যবহৃত হয়েছে.", "Living material transport-এ packing material হিসেবে historical use, কারণ water-holding capacity বেশি."], "examples": "Bryophyte / moss।", "neet": "Sphagnum ↔ peat।", "trap": "Sphagnum liverwort নয়।", "related": ["Mosses", "Peat", "Bryophytes"]}, "Pteridophytes": {"aliases": ["Pteridophytes", "টেরিডোফাইটা", "Pteridophyte"], "category": "Plant Group", "source": "📘 NCERT Plant Kingdom", "definition": "Horsetail ও fern-সহ প্রথম terrestrial vascular plants; dominant plant body sporophyte।", "details": ["True root, stem, leaves present.", "Xylem and phloem well differentiated.", "Sporangia on sporophylls; spores formed by meiosis.", "Spore → free-living photosynthetic prothallus gametophyte.", "Water needed for antherozoid transfer and fertilisation."], "examples": "Psilotum, Selaginella, Lycopodium, Equisetum, Dryopteris, Pteris, Adiantum।", "neet": "First vascular terrestrial plants + prothallus + heterospory।", "trap": "Dominant phase bryophyte-এর মতো gametophyte নয়; sporophyte।", "related": ["Prothallus", "Sporophyll", "Sporangium", "Heterospory", "Microphyll", "Macrophyll"]}, "Psilopsida": {"aliases": ["Psilopsida", "সাইলোপসিডা"], "category": "Pteridophyte Class", "source": "📘 NCERT Plant Kingdom", "definition": "Pteridophyte-এর একটি class।", "details": ["NCERT example association মনে রাখাই exam-এর জন্য মূল।"], "examples": "Psilotum।", "neet": "Psilopsida → Psilotum।", "trap": "Equisetum = Sphenopsida।", "related": ["Pteridophytes", "Psilotum", "Lycopsida", "Sphenopsida", "Pteropsida"]}, "Lycopsida": {"aliases": ["Lycopsida", "লাইকোপসিডা"], "category": "Pteridophyte Class", "source": "📘 NCERT Plant Kingdom", "definition": "Pteridophyte class যেখানে NCERT examples Selaginella ও Lycopodium।", "details": ["Selaginella microphyll ও heterospory-এর জন্য বিশেষ গুরুত্বপূর্ণ।"], "examples": "Selaginella, Lycopodium।", "neet": "Lycopsida → Selaginella + Lycopodium।", "trap": "Dryopteris/Pteris/Adiantum = Pteropsida।", "related": ["Selaginella", "Lycopodium", "Heterospory", "Microphyll"]}, "Sphenopsida": {"aliases": ["Sphenopsida", "স্ফেনোপসিডা"], "category": "Pteridophyte Class", "source": "📘 NCERT Plant Kingdom", "definition": "Pteridophyte class যার classic example Equisetum।", "details": ["Equisetum figure-এ strobilus, node, internode, branch, rhizome গুরুত্বপূর্ণ।"], "examples": "Equisetum।", "neet": "Sphenopsida → Equisetum।", "trap": "Psilotum = Psilopsida।", "related": ["Equisetum", "Strobilus", "Rhizome"]}, "Pteropsida": {"aliases": ["Pteropsida", "টেরোপসিডা"], "category": "Pteridophyte Class", "source": "📘 NCERT Plant Kingdom", "definition": "Fern group-এর গুরুত্বপূর্ণ pteridophyte class।", "details": ["Large leaves/macrophylls fern-এ characteristic।"], "examples": "Dryopteris, Pteris, Adiantum।", "neet": "Pteropsida → Dryopteris/Pteris/Adiantum।", "trap": "Selaginella = Lycopsida।", "related": ["Macrophyll", "Fern", "Pteridophytes"]}, "Microphyll": {"aliases": ["Microphyll", "মাইক্রোফিল", "Microphylls"], "category": "Pteridophyte Leaf", "source": "📘 NCERT Plant Kingdom", "definition": "ছোট পাতা; NCERT-এ Selaginella-এর leaf type হিসেবে উল্লেখ।", "details": ["Pteridophyte leaf size comparison-এ microphyll vs macrophyll।"], "examples": "Selaginella।", "neet": "Selaginella → microphyll।", "trap": "Ferns → large macrophylls।", "related": ["Macrophyll", "Selaginella", "Lycopsida"]}, "Macrophyll": {"aliases": ["Macrophyll", "ম্যাক্রোফিল", "Macrophylls"], "category": "Pteridophyte Leaf", "source": "📘 NCERT Plant Kingdom", "definition": "বড় পাতা; ferns-এ characteristic।", "details": ["Pteridophyte leaves may be small microphylls or large macrophylls।"], "examples": "Ferns।", "neet": "Fern → macrophyll।", "trap": "Selaginella → microphyll।", "related": ["Microphyll", "Fern", "Pteropsida"]}, "Sporophyll": {"aliases": ["Sporophyll", "স্পোরোফিল", "Sporophylls"], "category": "Reproductive Leaf", "source": "📘 NCERT Plant Kingdom", "definition": "Sporangium বহনকারী leaf-like appendage।", "details": ["Pteridophytes-এ sporophylls compact strobili/cones তৈরি করতে পারে.", "Gymnosperms-এ microsporophyll ও megasporophyll বিশেষ reproductive structures."], "examples": "Selaginella, Equisetum; gymnosperm cones।", "neet": "Sporophyll carries sporangium।", "trap": "Sporangium এবং sporophyll এক জিনিস নয়।", "related": ["Sporangium", "Strobilus", "Microsporophyll", "Megasporophyll"]}, "Sporangium": {"aliases": ["Sporangium", "স্পোরাঞ্জিয়াম", "Sporangia"], "category": "Spore-Producing Structure", "source": "📘 NCERT Plant Kingdom", "definition": "যেখানে spore mother cell meiosis করে spores তৈরি করে।", "details": ["Pteridophyte sporophyte-এর sporophyll-এর সঙ্গে যুক্ত.", "Gymnosperm-এ microsporangium ও megasporangium দুই ধরনের."], "examples": "Pteridophytes, Gymnosperms।", "neet": "Meiosis → spore formation।", "trap": "Gametangium (antheridium/archegonium) থেকে আলাদা।", "related": ["Sporophyll", "Meiosis", "Microsporangium", "Megasporangium"]}, "Strobilus": {"aliases": ["Strobilus", "স্ট্রোবিলাস", "Strobili", "Cone", "Cones", "কোন"], "category": "Reproductive Structure", "source": "📘 NCERT Plant Kingdom", "definition": "একটি অক্ষের চারপাশে sporophyll-এর compact বা organised arrangement।", "details": ["Pteridophytes-এ Selaginella, Equisetum-এ দেখা যায়.", "Gymnosperms-এ male/female strobili reproductive cones তৈরি করে."], "examples": "Selaginella, Equisetum, Pinus।", "neet": "Strobilus context দেখে group চিনুন।", "trap": "সব cone seed-bearing gymnosperm cone নয়; pteridophytes-এও strobilus থাকে।", "related": ["Sporophyll", "Selaginella", "Equisetum", "Male Strobilus", "Female Strobilus"]}, "Prothallus": {"aliases": ["Prothallus", "প্রোথ্যালাস"], "category": "Pteridophyte Gametophyte", "source": "📘 NCERT Plant Kingdom", "definition": "Pteridophyte spore থেকে তৈরি ছোট, বহুকোষী, স্বাধীন, সাধারণত photosynthetic thalloid gametophyte।", "details": ["Cool, damp, shady conditions দরকার.", "Antheridia ও archegonia বহন করে.", "Fertilisation-এর জন্য water দরকার."], "examples": "Fern gametophyte।", "neet": "Prothallus = pteridophyte gametophyte।", "trap": "Protonema = moss first gametophyte stage।", "related": ["Pteridophytes", "Protonema", "Antheridium", "Archegonium"]}, "Homosporous": {"aliases": ["Homosporous", "সমস্পোরী", "Homospory"], "category": "Spore Type", "source": "📘 NCERT Plant Kingdom", "definition": "এক ধরনের বা similar spores উৎপন্নকারী অবস্থা।", "details": ["Majority of pteridophytes homosporous।"], "examples": "Most pteridophytes।", "neet": "Homosporous বনাম heterosporous comparison।", "trap": "Selaginella ও Salvinia heterosporous।", "related": ["Heterospory", "Pteridophytes"]}, "Heterospory": {"aliases": ["Heterospory", "হেটেরোস্পোরি", "Heterosporous", "বিষমস্পোরী"], "category": "Spore Type / Evolution", "source": "📘 NCERT Plant Kingdom", "definition": "দুই ধরনের spore—microspore ও megaspore—উৎপাদনের অবস্থা।", "details": ["Microspore → male gametophyte.", "Megaspore → female gametophyte.", "Selaginella ও Salvinia-তে female gametophyte parent sporophyte-এ variable period retained হতে পারে.", "Zygote থেকে embryo female gametophyte-এর মধ্যে বিকশিত হওয়া seed habit-এর precursor."], "examples": "Selaginella, Salvinia; all gymnosperms heterosporous।", "neet": "Heterospory + gametophyte retention = seed habit evolution clue।", "trap": "Heterospory নিজে seed formation নয়।", "related": ["Microspore", "Megaspore", "Seed Habit", "Selaginella", "Salvinia", "Homosporous"]}, "Microspore": {"aliases": ["Microspore", "মাইক্রোস্পোর", "Microspores"], "category": "Spore", "source": "📘 NCERT Plant Kingdom", "definition": "ছোট spore যা male gametophyte lineage তৈরি করে।", "details": ["Heterosporous pteridophytes-এ male gametophyte দেয়.", "Gymnosperms-এ microspore → reduced male gametophyte/pollen grain."], "examples": "Selaginella/Salvinia, Gymnosperms।", "neet": "Micro = male; Mega = female memory aid।", "trap": "Microspore নিজে male gamete নয়।", "related": ["Megaspore", "Heterospory", "Pollen Grain"]}, "Megaspore": {"aliases": ["Megaspore", "মেগাস্পোর", "Megaspores"], "category": "Spore", "source": "📘 NCERT Plant Kingdom", "definition": "বড় spore যা female gametophyte lineage তৈরি করে।", "details": ["Heterosporous pteridophytes-এ female gametophyte দেয়.", "Gymnosperm megaspore mother cell meiosis করে চারটি megaspore তৈরি করে; একটি functional megaspore female gametophyte-এ বিকশিত হয়."], "examples": "Selaginella/Salvinia, Gymnosperms।", "neet": "Megaspore → female gametophyte।", "trap": "Megaspore = ovule নয়।", "related": ["Microspore", "Heterospory", "Megaspore Mother Cell"]}, "Seed Habit": {"aliases": ["Seed Habit", "বীজ অভ্যাস"], "category": "Evolution Concept", "source": "📘 NCERT Plant Kingdom", "definition": "Seed formation-এর দিকে evolutionary trend; heterospory ও female gametophyte retention এর গুরুত্বপূর্ণ precursor।", "details": ["Female gametophyte parent sporophyte-এ retained থাকে.", "Zygote থেকে young embryo female gametophyte-এর মধ্যে বিকশিত হয়."], "examples": "Selaginella ও Salvinia-র heterospory context।", "neet": "‘Precursor to seed habit’ phrase সরাসরি NCERT line।", "trap": "Selaginella নিজে seed-bearing plant নয়।", "related": ["Heterospory", "Megaspore", "Embryo", "Gymnosperms"]}, "Gymnosperms": {"aliases": ["Gymnosperms", "নগ্নবীজী", "Gymnosperm"], "category": "Plant Group", "source": "📘 NCERT Plant Kingdom", "definition": "যেসব seed plant-এ ovule ovary wall দ্বারা আবদ্ধ নয় এবং seed ফলের মধ্যে enclosed নয়।", "details": ["Tap roots common; Pinus mycorrhiza; Cycas coralloid roots.", "Stem Cycas unbranched, Pinus/Cedrus branched.", "Leaves simple/compound; conifer leaves xeromorphic.", "All heterosporous; micro- and megaspores produced in sporangia on sporophylls.", "Gametophytes highly reduced and not free-living."], "examples": "Cycas, Pinus, Ginkgo, Cedrus, Sequoia।", "neet": "Naked ovule/seed + heterospory + cones।", "trap": "‘Naked’ মানে seed coat নেই—এটি ভুল।", "related": ["Cycas", "Pinus", "Mycorrhiza", "Coralloid Root", "Male Strobilus", "Female Strobilus", "Ovule"]}, "Cycas": {"aliases": ["Cycas", "সাইকাস"], "category": "Gymnosperm Example", "source": "📘 NCERT Plant Kingdom", "definition": "Gymnosperm genus যার specialised coralloid roots এবং সাধারণত unbranched stem গুরুত্বপূর্ণ।", "details": ["Pinnate leaves কয়েক বছর স্থায়ী হতে পারে.", "Coralloid roots N₂-fixing cyanobacteria-এর সঙ্গে associated.", "Male cone ও megasporophyll different trees-এ borne হয়."], "examples": "Classic gymnosperm।", "neet": "Cycas → coralloid root + separate male/female trees।", "trap": "Pinus → mycorrhiza + male/female cones same tree।", "related": ["Coralloid Root", "Pinus", "Megasporophyll", "Gymnosperms"]}, "Pinus": {"aliases": ["Pinus", "পাইনাস"], "category": "Gymnosperm Example", "source": "📘 NCERT Plant Kingdom", "definition": "Conifer gymnosperm, branched stem, mycorrhizal root এবং needle-like leaves-এর জন্য গুরুত্বপূর্ণ।", "details": ["Needle leaves surface area কমায়.", "Thick cuticle + sunken stomata reduce water loss.", "Male ও female cones same tree-এ borne হয়."], "examples": "Classic conifer।", "neet": "Pinus → Mycorrhiza + same tree male/female cones।", "trap": "Coralloid root Cycas-এর, Pinus-এর নয়।", "related": ["Mycorrhiza", "Needle-like Leaf", "Sunken Stomata", "Cycas", "Male Strobilus"]}, "Mycorrhiza": {"aliases": ["Mycorrhiza", "মাইকোরাইজা"], "category": "Root Association", "source": "📘 NCERT Plant Kingdom", "definition": "Root ও fungus-এর association।", "details": ["NCERT Plant Kingdom chapter-এ Pinus roots-এর সঙ্গে fungal association হিসেবে উল্লেখিত।"], "examples": "Pinus।", "neet": "Pinus ↔ Mycorrhiza।", "trap": "Cycas ↔ Coralloid root + cyanobacteria।", "related": ["Pinus", "Coralloid Root", "Gymnosperms"]}, "Coralloid Root": {"aliases": ["Coralloid Root", "কোরালয়েড মূল", "Coralloid roots"], "category": "Special Root", "source": "📘 NCERT Plant Kingdom", "definition": "Cycas-এর ছোট specialised root যা N₂-fixing cyanobacteria-এর সঙ্গে associated।", "details": ["Nitrogen-fixing symbiotic association-এর জন্য famous।"], "examples": "Cycas।", "neet": "Cycas = Coralloid root।", "trap": "Pinus-এ mycorrhiza।", "related": ["Cycas", "Mycorrhiza", "Cyanobacteria"]}, "Needle-like Leaf": {"aliases": ["Needle-like Leaf", "Needle-like leaves", "সুঁচাকার পাতা"], "category": "Gymnosperm Adaptation", "source": "📘 NCERT Plant Kingdom", "definition": "Conifer পাতার সরু সূচাকার form, যা surface area কমায়।", "details": ["Thick cuticle ও sunken stomata-এর সঙ্গে মিলে water loss কমাতে সাহায্য করে.", "Extreme temperature, humidity ও wind সহ্য করার অভিযোজনের অংশ."], "examples": "Pinus/conifers।", "neet": "Needle leaf + thick cuticle + sunken stomata = xeromorphic water conservation।", "trap": "এগুলো seed exposure-এর কারণ নয়।", "related": ["Pinus", "Thick Cuticle", "Sunken Stomata"]}, "Sunken Stomata": {"aliases": ["Sunken Stomata", "অবনমিত পত্ররন্ধ্র"], "category": "Leaf Adaptation", "source": "📘 NCERT Plant Kingdom", "definition": "পাতার epidermal surface-এর নিচে অবস্থিত stomata; water loss কমাতে সাহায্য করে।", "details": ["Conifer adaptation হিসেবে NCERT-এ উল্লেখিত.", "Needle-like leaves ও thick cuticle-এর সঙ্গে কাজ করে."], "examples": "Conifers।", "neet": "Water-loss reduction adaptation।", "trap": "Gas exchange সম্পূর্ণ বন্ধ করে না।", "related": ["Needle-like Leaf", "Thick Cuticle", "Pinus"]}, "Male Strobilus": {"aliases": ["Male Strobilus", "Male Cone", "পুরুষ স্ট্রোবিলাস", "Microsporangiate strobilus"], "category": "Gymnosperm Reproduction", "source": "📘 NCERT Plant Kingdom", "definition": "Microsporophyll ও microsporangia বহনকারী gymnosperm cone/strobilus।", "details": ["Microsporangia-তে microspore তৈরি হয়.", "Microspore থেকে reduced male gametophyte/pollen grain."], "examples": "Pinus male cone।", "neet": "Microsporophyll → microsporangium → microspore → pollen grain।", "trap": "Female cone megasporophyll/ovule বহন করে।", "related": ["Microsporophyll", "Microsporangium", "Pollen Grain", "Female Strobilus"]}, "Female Strobilus": {"aliases": ["Female Strobilus", "Female Cone", "স্ত্রী স্ট্রোবিলাস", "Macrosporangiate strobilus"], "category": "Gymnosperm Reproduction", "source": "📘 NCERT Plant Kingdom", "definition": "Megasporophyll-এর উপর ovule/megasporangium বহনকারী female reproductive structure।", "details": ["Megasporophyll clustered হয়ে female cone তৈরি করতে পারে.", "Ovule-এর nucellus-এ megaspore mother cell differentiates."], "examples": "Pinus female cone; Cycas megasporophylls।", "neet": "Megasporophyll → ovule/megasporangium।", "trap": "Cycas-এ structures same tree-এ নয়; male/female separate trees।", "related": ["Megasporophyll", "Ovule", "Megaspore Mother Cell", "Male Strobilus"]}, "Microsporophyll": {"aliases": ["Microsporophyll", "মাইক্রোস্পোরোফিল", "Microsporophylls"], "category": "Gymnosperm Reproduction", "source": "📘 NCERT Plant Kingdom", "definition": "Microsporangia বহনকারী sporophyll।", "details": ["Axis-এ arranged হয়ে male strobilus/cone তৈরি করে."], "examples": "Gymnosperm male cone।", "neet": "Micro = male side।", "trap": "Megasporophyll ovule side।", "related": ["Microsporangium", "Male Strobilus", "Sporophyll"]}, "Megasporophyll": {"aliases": ["Megasporophyll", "মেগাস্পোরোফিল", "Megasporophylls"], "category": "Gymnosperm Reproduction", "source": "📘 NCERT Plant Kingdom", "definition": "Ovule/megasporangium বহনকারী sporophyll।", "details": ["Clustered হলে female cone তৈরি করতে পারে.", "Cycas-এ megasporophylls separate female plant-এ borne হয়."], "examples": "Gymnosperm female reproductive structure।", "neet": "Mega = female side।", "trap": "Microsporophyll pollen-side structure।", "related": ["Female Strobilus", "Ovule", "Microsporophyll"]}, "Pollen Grain": {"aliases": ["Pollen Grain", "Pollen grain", "পরাগরেণু"], "category": "Gametophyte", "source": "📘 NCERT Plant Kingdom", "definition": "Gymnosperm-এ microspore থেকে তৈরি highly reduced male gametophyte।", "details": ["Microsporangium-এর মধ্যে development হয়.", "Released pollen air current-এ ovule opening-এ পৌঁছাতে পারে.", "Pollen tube male gametes বহন করে archegonia-এর দিকে যায়."], "examples": "Gymnosperms; flowering plantsেও pollen male gametophyte lineage-এর অংশ (cross-chapter)।", "neet": "Microspore → pollen grain → pollen tube।", "trap": "Pollen grain নিজে seed নয়।", "related": ["Microspore", "Pollen Tube", "Male Strobilus"]}, "Pollen Tube": {"aliases": ["Pollen Tube", "পোলেন টিউব", "পরাগনালি"], "category": "Fertilisation", "source": "📘 NCERT Plant Kingdom", "definition": "Pollen grain germination-এর পরে গঠিত tube যা male gametes-কে ovule-এর female reproductive region-এর দিকে পৌঁছে দেয়।", "details": ["Gymnosperm-এ free external water-এর উপর sperm transfer-এর নির্ভরতা bryophyte/pteridophyte-এর মতো নয়."], "examples": "Gymnosperm fertilisation sequence।", "neet": "Pollen tube innovation → male gamete delivery।", "trap": "Pollen tube = pollen grain নয়; pollen grain থেকে grow করে।", "related": ["Pollen Grain", "Ovule", "Archegonium"]}, "Ovule": {"aliases": ["Ovule", "ডিম্বক", "Ovules"], "category": "Seed Plant Structure", "source": "📘 NCERT Plant Kingdom", "definition": "Gymnosperm-এ nucellus protected by envelopes-এর composite structure; fertilisation-এর পরে seed-এ বিকশিত হয়।", "details": ["Megaspore mother cell nucellus-এর একটি cell থেকে differentiates.", "Gymnosperm ovule exposed; angiosperm ovule ovary-এর মধ্যে enclosed."], "examples": "Gymnosperm female reproductive structure; angiosperm flower।", "neet": "Gymnosperm vs Angiosperm separation-এর কেন্দ্রীয় term।", "trap": "Ovule = ovary নয়।", "related": ["Nucellus", "Megaspore Mother Cell", "Gymnosperms", "Angiosperms"]}, "Nucellus": {"aliases": ["Nucellus", "নিউসেলাস"], "category": "Ovule Tissue", "source": "📘 NCERT Plant Kingdom", "definition": "Ovule-এর tissue যেখানে megaspore mother cell differentiates।", "details": ["Protective envelopes-এর সঙ্গে composite ovule গঠন করে."], "examples": "Gymnosperm ovule।", "neet": "MMC originates from nucellar cell।", "trap": "Nucellus pollen-producing tissue নয়।", "related": ["Ovule", "Megaspore Mother Cell", "Megaspore"]}, "Megaspore Mother Cell": {"aliases": ["Megaspore Mother Cell", "Megaspore mother cell", "মেগাস্পোর মাদার সেল"], "category": "Gymnosperm Reproduction", "source": "📘 NCERT Plant Kingdom", "definition": "Nucellus-এর একটি cell থেকে পৃথক হওয়া diploid cell যা meiosis করে megaspores তৈরি করে।", "details": ["Meiosis → চারটি megaspore.", "একটি megaspore multicellular female gametophyte-এ বিকশিত হয়."], "examples": "Gymnosperm ovule।", "neet": "MMC → meiosis → 4 megaspores।", "trap": "MMC নিজে female gametophyte নয়।", "related": ["Nucellus", "Megaspore", "Female Gametophyte", "Meiosis"]}, "Angiosperms": {"aliases": ["Angiosperms", "আবৃতবীজী", "Angiosperm"], "category": "Plant Group", "source": "📘 NCERT Plant Kingdom + 🔵 NEET Bridge", "definition": "Flowering plants যেখানে pollen grain ও ovule specialised flower-এ develop করে এবং seed fruit-এর মধ্যে enclosed থাকে।", "details": ["Extremely large group with wide habitat range.", "Size range: Wolffia থেকে >100 m Eucalyptus.", "Food, fodder, fuel, medicines ও commercial products-এর প্রধান উৎস.", "NCERT chapter-এ dicotyledons ও monocotyledons—দুই class বলা হয়েছে.", "Double fertilisation-এর বিশদ এই uploaded Plant Kingdom PDF-এ নেই; সেটি cross-chapter topic."], "examples": "Wolffia, Eucalyptus; dicotyledons and monocotyledons।", "neet": "Gymnosperm seed exposed বনাম Angiosperm seed enclosed in fruit।", "trap": "Plant Kingdom PDF-এর সংক্ষিপ্ত angiosperm অংশের বাইরে থাকা detail-কে একই source-level fact ভাববেন না।", "related": ["Dicotyledons", "Monocotyledons", "Ovule", "Fruit", "Double Fertilisation"]}, "Dicotyledons": {"aliases": ["Dicotyledons", "Dicotyledon", "Dicot", "দ্বিবীজপত্রী"], "category": "Angiosperm Class", "source": "📘 NCERT Plant Kingdom (class name) + 🔵 Cross-chapter detail", "definition": "Angiosperm-এর দুই class-এর একটি; নামটি দুই cotyledon ধারণার সঙ্গে সম্পর্কিত।", "details": ["Uploaded Plant Kingdom chapter-এ class division ও figure দেওয়া আছে.", "Detailed dicot morphology অন্য NCERT chapters-এর সঙ্গে সংযোগ করে পড়তে হবে."], "examples": "Chapter figure: a dicotyledon।", "neet": "Plant Kingdom chapter level: Angiosperms → Dicotyledons + Monocotyledons।", "trap": "এই PDF-এ full monocot-vs-dicot morphology table নেই।", "related": ["Monocotyledons", "Angiosperms", "Cotyledon"]}, "Monocotyledons": {"aliases": ["Monocotyledons", "Monocotyledon", "Monocot", "একবীজপত্রী"], "category": "Angiosperm Class", "source": "📘 NCERT Plant Kingdom (class name) + 🔵 Cross-chapter detail", "definition": "Angiosperm-এর দুই class-এর একটি; নামটি এক cotyledon ধারণার সঙ্গে সম্পর্কিত।", "details": ["Uploaded Plant Kingdom chapter-এ class division ও figure দেওয়া আছে.", "Detailed morphology other chapters-এর scope."], "examples": "Chapter figure: a monocotyledon।", "neet": "Angiosperm two classes matching question।", "trap": "Plant Kingdom PDF-এর বাইরে detail যোগ করলে source distinction মনে রাখুন।", "related": ["Dicotyledons", "Angiosperms", "Cotyledon"]}, "Double Fertilisation": {"aliases": ["Double Fertilisation", "Double Fertilization", "দ্বৈত নিষেক"], "category": "Cross-chapter NEET Bridge", "source": "🔵 Cross-chapter NEET concept — not detailed in uploaded Plant Kingdom PDF", "definition": "Angiosperm-এ দুইটি fusion event ঘটার ধারণা; এটি flowering plant reproduction-এর গুরুত্বপূর্ণ বৈশিষ্ট্য।", "details": ["এই term-এর full mechanism uploaded Plant Kingdom PDF-এর explanatory section-এ দেওয়া নেই.", "এটি Sexual Reproduction in Flowering Plants chapter-এর সঙ্গে পড়া উচিত."], "examples": "Angiosperms।", "neet": "Source distinction বজায় রেখে revise করুন।", "trap": "এই uploaded PDF-কে full double-fertilisation source হিসেবে ব্যবহার করবেন না।", "related": ["Angiosperms", "Pollen Grain", "Ovule"]}, "Gametophyte": {"aliases": ["Gametophyte", "গ্যামেটোফাইট", "Gametophytic"], "category": "Life Cycle", "source": "📘 NCERT Plant Kingdom", "definition": "Haploid generation যা gamete উৎপন্ন করে।", "details": ["Bryophytes-এ dominant main plant body.", "Pteridophytes-এ small prothallus.", "Gymnosperms-এ male/female gametophytes highly reduced and sporangia-তে retained."], "examples": "Bryophyte main plant; fern prothallus; pollen grain (reduced male gametophyte)।", "neet": "Dominance পরিবর্তন: Bryophyte gametophyte-dominant → Pteridophyte/Gymnosperm sporophyte-dominant।", "trap": "Gametophyte সব group-এ একই size/independence নয়।", "related": ["Sporophyte", "Prothallus", "Pollen Grain"]}, "Sporophyte": {"aliases": ["Sporophyte", "স্পোরোফাইট", "Sporophytic"], "category": "Life Cycle", "source": "📘 NCERT Plant Kingdom", "definition": "Diploid generation যা meiosis-এর মাধ্যমে spores উৎপাদনের lineage বহন করে।", "details": ["Bryophyte-এ attached, dependent.", "Pteridophyte-এ dominant, independent, true root-stem-leaf.", "Gymnosperm ও angiosperm-এ main plant body sporophyte."], "examples": "Fern plant, Pinus tree।", "neet": "Generation dominance comparison অত্যন্ত গুরুত্বপূর্ণ।", "trap": "Bryophyte sporophyte dominant নয়।", "related": ["Gametophyte", "Meiosis", "Spore"]}, "Meiosis": {"aliases": ["Meiosis", "মিয়োসিস", "Reduction Division", "হ্রাস বিভাজন"], "category": "Cell Division / Life Cycle", "source": "📘 NCERT Plant Kingdom", "definition": "Chromosome number reductionকারী division যা plant life cycle-এ diploid sporophytic cells থেকে haploid spores তৈরি করে।", "details": ["Bryophyte sporophyte-এর cells meiosis করে spores তৈরি করে.", "Pteridophyte spore mother cells-এ meiosis.", "Gymnosperm megaspore mother cell meiosis করে megaspores."], "examples": "Capsule spore formation; pteridophyte sporangia; gymnosperm MMC।", "neet": "Reduction division কোথায় হয়—NCERT exercise favourite।", "trap": "Fertilisation chromosome number বাড়ায়; meiosis কমায়।", "related": ["Sporophyte", "Spore", "Megaspore Mother Cell"]}, "Marchantia": {"aliases": ["Marchantia", "মার্চান্টিয়া"], "category": "Liverwort Example", "source": "📘 NCERT Plant Kingdom", "definition": "Classic liverwort with dorsiventral thallus, rhizoids and gemma cups।", "details": ["Male and female sex organs same বা different thalli-তে হতে পারে.", "Specialised antheridiophore ও archegoniophore figure labels গুরুত্বপূর্ণ."], "examples": "Liverwort।", "neet": "Marchantia → Gemma cup।", "trap": "Funaria = moss।", "related": ["Liverworts", "Gemma Cup", "Antheridiophore", "Archegoniophore"]}, "Funaria": {"aliases": ["Funaria", "ফিউনারিয়া"], "category": "Moss Example", "source": "📘 NCERT Plant Kingdom", "definition": "Classic moss example used to show gametophyte and attached sporophyte।", "details": ["Moss lifecycle concepts: protonema, leafy stage, foot-seta-capsule."], "examples": "Moss।", "neet": "Funaria → moss।", "trap": "Marchantia = liverwort।", "related": ["Mosses", "Protonema", "Sporophyte", "Capsule"]}, "Selaginella": {"aliases": ["Selaginella", "সেলাজিনেলা"], "category": "Pteridophyte Example", "source": "📘 NCERT Plant Kingdom", "definition": "Lycopsida pteridophyte; microphyll, strobilus এবং heterospory-এর জন্য অত্যন্ত গুরুত্বপূর্ণ।", "details": ["Microspore ও megaspore দুই ধরনের spore.", "Seed habit precursor concept-এ key genus."], "examples": "Lycopsida।", "neet": "Selaginella + Salvinia = heterosporous।", "trap": "Selaginella seed-bearing নয়।", "related": ["Lycopsida", "Microphyll", "Heterospory", "Seed Habit", "Salvinia"]}, "Salvinia": {"aliases": ["Salvinia", "সালভিনিয়া"], "category": "Pteridophyte Example", "source": "📘 NCERT Plant Kingdom", "definition": "Heterosporous pteridophyte genus।", "details": ["Microspore ও megaspore তৈরি করে.", "Seed habit precursor discussion-এ Selaginella-এর সঙ্গে pair."], "examples": "Pteridophyte।", "neet": "Selaginella + Salvinia।", "trap": "Funaria-এর সঙ্গে pair করবেন না।", "related": ["Selaginella", "Heterospory", "Seed Habit"]}, "Equisetum": {"aliases": ["Equisetum", "ইকুইসেটাম"], "category": "Pteridophyte Example", "source": "📘 NCERT Plant Kingdom", "definition": "Sphenopsida pteridophyte; horsetail group-এর classic example।", "details": ["Figure labels: strobilus, node, internode, branch, rhizome.", "Sporophylls compact strobilus তৈরি করতে পারে."], "examples": "Sphenopsida।", "neet": "Equisetum → Sphenopsida + strobilus।", "trap": "Psilotum → Psilopsida।", "related": ["Sphenopsida", "Strobilus", "Rhizome"]}, "Wolffia": {"aliases": ["Wolffia", "উলফিয়া"], "category": "Angiosperm Example", "source": "📘 NCERT Plant Kingdom", "definition": "Plant Kingdom chapter-এ angiosperm-এর size range বোঝাতে smallest end-এর example।", "details": ["Angiosperm diversity-এর extreme size example হিসেবে উল্লেখিত."], "examples": "Small angiosperm।", "neet": "Wolffia ↔ smallest angiosperm example in chapter।", "trap": "Chlorella alga; Wolffia flowering plant।", "related": ["Angiosperms", "Eucalyptus"]}, "Eucalyptus": {"aliases": ["Eucalyptus", "ইউক্যালিপটাস"], "category": "Angiosperm Example", "source": "📘 NCERT Plant Kingdom", "definition": "Chapter-এ tall angiosperm tree হিসেবে উল্লেখিত; 100 m-এর বেশি উচ্চতা হতে পারে।", "details": ["Angiosperm size diversity-এর large end illustrate করে."], "examples": "Tall flowering tree।", "neet": "Wolffia ↔ small; Eucalyptus ↔ very tall।", "trap": "Sequoia gymnosperm।", "related": ["Angiosperms", "Wolffia", "Sequoia"]}, "Sequoia": {"aliases": ["Sequoia", "সিকোইয়া"], "category": "Gymnosperm Example", "source": "📘 NCERT Plant Kingdom", "definition": "Giant redwood gymnosperm; পৃথিবীর tallest tree species-গুলির একটি হিসেবে উল্লেখিত।", "details": ["Gymnosperm size diversity-এর extreme example."], "examples": "Giant redwood।", "neet": "Sequoia = gymnosperm, Eucalyptus = angiosperm।", "trap": "Tallest examples-এর group গুলিয়ে ফেলবেন না।", "related": ["Gymnosperms", "Eucalyptus"]}, "Antheridiophore": {"aliases": ["Antheridiophore", "অ্যান্থেরিডিওফোর"], "category": "Marchantia Structure", "source": "📘 NCERT Figure", "definition": "Marchantia-র male sex organs বহনকারী specialised stalked receptacle।", "details": ["Male thallus diagram-এ গুরুত্বপূর্ণ label."], "examples": "Marchantia।", "neet": "Image-based identification।", "trap": "Archegoniophore female structure।", "related": ["Marchantia", "Archegoniophore", "Antheridium"]}, "Archegoniophore": {"aliases": ["Archegoniophore", "আর্কিগোনিওফোর"], "category": "Marchantia Structure", "source": "📘 NCERT Figure", "definition": "Marchantia-র female sex organs বহনকারী specialised stalked receptacle।", "details": ["Female thallus diagram-এ গুরুত্বপূর্ণ label."], "examples": "Marchantia।", "neet": "Image-based identification।", "trap": "Antheridiophore male structure।", "related": ["Marchantia", "Antheridiophore", "Archegonium"]}, "Rhizome": {"aliases": ["Rhizome", "রাইজোম"], "category": "Pteridophyte Part", "source": "📘 NCERT Figure", "definition": "Underground stem-like axis; Equisetum figure-এ label হিসেবে দেখানো।", "details": ["True root নয়; stem system-এর অংশ."], "examples": "Equisetum।", "neet": "Node–internode–branch–rhizome figure matching।", "trap": "Rhizoid-এর সঙ্গে গুলিয়ে ফেলবেন না।", "related": ["Equisetum", "Rhizoid", "Strobilus"]}, "Fruit": {"aliases": ["Fruit", "ফল"], "category": "Angiosperm Structure", "source": "📘 NCERT Plant Kingdom", "definition": "Angiosperm-এ seed যে enclosing structure-এর মধ্যে থাকে।", "details": ["Uploaded chapter-এর central distinction: angiosperm seeds are enclosed in fruits."], "examples": "Flowering plants।", "neet": "Gymnosperm naked seed vs Angiosperm fruit-enclosed seed।", "trap": "Gymnosperm-এ true fruit নেই।", "related": ["Angiosperms", "Ovule", "Gymnosperms"]}};
+  const CLASS_EXPLORERS = {"overview": [["Artificial Classification", "Artificial"], ["Natural Classification", "Natural"], ["Phylogenetic Classification", "Phylogenetic"], ["Numerical Taxonomy", "Numerical"], ["Cytotaxonomy", "Cytotaxonomy"], ["Chemotaxonomy", "Chemotaxonomy"]], "algae": [["Chlorophyceae", "Chlorophyceae"], ["Phaeophyceae", "Phaeophyceae"], ["Rhodophyceae", "Rhodophyceae"]], "bryophytes": [["Liverworts", "Liverworts"], ["Mosses", "Mosses"], ["Marchantia", "Marchantia"], ["Funaria", "Funaria"], ["Sphagnum", "Sphagnum"]], "pteridophytes": [["Psilopsida", "Psilopsida"], ["Lycopsida", "Lycopsida"], ["Sphenopsida", "Sphenopsida"], ["Pteropsida", "Pteropsida"], ["Heterospory", "Heterospory"]], "gymnosperms": [["Cycas", "Cycas"], ["Pinus", "Pinus"], ["Sequoia", "Sequoia"], ["Male Strobilus", "Male Cone"], ["Female Strobilus", "Female Cone"]], "angiosperms": [["Dicotyledons", "Dicotyledons"], ["Monocotyledons", "Monocotyledons"], ["Wolffia", "Wolffia"], ["Eucalyptus", "Eucalyptus"], ["Double Fertilisation", "NEET Bridge"]]};
+  const DEEP_DIVES = {"overview": ["Blue-green algae বা cyanobacteria বর্তমানে Plantae-এর true algae নয়।", "Artificial system vegetative characters-কে বেশি ব্যবহার করত; modern systems বহু ধরনের evidence নেয়।", "Numerical, Cytotaxonomy ও Chemotaxonomy—তিনটি supporting approach-এর basis আলাদা করে মনে রাখুন।"], "algae": ["Algal body organisation unicellular → colonial → filamentous → massive kelp পর্যন্ত হতে পারে।", "Sexual reproduction-এর progression: Isogamy → Anisogamy → Oogamy; examples exact pair-সহ মুখস্থ নয়, concept-সহ বুঝুন।", "Economic importance-এ CO₂ fixation, aquatic primary production, hydrocolloids, agar ও protein-rich Chlorella আলাদা প্রশ্ন হতে পারে।"], "bryophytes": ["Gametophyte dominant, sporophyte dependent—generation dominance বোঝা সবচেয়ে জরুরি।", "Liverwort বনাম Moss: thallus/gemma বনাম protonema/leafy stage।", "Ecology: rock colonisation, soil formation, erosion reduction, Sphagnum peat—short factual questions হতে পারে।"], "pteridophytes": ["First vascular terrestrial plant group—true root, stem, leaf + xylem/phloem।", "Prothallus small and free-living, কিন্তু cool/damp/shady requirement ও water-dependent fertilisation geographic spread সীমিত করে।", "Heterospory seed habit নয়; seed habit-এর evolutionary precursor।"], "gymnosperms": ["Naked ovule before and after fertilisation is the key definition; naked seed = fruit দ্বারা enclosed নয়।", "Microspore side = male; megaspore side = female—cone terminologyকে এই দুই column-এ সাজিয়ে পড়ুন।", "Gametophytes free-living নয়; sporophyte-এ retained reproductive structures-এর মধ্যে reduced থাকে।"], "angiosperms": ["এই PDF-এর Angiosperm অংশ সংক্ষিপ্ত: flower, fruit-enclosed seed, size range, uses, dicot/monocot division।", "Double fertilisation ও detailed monocot–dicot morphology cross-chapter material—অ্যাপে source label দিয়ে আলাদা রাখা হয়েছে।", "Gymnosperm বনাম Angiosperm distinction মূলত ovule/seed enclosure এবং flower/fruit context-এ ধরুন।"]};
+
+  const drawer = document.getElementById("conceptDrawer");
+  const overlay = document.getElementById("conceptOverlay");
+  const closeTop = document.getElementById("drawerClose");
+  const closeBottom = document.getElementById("drawerCloseBottom");
+
+  const fields = {
+    category: document.getElementById("drawerCategory"),
+    title: document.getElementById("drawerTitle"),
+    source: document.getElementById("drawerSource"),
+    definition: document.getElementById("drawerDefinition"),
+    details: document.getElementById("drawerDetails"),
+    examples: document.getElementById("drawerExamples"),
+    neet: document.getElementById("drawerNeet"),
+    trap: document.getElementById("drawerTrap"),
+    related: document.getElementById("drawerRelated")
+  };
+
+  function toHtml(value) {
+    if (Array.isArray(value)) return "<ul>" + value.map(x => "<li>" + x + "</li>").join("") + "</ul>";
+    return value || "—";
+  }
+
+  function openConcept(key) {
+    const d = CONCEPTS[key];
+    if (!d) return;
+    fields.category.textContent = d.category || "Concept Explorer";
+    fields.title.textContent = key;
+    fields.source.textContent = d.source || "📘 NCERT Plant Kingdom";
+    fields.definition.innerHTML = toHtml(d.definition);
+    fields.details.innerHTML = toHtml(d.details);
+    fields.examples.innerHTML = toHtml(d.examples);
+    fields.neet.innerHTML = toHtml(d.neet);
+    fields.trap.innerHTML = toHtml(d.trap);
+    fields.related.innerHTML = "";
+    (d.related || []).forEach(rel => {
+      if (!CONCEPTS[rel]) return;
+      const b = document.createElement("button");
+      b.className = "related-chip";
+      b.textContent = rel;
+      b.addEventListener("click", () => openConcept(rel));
+      fields.related.appendChild(b);
+    });
+    if (!fields.related.children.length) fields.related.textContent = "—";
+    drawer.classList.add("open");
+    overlay.classList.add("open");
+    drawer.setAttribute("aria-hidden","false");
+    overlay.setAttribute("aria-hidden","false");
+    document.body.classList.add("drawer-open");
+    closeTop.focus({preventScroll:true});
+  }
+
+  function closeConcept() {
+    drawer.classList.remove("open");
+    overlay.classList.remove("open");
+    drawer.setAttribute("aria-hidden","true");
+    overlay.setAttribute("aria-hidden","true");
+    document.body.classList.remove("drawer-open");
+  }
+  closeTop.addEventListener("click", closeConcept);
+  closeBottom.addEventListener("click", closeConcept);
+  overlay.addEventListener("click", closeConcept);
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeConcept(); });
+
+  /* Add class/group explorer tabs to every major panel WITHOUT removing old content. */
+  Object.entries(CLASS_EXPLORERS).forEach(([panelName, items]) => {
+    const panel = document.getElementById("panel-" + panelName);
+    if (!panel) return;
+    const head = panel.querySelector(".head");
+    if (!head) return;
+
+    const box = document.createElement("section");
+    box.className = "class-explorer";
+    box.innerHTML = `
+      <h3>🔎 Click-to-Explore Class / Group Details</h3>
+      <p>নিচের tab-এ click করলে বর্তমান page না ছেড়ে definition, detailed characters, examples, NEET focus ও common confusion দেখা যাবে।</p>
+      <div class="class-tabs"></div>
+      <div class="deep-dive">
+        <h4>🧠 Extra Deep-Dive Notes</h4>
+        <ul>${(DEEP_DIVES[panelName]||[]).map(x=>`<li>${x}</li>`).join("")}</ul>
+      </div>`;
+    const tabs = box.querySelector(".class-tabs");
+    items.forEach(([key,label]) => {
+      const b = document.createElement("button");
+      b.className = "class-tab";
+      b.type = "button";
+      b.textContent = label;
+      b.dataset.conceptKey = key;
+      b.addEventListener("click", () => openConcept(key));
+      tabs.appendChild(b);
+    });
+    head.insertAdjacentElement("afterend", box);
+  });
+
+  /* Alias lookup for automatic clickable terms. */
+  const aliasMap = new Map();
+  Object.entries(CONCEPTS).forEach(([key,d]) => {
+    [key, ...(d.aliases || [])].forEach(a => aliasMap.set(String(a).toLocaleLowerCase(), key));
+  });
+  const aliases = [...aliasMap.keys()].sort((a,b)=>b.length-a.length);
+  const escaped = aliases.map(s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const termRegex = new RegExp("(" + escaped.join("|") + ")", "giu");
+
+  const skipTags = new Set(["SCRIPT","STYLE","BUTTON","INPUT","TEXTAREA","SELECT","OPTION","CODE"]);
+  const root = document.querySelector(".content");
+
+  if (root && aliases.length) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const textNodes = [];
+    while (walker.nextNode()) {
+      const n = walker.currentNode;
+      const p = n.parentElement;
+      if (!p || skipTags.has(p.tagName) || p.closest(".concept-term") || p.closest(".class-explorer")) continue;
+      if (!n.nodeValue || !termRegex.test(n.nodeValue)) { termRegex.lastIndex = 0; continue; }
+      termRegex.lastIndex = 0;
+      textNodes.push(n);
+    }
+
+    textNodes.forEach(n => {
+      const text = n.nodeValue;
+      const frag = document.createDocumentFragment();
+      let last = 0;
+      text.replace(termRegex, (match, _g1, offset) => {
+        if (offset > last) frag.appendChild(document.createTextNode(text.slice(last, offset)));
+        const key = aliasMap.get(match.toLocaleLowerCase());
+        if (key) {
+          const span = document.createElement("span");
+          span.className = "concept-term";
+          span.tabIndex = 0;
+          span.dataset.conceptKey = key;
+          span.textContent = match;
+          span.title = "Click for detailed concept";
+          frag.appendChild(span);
+        } else {
+          frag.appendChild(document.createTextNode(match));
+        }
+        last = offset + match.length;
+        return match;
+      });
+      if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+      n.parentNode.replaceChild(frag, n);
+      termRegex.lastIndex = 0;
+    });
+  }
+
+  document.addEventListener("click", e => {
+    const term = e.target.closest(".concept-term");
+    if (term && term.dataset.conceptKey) openConcept(term.dataset.conceptKey);
+  });
+  document.addEventListener("keydown", e => {
+    const term = e.target.closest && e.target.closest(".concept-term");
+    if (term && (e.key === "Enter" || e.key === " ")) {
+      e.preventDefault();
+      openConcept(term.dataset.conceptKey);
+    }
+  });
+
+  const badge = document.getElementById("termCountBadge");
+  if (badge) badge.textContent = Object.keys(CONCEPTS).length + " detailed concepts";
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const EXAMPLES = {"Chlamydomonas": {"group": "Chlorophyceae (Green algae)", "intro": "এককোষী (Unicellular) সবুজ শৈবাল।", "facts": ["NCERT-এর common green algal example.", "Chlorophyceae group-এর সঙ্গে মনে রাখুন."], "neet": "Chlamydomonas → Chlorophyceae।", "related": ["Chlorophyceae", "Algae"]}, "Volvox": {"group": "Chlorophyceae (Green algae)", "intro": "উপনিবেশী (Colonial) সবুজ শৈবাল।", "facts": ["NCERT figure-এ parent colony ও daughter colony গুরুত্বপূর্ণ.", "Oogamy-এর classic example."], "neet": "Volvox → colonial + oogamous।", "related": ["Chlorophyceae", "Oogamy"]}, "Ulothrix": {"group": "Chlorophyceae (Green algae)", "intro": "তন্তুময় (Filamentous) সবুজ শৈবাল।", "facts": ["Isogamy-তে similar-sized flagellated gametes-এর example."], "neet": "Ulothrix → motile isogametes।", "related": ["Chlorophyceae", "Isogamy"]}, "Spirogyra": {"group": "Chlorophyceae (Green algae)", "intro": "তন্তুময় সবুজ শৈবাল।", "facts": ["Isogamy-তে similar-sized but non-motile gametes-এর example."], "neet": "Spirogyra → non-motile isogametes।", "related": ["Chlorophyceae", "Isogamy"]}, "Chara": {"group": "Chlorophyceae (Green algae)", "intro": "Common green algal example।", "facts": ["Chlorophyceae-এর classic NCERT list-এর অংশ."], "neet": "Chara → Chlorophyceae।", "related": ["Chlorophyceae"]}, "Eudorina": {"group": "Algae", "intro": "Anisogamy-এর NCERT example।", "facts": ["দুই gamete আকারে অসম."], "neet": "Eudorina → Anisogamy।", "related": ["Anisogamy", "Algae"]}, "Ectocarpus": {"group": "Phaeophyceae (Brown algae)", "intro": "সরল শাখাবিশিষ্ট filamentous brown alga।", "facts": ["Phaeophyceae-র small/simple form-এর example."], "neet": "Ectocarpus → Brown algae।", "related": ["Phaeophyceae"]}, "Dictyota": {"group": "Phaeophyceae (Brown algae)", "intro": "Brown algal example।", "facts": ["NCERT Phaeophyceae common forms list-এর অংশ."], "neet": "Dictyota → Phaeophyceae।", "related": ["Phaeophyceae"]}, "Laminaria": {"group": "Phaeophyceae (Brown algae)", "intro": "সামুদ্রিক brown alga / kelp-type form।", "facts": ["Food হিসেবে ব্যবহৃত marine algal species-এর মধ্যে উল্লেখিত.", "Brown algal body organisation study-তে useful."], "neet": "Laminaria → Phaeophyceae + food use।", "related": ["Phaeophyceae", "Holdfast", "Stipe", "Frond"]}, "Sargassum": {"group": "Phaeophyceae (Brown algae)", "intro": "সামুদ্রিক brown alga।", "facts": ["Food হিসেবে ব্যবহৃত marine algal species-এর মধ্যে উল্লেখিত."], "neet": "Sargassum → Phaeophyceae।", "related": ["Phaeophyceae"]}, "Fucus": {"group": "Phaeophyceae (Brown algae)", "intro": "Brown alga; oogamy-এর classic example।", "facts": ["Brown algal figure-এ frond, midrib ইত্যাদি context গুরুত্বপূর্ণ.", "Oogamous sexual reproduction."], "neet": "Fucus → Phaeophyceae + Oogamy।", "related": ["Phaeophyceae", "Oogamy", "Frond"]}, "Polysiphonia": {"group": "Rhodophyceae (Red algae)", "intro": "Common red algal example।", "facts": ["Rhodophyceae-এর classic NCERT member."], "neet": "Polysiphonia → Rhodophyceae।", "related": ["Rhodophyceae"]}, "Porphyra": {"group": "Rhodophyceae (Red algae)", "intro": "Red alga।", "facts": ["Food হিসেবে ব্যবহৃত marine algae-এর মধ্যে উল্লেখিত."], "neet": "Porphyra → red alga + food use।", "related": ["Rhodophyceae"]}, "Gracilaria": {"group": "Rhodophyceae (Red algae)", "intro": "Commercially important red alga।", "facts": ["Gelidium-এর সঙ্গে agar-এর source."], "neet": "Gracilaria → Agar।", "related": ["Rhodophyceae", "Agar"]}, "Gelidium": {"group": "Rhodophyceae (Red algae)", "intro": "Commercially important red alga।", "facts": ["Gracilaria-এর সঙ্গে agar-এর source."], "neet": "Gelidium → Agar।", "related": ["Rhodophyceae", "Agar"]}, "Chlorella": {"group": "Algae", "intro": "প্রোটিনসমৃদ্ধ এককোষী শৈবাল।", "facts": ["Food supplement হিসেবে ব্যবহৃত.", "Space travellers-এর খাদ্য supplement হিসেবে NCERT-এ উল্লেখ আছে."], "neet": "Chlorella → protein-rich food supplement।", "related": ["Algae"]}, "Marchantia": {"group": "Liverwort (Bryophyte)", "intro": "Classic liverwort with dorsiventral thallus।", "facts": ["Gemma cup গুরুত্বপূর্ণ.", "Male: antheridiophore; Female: archegoniophore."], "neet": "Marchantia → Liverwort + Gemma cup।", "related": ["Liverworts", "Gemma", "Gemma Cup", "Antheridiophore", "Archegoniophore"]}, "Funaria": {"group": "Moss (Bryophyte)", "intro": "Classic moss example।", "facts": ["Gametophyte ও attached sporophyte figure-এ গুরুত্বপূর্ণ.", "Sporophyte = foot, seta, capsule."], "neet": "Funaria → Moss।", "related": ["Mosses", "Protonema", "Capsule"]}, "Polytrichum": {"group": "Moss (Bryophyte)", "intro": "Common moss example।", "facts": ["Funaria ও Sphagnum-এর সঙ্গে NCERT moss list-এ আছে."], "neet": "Polytrichum → Moss।", "related": ["Mosses"]}, "Sphagnum": {"group": "Moss (Bryophyte)", "intro": "Peat moss।", "facts": ["Peat formation-এ গুরুত্বপূর্ণ.", "High water-holding capacity; packing material use historically noted."], "neet": "Sphagnum → peat।", "related": ["Mosses"]}, "Psilotum": {"group": "Psilopsida (Pteridophyte)", "intro": "Psilopsida-এর classic example।", "facts": ["Pteridophyte classification matching-এ গুরুত্বপূর্ণ."], "neet": "Psilopsida → Psilotum।", "related": ["Psilopsida", "Pteridophytes"]}, "Selaginella": {"group": "Lycopsida (Pteridophyte)", "intro": "Microphyll-bearing heterosporous pteridophyte।", "facts": ["Microspore + megaspore.", "Seed habit precursor concept-এ খুব গুরুত্বপূর্ণ.", "Strobilus থাকতে পারে."], "neet": "Selaginella + Salvinia = Heterospory।", "related": ["Lycopsida", "Microphyll", "Heterospory", "Seed Habit"]}, "Lycopodium": {"group": "Lycopsida (Pteridophyte)", "intro": "Lycopsida-এর NCERT example।", "facts": ["Selaginella-এর সঙ্গে class example হিসেবে উল্লেখিত."], "neet": "Lycopsida → Lycopodium।", "related": ["Lycopsida"]}, "Equisetum": {"group": "Sphenopsida (Pteridophyte)", "intro": "Horsetail; Sphenopsida-এর example।", "facts": ["Figure labels: strobilus, node, internode, branch, rhizome."], "neet": "Sphenopsida → Equisetum।", "related": ["Sphenopsida", "Strobilus", "Rhizome"]}, "Dryopteris": {"group": "Pteropsida (Pteridophyte)", "intro": "Fern example।", "facts": ["Pteropsida-এর classic NCERT genus."], "neet": "Pteropsida → Dryopteris।", "related": ["Pteropsida", "Macrophyll"]}, "Pteris": {"group": "Pteropsida (Pteridophyte)", "intro": "Fern example।", "facts": ["Pteropsida-এর classic NCERT genus."], "neet": "Pteropsida → Pteris।", "related": ["Pteropsida"]}, "Adiantum": {"group": "Pteropsida (Pteridophyte)", "intro": "Fern example।", "facts": ["Pteropsida-এর classic NCERT genus."], "neet": "Pteropsida → Adiantum।", "related": ["Pteropsida"]}, "Salvinia": {"group": "Pteridophyte", "intro": "Heterosporous pteridophyte।", "facts": ["Microspore ও megaspore তৈরি করে.", "Seed habit precursor discussion-এ Selaginella-এর সঙ্গে pair."], "neet": "Selaginella + Salvinia।", "related": ["Heterospory", "Seed Habit"]}, "Cycas": {"group": "Gymnosperm", "intro": "Coralloid-root-bearing gymnosperm।", "facts": ["Stem generally unbranched.", "Pinnate leaves may persist for years.", "Male cone ও megasporophyll separate trees-এ."], "neet": "Cycas → Coralloid root।", "related": ["Gymnosperms", "Coralloid Root"]}, "Pinus": {"group": "Gymnosperm / Conifer", "intro": "Mycorrhizal-rooted conifer with needle-like leaves।", "facts": ["Male ও female cones same tree-এ.", "Needle leaf + thick cuticle + sunken stomata water loss কমায়."], "neet": "Pinus → Mycorrhiza + same-tree cones।", "related": ["Gymnosperms", "Mycorrhiza", "Sunken Stomata"]}, "Ginkgo": {"group": "Gymnosperm", "intro": "Gymnosperm example।", "facts": ["NCERT figure set-এ Cycas ও Pinus-এর সঙ্গে উল্লেখিত."], "neet": "Ginkgo → Gymnosperm।", "related": ["Gymnosperms"]}, "Cedrus": {"group": "Gymnosperm", "intro": "Branched-stem gymnosperm example।", "facts": ["Pinus-এর সঙ্গে branched stem context-এ উল্লেখিত."], "neet": "Cedrus → Gymnosperm।", "related": ["Gymnosperms"]}, "Sequoia": {"group": "Gymnosperm", "intro": "Giant redwood; extremely tall gymnosperm।", "facts": ["Tallest tree species-গুলির একটি হিসেবে উল্লেখিত."], "neet": "Sequoia → Gymnosperm tall-tree example।", "related": ["Gymnosperms"]}, "Wolffia": {"group": "Angiosperm", "intro": "Chapter-এ very small angiosperm example।", "facts": ["Angiosperm size range-এর smallest end illustrate করে."], "neet": "Wolffia → small angiosperm।", "related": ["Angiosperms"]}, "Eucalyptus": {"group": "Angiosperm", "intro": "Tall flowering tree example।", "facts": ["100 m-এর বেশি উচ্চতা হতে পারে বলে chapter-এ উল্লেখ আছে."], "neet": "Eucalyptus → tall angiosperm।", "related": ["Angiosperms"]}};
+
+  const finder = document.getElementById("quickFinder");
+  const toggle = document.getElementById("quickFinderToggle");
+  const toolbarBtn = document.getElementById("quickFinderToolbarBtn");
+  const closeBtn = document.getElementById("qfClose");
+  const search = document.getElementById("qfSearch");
+  const results = document.getElementById("qfResults");
+  const detail = document.getElementById("qfDetail");
+  const back = document.getElementById("qfBack");
+  const filterBtns = [...document.querySelectorAll(".qf-filter")];
+  let activeFilter = "all";
+
+  const detailName = document.getElementById("qfDetailName");
+  const detailMeta = document.getElementById("qfDetailMeta");
+  const detailIntro = document.getElementById("qfDetailIntro");
+  const detailFacts = document.getElementById("qfDetailFacts");
+  const detailNeet = document.getElementById("qfDetailNeet");
+  const detailRelated = document.getElementById("qfDetailRelated");
+  const actions = document.getElementById("qfActions");
+
+  function openFinder(prefill="") {
+    finder.classList.add("open");
+    finder.setAttribute("aria-hidden","false");
+    toggle.setAttribute("aria-expanded","true");
+    detail.classList.remove("open");
+    results.style.display = "block";
+    if(prefill !== undefined) search.value = prefill;
+    renderResults();
+    setTimeout(()=>search.focus(),80);
+  }
+  function closeFinder() {
+    finder.classList.remove("open");
+    finder.setAttribute("aria-hidden","true");
+    toggle.setAttribute("aria-expanded","false");
+  }
+  toggle.addEventListener("click",()=> finder.classList.contains("open") ? closeFinder() : openFinder(search.value));
+  toolbarBtn.addEventListener("click",()=>openFinder(""));
+  closeBtn.addEventListener("click",closeFinder);
+
+  /* Core term index comes from all already-clickable detailed terms plus key class/group tabs. */
+  function buildTermIndex() {
+    const map = new Map();
+
+    document.querySelectorAll(".concept-term").forEach(el => {
+      const key = el.dataset.conceptKey || el.textContent.trim();
+      const label = el.textContent.trim();
+      if(!map.has(key)) {
+        map.set(key, {
+          name:key,
+          label:label,
+          type:"term",
+          category:"পরিভাষা / Concept",
+          intro:"এই term-এর সম্পূর্ণ বিস্তারিত Concept Explorer-এ রয়েছে।",
+          facts:["পাতায় term-টি click করলেও একই full detail খুলবে."],
+          neet:"Full definition, detailed concept, examples, NEET focus ও common confusion দেখতে “Full Concept” চাপুন.",
+          related:[],
+          conceptKey:key
+        });
+      }
+    });
+
+    document.querySelectorAll(".class-tab").forEach(el => {
+      const key = el.dataset.conceptKey;
+      if(key && !map.has(key)) {
+        map.set(key, {
+          name:key,label:el.textContent.trim(),type:"group",category:"Class / Group",
+          intro:"এই class/group-এর বিস্তারিত Concept Explorer-এ রয়েছে.",
+          facts:["Class/group tab হিসেবে app-এর ভেতরে আগে থেকেই যুক্ত আছে."],
+          neet:"Full Concept খুলে detailed characters ও traps দেখুন.",related:[],conceptKey:key
+        });
+      } else if(key && map.has(key)) {
+        map.get(key).type = "group";
+        map.get(key).category = "Class / Group";
+      }
+    });
+    return [...map.values()];
+  }
+
+  let TERM_INDEX = buildTermIndex();
+
+  const EXAMPLE_INDEX = Object.entries(EXAMPLES).map(([name,d]) => ({
+    name, label:name, type:"example", category:d.group || "Important Example",
+    intro:d.intro || "", facts:d.facts || [], neet:d.neet || "", related:d.related || [],
+    conceptKey: document.querySelector(`.concept-term[data-concept-key="${CSS.escape(name)}"]`) ? name : null
+  }));
+
+  function allItems() {
+    const byName = new Map();
+    [...TERM_INDEX, ...EXAMPLE_INDEX].forEach(item => {
+      const key = item.name.toLocaleLowerCase();
+      if(!byName.has(key)) byName.set(key,item);
+      else {
+        const old = byName.get(key);
+        if(item.type === "example") {
+          byName.set(key, {...old, ...item, conceptKey: old.conceptKey || item.conceptKey});
+        }
+      }
+    });
+    return [...byName.values()];
+  }
+
+  function scoreItem(item,q) {
+    const hay = [item.name,item.label,item.category,item.intro,(item.facts||[]).join(" "),item.neet].join(" ").toLocaleLowerCase();
+    const name = item.name.toLocaleLowerCase();
+    if(!q) return item.type === "example" ? 2 : 1;
+    if(name === q) return 100;
+    if(name.startsWith(q)) return 80;
+    if(name.includes(q)) return 60;
+    if(hay.includes(q)) return 30;
+    return 0;
+  }
+
+  function renderResults() {
+    TERM_INDEX = buildTermIndex();
+    const q = search.value.trim().toLocaleLowerCase();
+    const items = allItems()
+      .filter(i => activeFilter === "all" || i.type === activeFilter)
+      .map(i => [i,scoreItem(i,q)])
+      .filter(x => x[1] > 0)
+      .sort((a,b)=> b[1]-a[1] || a[0].name.localeCompare(b[0].name))
+      .slice(0,36)
+      .map(x=>x[0]);
+
+    results.innerHTML = "";
+    detail.classList.remove("open");
+    results.style.display = "block";
+
+    if(!items.length) {
+      results.innerHTML = `<div class="qf-empty">কোনো match পাওয়া যায়নি। অন্য spelling বা class name চেষ্টা করুন।</div>`;
+      return;
+    }
+
+    items.forEach(item => {
+      const b = document.createElement("button");
+      b.className = "qf-result";
+      b.type = "button";
+      const badge = item.type === "example" ? "Example" : item.type === "group" ? "Class / Group" : "Term";
+      const fact = (item.facts && item.facts[0]) || item.neet || item.intro || "";
+      b.innerHTML = `
+        <div class="qf-result-top">
+          <span class="qf-result-name">${item.name}</span>
+          <span class="qf-badge">${badge}</span>
+        </div>
+        <div class="qf-result-sub">${item.category || ""}</div>
+        <div class="qf-result-fact">${fact}</div>`;
+      b.addEventListener("click",()=>showDetail(item));
+      results.appendChild(b);
+    });
+  }
+
+  function showDetail(item) {
+    results.style.display = "none";
+    detail.classList.add("open");
+    detailName.textContent = item.name;
+    detailMeta.textContent = (item.type === "example" ? "Important Example • " : item.type === "group" ? "Class / Group • " : "Concept Term • ") + (item.category || "");
+    detailIntro.textContent = item.intro || "এই concept-এর full detail Concept Explorer-এ রয়েছে.";
+    detailFacts.innerHTML = (item.facts && item.facts.length)
+      ? "<ul>" + item.facts.map(x=>"<li>"+x+"</li>").join("") + "</ul>"
+      : "Full detail-এর জন্য Concept Explorer খুলুন.";
+    detailNeet.textContent = item.neet || "NEET revision-এর জন্য term/group context সহ পড়ুন.";
+    detailRelated.innerHTML = "";
+    (item.related || []).forEach(name => {
+      const rb = document.createElement("button");
+      rb.className = "qf-action";
+      rb.type = "button";
+      rb.textContent = name;
+      rb.addEventListener("click",()=> {
+        search.value = name;
+        activeFilter = "all";
+        filterBtns.forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"));
+        detail.classList.remove("open");
+        renderResults();
+      });
+      detailRelated.appendChild(rb);
+    });
+    if(!detailRelated.children.length) detailRelated.textContent = "—";
+
+    actions.innerHTML = "";
+    if(item.conceptKey) {
+      const full = document.createElement("button");
+      full.className = "qf-action primary";
+      full.type = "button";
+      full.textContent = "📖 Full Concept খুলুন";
+      full.addEventListener("click",()=> {
+        const target = [...document.querySelectorAll(".concept-term")].find(x=>x.dataset.conceptKey===item.conceptKey);
+        const classTarget = [...document.querySelectorAll(".class-tab")].find(x=>x.dataset.conceptKey===item.conceptKey);
+        closeFinder();
+        if(target) target.click();
+        else if(classTarget) classTarget.click();
+      });
+      actions.appendChild(full);
+    }
+    const locate = document.createElement("button");
+    locate.className = "qf-action";
+    locate.type = "button";
+    locate.textContent = "🔎 পাতায় খুঁজুন";
+    locate.addEventListener("click",()=> {
+      closeFinder();
+      const globalSearch = document.getElementById("searchInput");
+      if(globalSearch) {
+        globalSearch.value = item.name;
+        globalSearch.dispatchEvent(new Event("input",{bubbles:true}));
+      }
+    });
+    actions.appendChild(locate);
+  }
+
+  back.addEventListener("click",()=>{detail.classList.remove("open");results.style.display="block";});
+  search.addEventListener("input",renderResults);
+  filterBtns.forEach(b => b.addEventListener("click",()=>{
+    activeFilter = b.dataset.filter;
+    filterBtns.forEach(x=>x.classList.toggle("active",x===b));
+    renderResults();
+  }));
+
+  /* Make ALL important examples clickable on the page, without replacing existing concept terms. */
+  const exNames = Object.keys(EXAMPLES).sort((a,b)=>b.length-a.length);
+  const exRegex = new RegExp("(" + exNames.map(s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|") + ")", "g");
+  const root = document.querySelector(".content");
+  const skipTags = new Set(["SCRIPT","STYLE","BUTTON","INPUT","TEXTAREA","SELECT","OPTION","CODE"]);
+  if(root) {
+    const walker = document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+    const nodes=[];
+    while(walker.nextNode()) {
+      const n=walker.currentNode,p=n.parentElement;
+      if(!p || skipTags.has(p.tagName) || p.closest(".concept-term") || p.closest(".example-clickable") || p.closest(".class-explorer")) continue;
+      if(exRegex.test(n.nodeValue)) nodes.push(n);
+      exRegex.lastIndex=0;
+    }
+    nodes.forEach(n=>{
+      const text=n.nodeValue,frag=document.createDocumentFragment();
+      let last=0;
+      text.replace(exRegex,(match,_g,offset)=>{
+        if(offset>last) frag.appendChild(document.createTextNode(text.slice(last,offset)));
+        const s=document.createElement("span");
+        s.className="example-clickable";s.tabIndex=0;s.dataset.example=match;s.textContent=match;
+        s.title="Quick example details";
+        frag.appendChild(s);last=offset+match.length;return match;
+      });
+      if(last<text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+      n.parentNode.replaceChild(frag,n);
+      exRegex.lastIndex=0;
+    });
+  }
+
+  function openExample(name) {
+    const d=EXAMPLES[name];
+    if(!d) return;
+    openFinder(name);
+    const item = EXAMPLE_INDEX.find(x=>x.name===name);
+    if(item) setTimeout(()=>showDetail(item),40);
+  }
+
+  document.addEventListener("click",e=>{
+    const ex=e.target.closest(".example-clickable");
+    if(ex) openExample(ex.dataset.example);
+  });
+  document.addEventListener("keydown",e=>{
+    const ex=e.target.closest && e.target.closest(".example-clickable");
+    if(ex && (e.key==="Enter" || e.key===" ")){e.preventDefault();openExample(ex.dataset.example);}
+  });
+
+  document.addEventListener("keydown",e=>{
+    if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==="k"){
+      e.preventDefault();openFinder("");
+    }
+    if(e.key==="Escape" && finder.classList.contains("open")) closeFinder();
+  });
+
+  renderResults();
+});
+</script>
+
+</body></html>

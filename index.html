@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biology Learning Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4CAF50;
+            --primary-light: #e8f5e9;
+            --text-dark: #2c3e50;
+            --text-light: #546e7a;
+            --white: #ffffff;
+            --bg-color: #f4f9f4;
+            --shadow: 0 10px 20px rgba(0,0,0,0.05);
+            --shadow-hover: 0 15px 30px rgba(76, 175, 80, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--white) 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-bottom: 2px solid var(--primary-light);
+            border-radius: 0 0 30px 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: left;
+            font-size: 1.8rem;
+            margin: 2.5rem 0 1.5rem;
+            color: var(--text-dark);
+            border-bottom: 3px solid var(--primary);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .chapter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover:not(.upcoming) {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary-light);
+        }
+
+        .card-unit {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: auto;
+        }
+
+        /* Upcoming Badge Styles */
+        .card.upcoming {
+            background: #f9f9f9;
+            opacity: 0.8;
+            cursor: default;
+        }
+        
+        .badge {
+            align-self: flex-start;
+            background: #ffe082;
+            color: #d35400;
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--white);
+            margin-top: 3rem;
+            border-radius: 30px 30px 0 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 class="hero-title">🌱 Biology Learning Hub</h1>
+        <p>Interactive modules and visual learning aids for NEET & Board Students.</p>
+    </header>
+
+    <div class="container">
+        
+        <h2 class="section-title">Class XI Syllabus</h2>
+
+        <div class="chapter-grid">
+            
+            <!-- UNIT I: DIVERSITY IN THE LIVING WORLD -->
+            <div class="card upcoming">
+                <span class="card-unit">Unit I</span>
+                <h3 class="card-title">Chapter 1: The Living World</h3>
+                <span class="badge">Upcoming / Will update soon</span>
+            </div>
+
+            <div class="card upcoming">
+                <span class="card-unit">Unit I</span>
+                <h3 class="card-title">Chapter 2: Biological Classification</h3>
+                <span class="badge">Upcoming / Will update soon</span>
+            </div>
+
+            <!-- Active App from previous prompt -->
+            <a href="plant-kingdom.html" class="card">
+                <span class="card-unit">Unit I</span>
+                <h3 class="card-title">Chapter 3: Plant Kingdom</h3>
+            </a>
+
+            <div class="card upcoming">
+                <span class="card-unit">Unit I</span>
+                <h3 class="card-title">Chapter 4: Animal Kingdom</h3>
+                <span class="badge">Upcoming / Will update soon</span>
+            </div>
+
+            <!-- UNIT II: STRUCTURAL ORGANISATION -->
+            <div class="card upcoming">
+                <span class="card-unit">Unit II</span>
+                <h3 class="card-title">Chapter 5: Morphology of Flowering Plants</h3>
+                <span class="badge">Upcoming / Will update soon</span>
+            </div>
+
+            <div class="card upcoming">
+                <span class="card-unit">Unit II</span>
+                <h3 class="card-title">Chapter 6: Anatomy of Flowering Plants</h3>
+                <span class="badge">Upcoming / Will update soon</span>
+            </div>
+
+            <div class="card upcoming">
+                <span class="card-unit">Unit II</span>
+                <h3 class="card-title">Chapter 7: Structural Organisation in Animals</h3>
+                <span class="badge">Upcoming / Will update soon</span>
+            </div>
+
+            <!-- UNIT III: CELL -->
+            <a href="cell-biology.html" class="card">
+                <span class="card-unit">Unit III</span>
+                <h3 class="card-title">Chapter 8: Cell: The Unit of Life</h3>
+            </a>
+
+            <div class="card upcoming">
+                <span class="card-unit">Unit III</span>
+                <h3 class="card-title">Chapter 9: Biomolecules</h3>
+                <span class="badge">Upcoming / Will update soon</span>
+            </div>
+
+            <div class="card upcoming">
+                <span class="card-unit">Unit III</span>
+                <h3 class="card-title">Chapter 10: Cell Cycle and Cell Division</h3>
+                <span class="badge">Upcoming / Will update soon</span>
+            </div>
+
+            <!-- UNIT IV: PLANT PHYSIOLOGY -->
+            <div class="card upcoming">
+                <span class="card-unit">Unit IV</span>
+                <h3 class="card-title">Chapter 11: Photosynthesis in Higher Plants</h3>
+                <span class="badge">Upcoming / Will update soon</span>
+            </div>
+
+            <div class="card upcoming">
+                <span class="card-unit">Unit IV</span>
+                <h3 class="card-title">Chapter 12: Respiration in Plants</h3>
+                <span class="badge">Upcoming / Will update soon</span>
+            </div>
+
+            <div class="card upcoming">
+                <span class="card-unit">Unit IV</span>
+                <h3 class="card-title">Chapter 13: Plant Growth and Development</h3>
+                <span class="badge">Upcoming / Will update soon</span>
+            </div>
+
+            <!-- UNIT V: HUMAN PHYSIOLOGY -->
+            <a href="human-physiology.html" class="card">
+                <span class="card-unit">Unit V</span>
+                <h3 class="card-title">Chapter 14: Breathing and Exchange of Gases</h3>
+            </a>
+
+            <div class="card upcoming">
+                <span class="card-unit">Unit V</span>
+                <h3 class="card-title">Chapter 15: Body Fluids and Circulation</h3>
+                <span class="badge">Upcoming / Will update soon</span>
+            </div>
+
+            <div class="card upcoming">
+                <span class="card-unit">Unit V</span>
+                <h3 class="card-title">Chapter 16: Excretory Products and their Elimination</h3>
+                <span class="badge">Upcoming / Will update soon</span>
+            </div>
+
+            <div class="card upcoming">
+                <span class="card-unit">Unit V</span>
+                <h3 class="card-title">Chapter 17: Locomotion and Movement</h3>
+                <span class="badge">Upcoming / Will update soon</span>
+            </div>
+
+            <div class="card upcoming">
+                <span class="card-unit">Unit V</span>
+                <h3 class="card-title">Chapter 18: Neural Control and Coordination</h3>
+                <span class="badge">Upcoming / Will update soon</span>
+            </div>
+
+            <div class="card upcoming">
+                <span class="card-unit">Unit V</span>
+                <h3 class="card-title">Chapter 19: Coordination and Integration</h3>
+                <span class="badge">Upcoming / Will update soon</span>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>Created with ❤️ for Biology Students & Educators.</p>
+    </footer>
+
+</body>
+</html>
