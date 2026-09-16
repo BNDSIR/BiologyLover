@@ -173,6 +173,36 @@
         }
         .badge.ready { background: #d1fae5; color: #047857; }
 
+
+        /* Online Quiz Arena launcher */
+        .arena-tab-link {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: .55rem;
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(135deg, #7c3aed, #ec4899, #f59e0b);
+            border: 2px solid rgba(255,255,255,.85);
+            box-shadow: 0 0 0 0 rgba(236,72,153,.55), var(--shadow-sm);
+            animation: arenaBlink 1.5s ease-in-out infinite;
+            overflow: hidden;
+        }
+        .arena-tab-link:hover { color:#fff; transform: translateY(-2px) scale(1.02); background:linear-gradient(135deg,#6d28d9,#db2777,#d97706); }
+        .arena-tab-link .arena-new {
+            background:#fff; color:#be123c; font-size:.68rem; font-weight:800;
+            border-radius:999px; padding:.2rem .45rem; letter-spacing:.04em;
+        }
+        .arena-tab-link .arena-copy { display:flex; flex-direction:column; line-height:1.15; text-align:left; }
+        .arena-tab-link .arena-copy strong { font-size:1rem; }
+        .arena-tab-link .arena-copy small { font-size:.72rem; font-weight:600; opacity:.95; white-space:normal; }
+        @keyframes arenaBlink {
+            0%,100% { box-shadow:0 0 0 0 rgba(236,72,153,.45), var(--shadow-sm); filter:saturate(1); }
+            50% { box-shadow:0 0 0 10px rgba(236,72,153,0), 0 12px 26px rgba(124,58,237,.28); filter:saturate(1.25); }
+        }
+        @media (max-width:700px){ .arena-tab-link{ width:100%; justify-content:center; } .arena-tab-link .arena-copy{ text-align:center; } }
+        @media (prefers-reduced-motion: reduce){ .arena-tab-link{ animation:none; } }
+
     </style>
 </head>
 <body>
@@ -197,6 +227,11 @@
             <button class="tab-btn" onclick="openTab(event, 'class11')">Class XI</button>
             <button class="tab-btn" onclick="openTab(event, 'class12')">Class XII</button>
             <button class="tab-btn" onclick="openTab(event, 'neet')">Exam Section</button>
+            <a class="tab-btn arena-tab-link" href="quiz_arena.html" title="Online Quiz Arena">
+                <span class="arena-new">NEW</span>
+                <span aria-hidden="true">🎮</span>
+                <span class="arena-copy"><strong>Online Quiz Arena</strong><small>নিজেদের মধ্যে অনলাইনে খেলো আর শেখো ।</small></span>
+            </a>
         </div>
 
         <!-- <!-- Syllabus data derived from Class IX and X Syllabus[cite: 4] -->
