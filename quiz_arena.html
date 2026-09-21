@@ -19,6 +19,80 @@ button,input,select{font:inherit}.shell{width:min(1450px,100%);margin:auto;paddi
 @media(max-width:600px){.shell{padding:5px}.head{padding:8px}.logo{width:40px;height:40px}.brand p{display:none}.head-actions .btn,.back{font-size:.72rem;padding:7px}.quote{font-size:.87rem}.arena{padding:5px}.topbar{font-size:.72rem}.track{order:10;flex-basis:100%}.question{min-height:0;padding:10px}.question h2{font-size:1rem}.answers{grid-template-columns:1fr;gap:6px}.answer{min-height:52px;padding:9px;font-size:.95rem}.side{max-height:24vh;padding:6px}.emoji button{width:40px;height:40px}.linkbox{display:none}.settings{grid-template-columns:1fr}.panel{padding:10px}.qimg{max-height:180px}}
 @media(max-width:380px){.side{grid-template-columns:1fr;max-height:25vh}.feed-wrap{display:none}.head-actions .btn:nth-child(1){display:none}.pill{font-size:.64rem}.question h2{font-size:.94rem}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== V5: clean single-column mobile game window ===== */
+.grid{grid-template-columns:1fr!important}
+.side{display:none!important}
+.arena{min-width:0}
+.main{width:100%;min-width:0}
+.score-rail{max-width:100%;overscroll-behavior-x:contain}
+.score-chip{min-height:42px;padding:6px 9px;border-radius:10px;font-size:.92rem;gap:6px}
+.score-chip .rank{width:24px;height:24px;font-size:.75rem}
+.asker-banner{padding:8px 10px;font-size:1.05rem;border-radius:10px}
+.qid{display:none}
+
+body.game-live .arena{height:100vh;height:100dvh;display:flex;flex-direction:column}
+body.game-live .topbar{flex:0 0 auto;position:relative;top:auto}
+body.game-live .grid{flex:1;min-height:0;display:flex;margin-top:5px}
+body.game-live .main{flex:1;min-height:0;display:flex;flex-direction:column}
+body.game-live .question{flex:1;min-height:0;height:auto;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+body.game-live .emoji{flex:0 0 auto}
+body.game-live .controls{flex:0 0 auto}
+
+@media(max-width:600px){
+  html{font-size:18px}
+  body.game-live .arena{padding:4px}
+  body.game-live .topbar{padding:5px;border-radius:8px;gap:4px}
+  body.game-live .score-rail{order:-4;padding:0 0 4px;gap:5px}
+  body.game-live .score-chip{font-size:.86rem;min-height:38px;padding:5px 7px}
+  body.game-live .score-chip .rank{display:none}
+  body.game-live .score-chip .strikes{font-size:.72rem}
+  body.game-live .asker-banner{order:-3;font-size:1.08rem;padding:7px 9px;margin-bottom:1px}
+  body.game-live #status{font-size:.78rem;max-width:42vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  body.game-live #role,body.game-live #bankCount,body.game-live #fair,body.game-live #roomState{display:none}
+  body.game-live .pill{font-size:.82rem;padding:4px 7px}
+  body.game-live .timer{font-size:1rem;min-width:62px}
+  body.game-live .track{height:7px;min-width:100%;flex-basis:100%;order:9}
+  body.game-live .question{padding:10px 9px 8px;border-radius:10px}
+  body.game-live .question h2{font-size:1.48rem;line-height:1.34;margin:5px 0 11px}
+  body.game-live .qmaster{font-size:1rem;padding:5px 8px;margin-bottom:4px}
+  body.game-live .answers{grid-template-columns:1fr;gap:7px}
+  body.game-live .answer{min-height:62px;font-size:1.15rem;line-height:1.28;padding:11px 12px;border-radius:10px}
+  body.game-live .result,body.game-live .lock{font-size:.98rem;padding:9px;margin-top:7px}
+  body.game-live .qimg{max-height:150px;margin-bottom:8px}
+  body.game-live .emoji{gap:4px;padding:4px 0 2px}
+  body.game-live .emoji button{width:38px;height:38px;font-size:1.05rem}
+  body.game-live .emoji button:nth-child(n+5){display:none}
+  body.game-live .controls .btn{min-height:38px;padding:6px 9px;font-size:.82rem}
+  body.game-live .controls.player-only{justify-content:center}
+  body.game-live .controls.player-only .btn{min-width:120px}
+}
+
+@media(max-width:390px){
+  html{font-size:17px}
+  body.game-live .question h2{font-size:1.36rem}
+  body.game-live .answer{font-size:1.08rem;min-height:58px}
+  body.game-live .score-chip{font-size:.8rem}
+  body.game-live .asker-banner{font-size:1rem}
+}
+
+/* Exact mobile viewport fit: no page-level vertical overflow during a live round */
+body.game-live,body.game-live .shell{height:100vh;height:100dvh;min-height:0;overflow:hidden}
+body.game-live .shell{display:flex;flex-direction:column}
+body.game-live .arena{height:auto!important;min-height:0;flex:1 1 0}
+body.game-live .grid{flex:1 1 0;min-height:0}
+body.game-live .main{flex:1 1 0;min-height:0}
+
+@media(max-width:600px){
+  /* Keep only the information a student needs while answering */
+  body.game-live .dot,body.game-live #status{display:none}
+  body.game-live .qmaster{display:none}
+  body.game-live.role-player .emoji{display:none}
+  body.game-live .question{padding-top:9px}
+  body.game-live .question h2{margin-top:0}
+  body.game-live .controls.player-only{padding-top:4px}
+  body.game-live .controls.player-only .btn{min-height:34px;padding:5px 13px;font-size:.78rem;border-radius:8px}
+}
 </style>
 
 <style id="v4-safe-mobile-css">
@@ -131,18 +205,18 @@ body.game-live .linkbox{display:none}
   <header class="head">
     <div class="brand">
       <img class="logo" src="https://github.com/mrinmoyedebnath-sys/mylogo/blob/main/1764070018636-removebg-preview.png?raw=true" alt="Biology Lovers logo">
-      <div><h1>🎮 Biology Lovers — Online Quiz Arena</h1><p>• 2–8 players - নিজেদের মধ্যে খেলতে পারো </p></div>
+      <div><h1>Biology Lovers — Quiz Arena</h1><p>2–8 players</p></div>
     </div>
     <div class="head-actions">
       <a class="back" href="index.html">← Main Index</a>
       <button class="btn" id="openStartBtn" type="button">🎮 Start</button>
-      <button class="btn" id="settingsBtn" type="button">⚙ Settings</button>
-      <button class="btn" id="guideBtn" type="button">📖 Guide</button>
-      <button class="btn" id="soundBtn" type="button">🔊 Sound</button>
+      <button class="btn" id="settingsBtn" type="button">Settings</button>
+      <button class="btn" id="guideBtn" type="button">Guide</button>
+      <button class="btn" id="soundBtn" type="button">Sound</button>
     </div>
   </header>
 
-  <div class="quote">“নিজেদের মধ্যে অনলাইনে খেলো আর শেখো । একজন হোস্ট হিসাবে গেম লিংক শেয়ার করবে বাকিরা লিংক থেকে জয়েন করবে ”</div>
+  <div class="quote">নিজেদের মধ্যে অনলাইনে খেলো আর শেখো</div>
 
   <section class="setup" id="setup">
     <label>Your Name<input id="name" maxlength="32" autocomplete="off" placeholder="e.g. Riya"></label>
@@ -159,19 +233,19 @@ body.game-live .linkbox{display:none}
     </div>
 
     <div class="setup-actions">
-      <button class="btn primary" id="hostBtn" type="button">🏠 Host Game</button>
-      <button class="btn" id="joinBtn" type="button">🎯 Join Game</button>
-      <button class="btn" id="newCode" type="button">🎲 New Code</button>
-      <button class="btn" id="setupSettings" type="button">⚙ Host Settings</button>
-      <button class="btn" id="setupGuide" type="button">📖 How to Play</button>
+      <button class="btn primary" id="hostBtn" type="button">Host Game</button>
+      <button class="btn" id="joinBtn" type="button">Join Game</button>
+      <button class="btn" id="newCode" type="button">New Code</button>
+      <button class="btn" id="setupSettings" type="button">Host Settings</button>
+      <button class="btn" id="setupGuide" type="button">Guide</button>
     </div>
     <div class="config-summary" id="configSummary">Host settings: 10 rounds • 20 sec • +10 correct • +5 fastest • max 8 players</div>
   </section>
 
   <main class="arena">
     <div class="topbar">
-      <div class="score-rail" id="scoreRail" aria-label="Live score leaderboard"><div class="score-chip">🏆 Scores will appear here</div></div>
-      <div class="asker-banner" id="askerBanner">🎤 Waiting for Quiz Master</div>
+      <div class="score-rail" id="scoreRail" aria-label="Scores"><div class="score-chip">Scores</div></div>
+      <div class="asker-banner" id="askerBanner">Waiting for player</div>
       <span class="dot" id="dot"></span><strong id="status">Offline</strong>
       <span class="pill" id="role">Role: —</span><span class="pill" id="round">Round: 0/10</span>
       <span class="pill" id="bankCount">Questions: 0</span><span class="pill timer" id="timer">⏱ 20</span>
@@ -184,14 +258,14 @@ body.game-live .linkbox{display:none}
         <div class="emoji" id="emojiBar">
           <button type="button" data-emoji="😀">😀</button><button type="button" data-emoji="🔥">🔥</button><button type="button" data-emoji="👏">👏</button><button type="button" data-emoji="😎">😎</button><button type="button" data-emoji="🤯">🤯</button><button type="button" data-emoji="❤️">❤️</button><button type="button" data-emoji="🎯">🎯</button><button type="button" data-emoji="😂">😂</button>
         </div>
-        <div class="controls host-only"><button class="btn primary" id="startBtn" type="button" disabled>▶ Start 10-Round Game</button><button class="btn" id="pauseBtn" type="button" disabled>⏸ Pause</button><button class="btn" id="lockBtn" type="button" disabled>🔓 Lock Joins</button><button class="btn danger" id="endBtn" type="button" disabled>⛔ End Game</button></div>
-        <div class="controls player-only"><button class="btn danger" id="leaveBtn" type="button" disabled>🚪 Leave Game</button></div>
+        <div class="controls host-only"><button class="btn primary" id="startBtn" type="button" disabled>Start 10-Round Game</button><button class="btn" id="pauseBtn" type="button" disabled>Pause</button><button class="btn" id="lockBtn" type="button" disabled>🔓 Lock Joins</button><button class="btn danger" id="endBtn" type="button" disabled>End Game</button></div>
+        <div class="controls player-only"><button class="btn danger" id="leaveBtn" type="button" disabled>Leave Game</button></div>
         <div class="linkbox host-only"><input id="shareLink" readonly placeholder="Game link appears here"><button class="btn" id="copyLink" type="button" disabled>Copy Link</button></div>
       </section>
 
-      <aside class="side">
-        <div><h3>🏆 Live Leaderboard</h3><div class="players" id="players">No players yet.</div></div>
-        <div class="feed-wrap"><h3>💬 Reactions / Events</h3><div class="feed" id="feed"><div class="feed-item">Game reactions will appear here.</div></div></div>
+      <aside class="side" aria-hidden="true">
+        <div class="players" id="players">No players yet.</div>
+        <div class="feed" id="feed"><div class="feed-item">Game events</div></div>
       </aside>
     </div>
   </main>
@@ -201,12 +275,12 @@ body.game-live .linkbox{display:none}
 <div class="start-overlay open" id="startOverlay" aria-hidden="false">
   <section class="start-panel">
     <div class="start-head">
-      <div><h2>🎮 Biology Lovers — Quiz Arena</h2><p>Host settings প্রথমেই ঠিক করুন, অথবা shared link/code দিয়ে সরাসরি Join করুন।</p></div>
+      <div><h2>Quiz Arena</h2><p>Host করুন অথবা game code দিয়ে Join করুন।</p></div>
       <button class="btn start-close" id="startClose" type="button" aria-label="Close">✕</button>
     </div>
     <div class="mode-tabs">
-      <button class="mode-tab active" id="modeHost" type="button">🏠 Host a Game</button>
-      <button class="mode-tab" id="modeJoin" type="button">🎯 Join a Game</button>
+      <button class="mode-tab active" id="modeHost" type="button">Host Game</button>
+      <button class="mode-tab" id="modeJoin" type="button">Join Game</button>
     </div>
 
     <div class="start-pane active" id="hostPane">
@@ -239,7 +313,7 @@ body.game-live .linkbox{display:none}
         <label>Your Name<input id="quickJoinName" maxlength="20" autocomplete="name" placeholder="e.g. Rahul"></label>
         <label>Game Code<input id="quickJoinCode" maxlength="18" autocomplete="off" placeholder="e.g. BIO-AB12-CD34"></label>
       </div>
-      <button class="start-primary join" id="quickJoinBtn" type="button">🎯 Join Game</button>
+      <button class="start-primary join" id="quickJoinBtn" type="button">Join Game</button>
       <div class="start-note">Shared game link খুললে code নিজে থেকেই বসবে। একই browser/device থেকে duplicate joining এবং একই নামের duplicate player block করা হবে।</div>
       <div class="start-error" id="joinStartMsg"></div>
     </div>
@@ -304,7 +378,7 @@ function normCfg(c={}){return {maxPlayers:clamp(c.maxPlayers,2,8,8),seconds:clam
 function readCfg(){return normCfg({maxPlayers:$('setMax').value,seconds:$('setSeconds').value,points:$('setPoints').value,fastBonus:$('setFast').value,masterPoint:$('setMaster').value,totalRounds:$('setRounds').value,nextDelay:$('setDelay').value,fairPlay:$('setFair').checked,emoji:$('setEmoji').checked})}
 function writeCfg(c){c=normCfg(c);$('setMax').value=c.maxPlayers;$('setSeconds').value=c.seconds;$('setPoints').value=c.points;$('setFast').value=c.fastBonus;$('setMaster').value=c.masterPoint;$('setRounds').value=c.totalRounds;$('setDelay').value=c.nextDelay;$('setFair').checked=c.fairPlay;$('setEmoji').checked=c.emoji}
 function cfgText(c=g.cfg){return `${c.totalRounds} rounds • ${c.seconds} sec • +${c.points} correct • +${c.fastBonus} fastest • max ${c.maxPlayers} players`}
-function applyCfg(c,write=false){g.cfg=normCfg(c);if(write)writeCfg(g.cfg);$('configSummary').textContent='Host settings: '+cfgText();$('round').textContent=`Round: ${g.round||0}/${g.cfg.totalRounds}`;$('startBtn').textContent=`▶ Start ${g.cfg.totalRounds}-Round Game`;$('fair').textContent=g.cfg.fairPlay?'🛡 Fair Play ON':'🛡 Fair Play OFF';document.querySelectorAll('[data-emoji]').forEach(b=>b.disabled=!g.cfg.emoji);if(!g.current?.asked)setTimer(g.cfg.seconds,g.cfg.seconds)}
+function applyCfg(c,write=false){g.cfg=normCfg(c);if(write)writeCfg(g.cfg);$('configSummary').textContent='Host settings: '+cfgText();$('round').textContent=`Round: ${g.round||0}/${g.cfg.totalRounds}`;$('startBtn').textContent=`Start ${g.cfg.totalRounds}-Round Game`;$('fair').textContent=g.cfg.fairPlay?'🛡 Fair Play ON':'🛡 Fair Play OFF';document.querySelectorAll('[data-emoji]').forEach(b=>b.disabled=!g.cfg.emoji);if(!g.current?.asked)setTimer(g.cfg.seconds,g.cfg.seconds)}
 function setSettingsLocked(on){['setMax','setSeconds','setPoints','setFast','setMaster','setRounds','setDelay','setFair','setEmoji','settingsSave','settingsDefaults'].forEach(id=>{$(id).disabled=!!on})}
 function setRole(role){g.role=role||'';document.body.classList.toggle('role-host',role==='host');document.body.classList.toggle('role-player',role==='player');document.body.classList.toggle('connected',!!role);$('role').textContent='Role: '+(role?role==='host'?'Host':'Player':'—');$('startBtn').disabled=role!=='host';$('pauseBtn').disabled=role!=='host';$('endBtn').disabled=role!=='host';$('lockBtn').disabled=role!=='host';$('copyLink').disabled=role!=='host';$('leaveBtn').disabled=role!=='player'}
 function setStatus(text,on=false){$('status').textContent=text;$('dot').classList.toggle('on',!!on)}
@@ -446,7 +520,7 @@ function sound(k){if(!g.sound)return;({join:()=>{tone(540,.09);tone(720,.12,'sin
 function publicCurrent(type,seconds=g.seconds){const c=g.current||{};return {type,qid:c.qid,sourceId:c.sourceId,round:c.round,quizmaster:c.quizmaster,quizmasterName:c.quizmasterName,question:c.question,options:c.options,image:c.image||'',asked:!!c.asked,seconds,config:{...g.cfg}}}
 function state(){return {type:'g-state',running:g.running,paused:g.paused,round:g.round,players:[...g.players.values()].map(p=>({id:p.id,name:p.name,score:p.score,away:!!p.away})),quizmaster:g.current?.quizmaster||'',config:{...g.cfg},bankCount:questionBank.length}}
 function broadcastState(){const s=state();sendAll(s);renderPlayers(s.players,s.quizmaster);$('bankCount').textContent='Questions: '+questionBank.length}
-function renderPlayers(arr=[...g.players.values()],master=''){const a=[...arr].sort((x,y)=>(y.score||0)-(x.score||0));$('players').innerHTML=a.length?a.map((p,i)=>`<div class="player ${p.id===master?'master':''} ${p.away?'away':''}"><b>${i+1}. ${esc(p.name)}${p.id===master?' 🎤':''}${p.away?' ⚠️':''}</b><span class="score">${Number(p.score||0)} pts</span></div>`).join(''):'No players yet.'}
+function renderPlayers(arr=[...g.players.values()],master=''){const a=[...arr].sort((x,y)=>(y.score||0)-(x.score||0));$('players').innerHTML=a.length?a.map((p,i)=>`<div class="player ${p.id===master?'master':''} ${p.away?'away':''}"><b>${i+1}. ${esc(p.name)}${p.away?' ⚠️':''}</b><span class="score">${Number(p.score||0)} pts</span></div>`).join(''):'No players yet.'}
 
 function accept(conn){
   const cap=g.cfg.maxPlayers;if(g.players.size>=cap){conn.on('open',()=>{try{conn.send({type:'g-full',max:cap});conn.close()}catch(_){}});return}
@@ -508,7 +582,7 @@ async function joinGame(){if(!peerOk())return;unlockAudio();const name=$('name')
 function playerData(d){if(!d||typeof d!=='object')return;if(d.config)applyCfg(d.config,true);if(Number.isFinite(Number(d.bankCount)))$('bankCount').textContent='Questions: '+Number(d.bankCount);
   if(d.type==='g-state'){g.running=!!d.running;g.paused=!!d.paused;renderPlayers(d.players,d.quizmaster);$('round').textContent=`Round: ${d.round||0}/${g.cfg.totalRounds}`;markActive(g.running)}
   else if(d.type==='g-master-preview'){clearAnswerState();g.current=d;g.running=true;renderMaster(d);sound('start');markActive(true)}
-  else if(d.type==='g-wait-master'){clearAnswerState();g.current={round:d.round,quizmasterName:d.quizmasterName,asked:false};g.running=true;$('round').textContent=`Round: ${d.round}/${g.cfg.totalRounds}`;$('question').innerHTML=`<div class="wait"><div style="font-size:46px">🎤</div><b>${esc(d.quizmasterName)}</b> is preparing the next question…</div>`;setTimer(g.cfg.seconds);markActive(true)}
+  else if(d.type==='g-wait-master'){clearAnswerState();g.current={round:d.round,quizmasterName:d.quizmasterName,asked:false};g.running=true;$('round').textContent=`Round: ${d.round}/${g.cfg.totalRounds}`;$('question').innerHTML=`<div class="wait"><div style="font-size:46px"></div><b>${esc(d.quizmasterName)}</b> is preparing the next question…</div>`;setTimer(g.cfg.seconds);markActive(true)}
   else if(d.type==='g-question'){clearAnswerState();g.running=true;g.current=d;g.seconds=Number(d.seconds||g.cfg.seconds);$('round').textContent=`Round: ${d.round}/${g.cfg.totalRounds}`;renderQuestion(d);sound('start');markActive(true)}
   else if(d.type==='g-tick'){g.seconds=Number(d.seconds)||0;setTimer(g.seconds);if(g.seconds<=5&&g.seconds>0)sound(g.seconds<=3?'urgent':'tick')}
   else if(d.type==='g-answer-ack'){if(g.current&&d.qid===g.current.qid&&g.myAnswer!==null){clearTimeout(g.answerAckTimer);g.answerPending=false;g.myLocked=true;const m=$('roundMsg');if(m)m.textContent='🔒 Answer locked: '+String.fromCharCode(65+Number(d.answer))+' • received by host'}}
@@ -523,11 +597,11 @@ function playerData(d){if(!d||typeof d!=='object')return;if(d.config)applyCfg(d.
 function clearAnswerState(){clearTimeout(g.answerAckTimer);g.answerAckTimer=null;g.answerPending=false;g.myAnswer=null;g.myLocked=false}
 function pickQuestion(){if(!questionBank.length)return null;if(g.used.size>=questionBank.length)g.used.clear();let i;do{i=Math.floor(Math.random()*questionBank.length)}while(g.used.has(i)&&g.used.size<questionBank.length);g.used.add(i);return questionBank[i]}
 function imgHtml(url){return url?`<img class="qimg" src="${esc(url)}" alt="Question image" onerror="this.style.display='none'">`:''}
-function nextRound(){if(g.role!=='host'||!g.running||g.paused)return;const plist=[...g.players.values()];if(plist.length<2){setStatus('At least 2 players are needed.');g.running=false;markActive(false);return}if(!questionBank.length){setStatus('Question bank is unavailable. Refresh the teacher-set bank.');g.running=false;markActive(false);return}if(g.round>=g.cfg.totalRounds){finishGame();return}g.round++;g.blocked.clear();clearAnswerState();plist.forEach(p=>p.away=false);const master=plist[(g.round-1)%plist.length],q=pickQuestion();g.answers.clear();g.seconds=g.cfg.seconds;g.current={qid:'gq-'+Date.now(),sourceId:q.id,round:g.round,quizmaster:master.id,quizmasterName:master.name,question:q.question,options:q.options,correct:q.correct,image:q.image||'',asked:false,started:0};$('round').textContent=`Round: ${g.round}/${g.cfg.totalRounds}`;setTimer(g.cfg.seconds);broadcastState();setStatus(master.name+' is Quiz Master — waiting to ask',true);markActive(true);if(master.id===g.peer.id){renderMaster(g.current);sound('start')}else{$('question').innerHTML=`<div class="wait"><div style="font-size:46px">🎤</div><b>${esc(master.name)}</b> is preparing the question…</div>`;sendTo(master.id,publicCurrent('g-master-preview',g.cfg.seconds));sendAll({type:'g-wait-master',round:g.round,total:g.cfg.totalRounds,quizmasterName:master.name,config:{...g.cfg}},master.id)}}
-function renderMaster(d){$('question').innerHTML=`<div class="master-card"><div class="qmaster">🎤 You are Quiz Master — Round ${d.round}</div><div class="qid">Question ID: ${esc(d.sourceId||'')}</div><h2>${esc(d.question)}</h2>${imgHtml(d.image)}<div class="answers">${d.options.map((o,i)=>`<button class="answer" disabled>${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('')}</div><div class="notice" style="margin-top:10px"><b>আপনার কাজ:</b> Question ও options দেখে প্রস্তুত হলে নিচের button চাপুন। অন্য players-এর timer তখন শুরু হবে। আপনি এই round-এ answer দেবেন না।</div><button class="ask" id="askEveryone" type="button">📤 Ask Everyone</button></div>`;$('askEveryone').addEventListener('click',askCurrent)}
+function nextRound(){if(g.role!=='host'||!g.running||g.paused)return;const plist=[...g.players.values()];if(plist.length<2){setStatus('At least 2 players are needed.');g.running=false;markActive(false);return}if(!questionBank.length){setStatus('Question bank is unavailable. Refresh the teacher-set bank.');g.running=false;markActive(false);return}if(g.round>=g.cfg.totalRounds){finishGame();return}g.round++;g.blocked.clear();clearAnswerState();plist.forEach(p=>p.away=false);const master=plist[(g.round-1)%plist.length],q=pickQuestion();g.answers.clear();g.seconds=g.cfg.seconds;g.current={qid:'gq-'+Date.now(),sourceId:q.id,round:g.round,quizmaster:master.id,quizmasterName:master.name,question:q.question,options:q.options,correct:q.correct,image:q.image||'',asked:false,started:0};$('round').textContent=`Round: ${g.round}/${g.cfg.totalRounds}`;setTimer(g.cfg.seconds);broadcastState();setStatus(master.name+' is Quiz Master — waiting to ask',true);markActive(true);if(master.id===g.peer.id){renderMaster(g.current);sound('start')}else{$('question').innerHTML=`<div class="wait"><div style="font-size:46px"></div><b>${esc(master.name)}</b> is preparing the question…</div>`;sendTo(master.id,publicCurrent('g-master-preview',g.cfg.seconds));sendAll({type:'g-wait-master',round:g.round,total:g.cfg.totalRounds,quizmasterName:master.name,config:{...g.cfg}},master.id)}}
+function renderMaster(d){$('question').innerHTML=`<div class="master-card"><div class="qmaster">Your turn to ask — Round ${d.round}</div><div class="qid">Question ID: ${esc(d.sourceId||'')}</div><h2>${esc(d.question)}</h2>${imgHtml(d.image)}<div class="answers">${d.options.map((o,i)=>`<button class="answer" disabled>${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('')}</div><div class="notice" style="margin-top:10px"><b>আপনার কাজ:</b> Question ও options দেখে প্রস্তুত হলে নিচের button চাপুন। অন্য players-এর timer তখন শুরু হবে। আপনি এই round-এ answer দেবেন না।</div><button class="ask" id="askEveryone" type="button">📤 Ask Everyone</button></div>`;$('askEveryone').addEventListener('click',askCurrent)}
 function askCurrent(){if(!g.current||g.current.asked)return;if(g.role==='host'&&g.peer?.id===g.current.quizmaster)publishQuestion();else if(g.role==='player'&&g.peer?.id===g.current.quizmaster){try{if(g.hostConn?.open)g.hostConn.send({type:'g-ask',qid:g.current.qid});$('askEveryone').disabled=true;$('askEveryone').textContent='✅ Sent to players';sound('start')}catch(_){}}}
 function publishQuestion(){if(!g.current||g.current.asked||g.role!=='host')return;g.current.asked=true;g.current.started=Date.now();g.seconds=g.cfg.seconds;const p=publicCurrent('g-question',g.seconds);sendAll(p);if(g.peer.id!==g.current.quizmaster)renderQuestion(p);else renderMasterAsked(p);setStatus('Question LIVE — answer now!',true);sound('start');startTimer()}
-function renderMasterAsked(d){$('question').innerHTML=`<div class="master-card"><div class="qmaster">🎤 Quiz Master: You</div><div class="qid">Question ID: ${esc(d.sourceId||'')}</div><h2>${esc(d.question)}</h2>${imgHtml(d.image)}<div class="answers">${d.options.map((o,i)=>`<button class="answer" disabled>${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('')}</div><div class="result" id="roundMsg">📡 Question sent. Players are answering…</div></div>`}
+function renderMasterAsked(d){$('question').innerHTML=`<div class="master-card"><div class="qmaster">Asking: You</div><div class="qid">Question ID: ${esc(d.sourceId||'')}</div><h2>${esc(d.question)}</h2>${imgHtml(d.image)}<div class="answers">${d.options.map((o,i)=>`<button class="answer" disabled>${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('')}</div><div class="result" id="roundMsg">📡 Question sent. Players are answering…</div></div>`}
 function renderQuestion(d){if(g.peer?.id===d.quizmaster){renderMasterAsked(d);return}$('question').innerHTML=`<div class="qmaster">🎤 Quiz Master: ${esc(d.quizmasterName)}</div><div class="qid">Question ID: ${esc(d.sourceId||'')}</div><h2>${esc(d.question)}</h2>${imgHtml(d.image)}<div class="answers">${d.options.map((o,i)=>`<button class="answer" data-answer="${i}">${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('')}</div><div class="result" id="roundMsg">⏱ Answer within ${g.cfg.seconds} seconds.</div>`;setTimer(d.seconds||g.cfg.seconds);$('question').querySelectorAll('[data-answer]').forEach(b=>b.addEventListener('click',()=>answer(Number(b.dataset.answer),b)))}
 function answer(a,btn){if(!g.current||!g.current.asked||g.peer?.id===g.current.quizmaster||g.myLocked||g.answerPending||g.myAnswer!==null)return;const bs=[...$('question').querySelectorAll('[data-answer]')];bs.forEach(b=>b.disabled=true);btn.classList.add('selected');g.myAnswer=a;if(g.role==='host'){if(!g.answers.has(g.peer.id)&&!g.blocked.has(g.peer.id))g.answers.set(g.peer.id,{answer:a,time:Date.now(),name:g.name});g.myLocked=true;$('roundMsg').textContent='🔒 Answer locked: '+String.fromCharCode(65+a)+' • saved by host';return}if(!g.hostConn?.open){g.myAnswer=null;bs.forEach(b=>b.disabled=false);btn.classList.remove('selected');$('roundMsg').textContent='⚠️ Connection interrupted. Tap again.';return}g.answerPending=true;$('roundMsg').textContent='📡 Sending answer '+String.fromCharCode(65+a)+' to host…';sendAnswerAttempt(a,0)}
 function sendAnswerAttempt(a,attempt){if(g.role!=='player'||!g.current||g.myLocked||!g.answerPending)return;if(!g.hostConn?.open){g.answerPending=false;g.myAnswer=null;$('question').querySelectorAll('[data-answer]').forEach(b=>b.disabled=false);$('question').querySelectorAll('.selected').forEach(b=>b.classList.remove('selected'));$('roundMsg').textContent='⚠️ Connection interrupted. Tap again.';return}try{g.hostConn.send({type:'g-answer',qid:g.current.qid,answer:a,attempt})}catch(_){}clearTimeout(g.answerAckTimer);g.answerAckTimer=setTimeout(()=>{if(!g.answerPending||g.myLocked)return;if(attempt<2){$('roundMsg').textContent='📡 Confirming answer with host…';sendAnswerAttempt(a,attempt+1)}else{g.answerPending=false;g.myAnswer=null;$('question').querySelectorAll('[data-answer]').forEach(b=>b.disabled=false);$('question').querySelectorAll('.selected').forEach(b=>b.classList.remove('selected'));$('roundMsg').textContent='⚠️ Host did not confirm. Tap the answer again.'}},900)}
@@ -537,8 +611,8 @@ function finishRound(){if(!g.current?.asked)return;clearInterval(g.timer);g.time
 function showResult(d){const bs=$('question').querySelectorAll('[data-answer]');bs.forEach((b,i)=>{b.disabled=true;b.classList.toggle('correct',i===Number(d.correct));if(b.classList.contains('selected')&&i!==Number(d.correct))b.classList.add('wrong')});let m=$('roundMsg');if(!m){m=document.createElement('div');m.id='roundMsg';m.className='result';$('question').appendChild(m)}m.textContent='✅ Correct: '+String.fromCharCode(65+Number(d.correct))+'. '+String(d.correctText||'')+(d.fastest?' • ⚡ Fastest: '+d.fastest:'');if(g.peer?.id!==g.current?.quizmaster){if(g.myAnswer===Number(d.correct))sound('correct');else sound('wrong')}else sound('join')}
 function finishGame(){g.running=false;markActive(false);const ps=[...g.players.values()].sort((a,b)=>b.score-a.score);const p={type:'g-final',players:ps.map(x=>({id:x.id,name:x.name,score:x.score}))};showFinal(p);sendAll(p);broadcastState();sound('win')}
 function showFinal(d){markActive(false);const p=d.players||[],med=['🥇','🥈','🥉'];$('question').innerHTML=`<div class="podium"><div style="font-size:55px">🏆</div><h2>Game Complete!</h2>${p.slice(0,3).map((x,i)=>`<div class="champ">${med[i]} ${esc(x.name)} — ${Number(x.score||0)} pts</div>`).join('')}<div class="result">Great game! Host can change settings and start a new match.</div></div>`;renderPlayers(p);setStatus('Game complete',true);setTimer(0)}
-function startGame(){if(g.role!=='host')return;if(g.players.size<2){setStatus('At least 2 players are needed.');return}if(!questionBank.length){setStatus('Teacher-set question bank is not ready. Use Refresh Question Bank.');return}applyCfg(readCfg());g.running=true;g.paused=false;g.round=0;g.used.clear();g.players.forEach(p=>{p.score=0;p.away=false});$('pauseBtn').textContent='⏸ Pause';markActive(true);broadcastState();sound('start');nextRound()}
-function pauseGame(){if(g.role!=='host'||!g.running)return;g.paused=!g.paused;$('pauseBtn').textContent=g.paused?'▶ Resume':'⏸ Pause';if(g.paused){clearInterval(g.timer);g.timer=null;clearTimeout(g.nextTimer);setStatus('Game paused',true);sendAll(state())}else{setStatus('Game resumed',true);sendAll(state());if(g.current?.asked&&g.seconds>0)startTimer();else{clearTimeout(g.nextTimer);g.nextTimer=setTimeout(nextRound,650)}}}
+function startGame(){if(g.role!=='host')return;if(g.players.size<2){setStatus('At least 2 players are needed.');return}if(!questionBank.length){setStatus('Teacher-set question bank is not ready. Use Refresh Question Bank.');return}applyCfg(readCfg());g.running=true;g.paused=false;g.round=0;g.used.clear();g.players.forEach(p=>{p.score=0;p.away=false});$('pauseBtn').textContent='Pause';markActive(true);broadcastState();sound('start');nextRound()}
+function pauseGame(){if(g.role!=='host'||!g.running)return;g.paused=!g.paused;$('pauseBtn').textContent=g.paused?'Resume':'Pause';if(g.paused){clearInterval(g.timer);g.timer=null;clearTimeout(g.nextTimer);setStatus('Game paused',true);sendAll(state())}else{setStatus('Game resumed',true);sendAll(state());if(g.current?.asked&&g.seconds>0)startTimer();else{clearTimeout(g.nextTimer);g.nextTimer=setTimeout(nextRound,650)}}}
 function markActive(on){setSettingsLocked(!!on);$('fair').textContent=on?(g.cfg.fairPlay?'🛡 Fair Play ON':'🛡 Fair Play OFF'):'🛡 Fair Play';if(on){closeOverlay('settingsOverlay');closeOverlay('guideOverlay')}}
 function emoji(e){if(!g.role||!g.cfg.emoji)return;const name=g.name||'Player';feed(name,e);floatEmoji(e);sound('emoji');if(g.role==='host')sendAll({type:'g-emoji',name,emoji:e});else try{if(g.hostConn?.open)g.hostConn.send({type:'g-emoji',emoji:e})}catch(_){}}
 async function copyLink(){const v=$('shareLink').value;if(!v)return;try{await navigator.clipboard.writeText(v);feed('System','Game link copied.')}catch(_){$('shareLink').select();document.execCommand('copy')}}
@@ -578,7 +652,7 @@ function updateRoomState(){
 }
 function updateAsker(name='',mode=''){
   const el=$('askerBanner');if(!el)return;
-  if(!name){el.textContent=mode||'🎤 Waiting for Quiz Master';return}
+  if(!name){el.textContent=mode||'Waiting for player';return}
   el.textContent=`🎤 ${mode||'Asking'}: ${name}`;
 }
 
@@ -586,7 +660,7 @@ function normCfg(c={}){return {maxPlayers:clamp(c.maxPlayers,2,8,8),seconds:clam
 function readCfg(){return normCfg({maxPlayers:$('setMax').value,seconds:$('setSeconds').value,points:$('setPoints').value,fastBonus:$('setFast').value,masterPoint:$('setMaster').value,totalRounds:$('setRounds').value,nextDelay:$('setDelay').value,fairPlay:$('setFair').checked,emoji:$('setEmoji').checked,lockJoin:$('setLockJoin').checked,strikeLimit:$('setStrikeLimit').value,roomMinutes:$('setRoomMinutes').value})}
 function writeCfg(c){c=normCfg(c);$('setMax').value=c.maxPlayers;$('setSeconds').value=c.seconds;$('setPoints').value=c.points;$('setFast').value=c.fastBonus;$('setMaster').value=c.masterPoint;$('setRounds').value=c.totalRounds;$('setDelay').value=c.nextDelay;$('setFair').checked=c.fairPlay;$('setEmoji').checked=c.emoji;$('setLockJoin').checked=c.lockJoin;$('setStrikeLimit').value=String(c.strikeLimit);$('setRoomMinutes').value=String(c.roomMinutes)}
 function cfgText(c=g.cfg){return `${c.totalRounds} rounds • ${c.seconds} sec • +${c.points} correct • +${c.fastBonus} fastest • max ${c.maxPlayers} players • room ${c.roomMinutes} min`}
-function applyCfg(c,write=false){g.cfg=normCfg(c);if(write)writeCfg(g.cfg);$('configSummary').textContent='Host settings: '+cfgText();$('round').textContent=`Round: ${g.round||0}/${g.cfg.totalRounds}`;$('startBtn').textContent=`▶ Start ${g.cfg.totalRounds}-Round Game`;$('fair').textContent=g.cfg.fairPlay?'🛡 Fair Play ON':'🛡 Fair Play OFF';document.querySelectorAll('[data-emoji]').forEach(b=>b.disabled=!g.cfg.emoji);if(!g.current?.asked)setTimer(g.cfg.seconds,g.cfg.seconds);syncQuickFromMain()}
+function applyCfg(c,write=false){g.cfg=normCfg(c);if(write)writeCfg(g.cfg);$('configSummary').textContent='Host settings: '+cfgText();$('round').textContent=`Round: ${g.round||0}/${g.cfg.totalRounds}`;$('startBtn').textContent=`Start ${g.cfg.totalRounds}-Round Game`;$('fair').textContent=g.cfg.fairPlay?'🛡 Fair Play ON':'🛡 Fair Play OFF';document.querySelectorAll('[data-emoji]').forEach(b=>b.disabled=!g.cfg.emoji);if(!g.current?.asked)setTimer(g.cfg.seconds,g.cfg.seconds);syncQuickFromMain()}
 function setSettingsLocked(on){['setMax','setSeconds','setPoints','setFast','setMaster','setRounds','setDelay','setFair','setEmoji','setLockJoin','setStrikeLimit','setRoomMinutes','settingsSave','settingsDefaults'].forEach(id=>{if($(id))$(id).disabled=!!on})}
 function randomCode(){return 'BIO-'+Math.random().toString(36).slice(2,6).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase()}
 
@@ -597,10 +671,10 @@ function renderPlayers(arr=[...g.players.values()],master=''){
   const me=g.peer?.id||'';
   const cards=a.map((p,i)=>{
     const kick=g.role==='host'&&p.id!==me?`<button class="kick-mini" data-kick="${esc(p.id)}" title="Remove player">✕</button>`:'';
-    return `<div class="score-chip ${p.id===master?'master':''} ${p.away?'away':''} ${p.id===me?'me':''}"><span class="rank">${i+1}</span><b>${esc(p.name)}${p.id===master?' 🎤':''}</b><span class="pts">${Number(p.score||0)} pts</span>${Number(p.strikes||0)?`<span class="strikes">⚠${Number(p.strikes||0)}</span>`:''}${kick}</div>`
+    return `<div class="score-chip ${p.id===master?'master':''} ${p.away?'away':''} ${p.id===me?'me':''}"><span class="rank">${i+1}</span><b>${esc(p.name)}</b><span class="pts">${Number(p.score||0)} pts</span>${Number(p.strikes||0)?`<span class="strikes">⚠${Number(p.strikes||0)}</span>`:''}${kick}</div>`
   }).join('');
-  $('scoreRail').innerHTML=cards||'<div class="score-chip">🏆 Scores will appear here</div>';
-  $('players').innerHTML=a.length?a.map((p,i)=>{const kick=g.role==='host'&&p.id!==me?`<button class="kick-btn" data-kick="${esc(p.id)}">Remove</button>`:'';return `<div class="player ${p.id===master?'master':''} ${p.away?'away':''}"><b>${i+1}. ${esc(p.name)}${p.id===master?' 🎤':''}${p.away?' ⚠️':''}${Number(p.strikes||0)?' • strikes '+Number(p.strikes||0):''}</b><div class="player-actions"><span class="score">${Number(p.score||0)} pts</span>${kick}</div></div>`}).join(''):'No players yet.';
+  $('scoreRail').innerHTML=cards||'<div class="score-chip">Scores</div>';
+  $('players').innerHTML=a.length?a.map((p,i)=>{const kick=g.role==='host'&&p.id!==me?`<button class="kick-btn" data-kick="${esc(p.id)}">Remove</button>`:'';return `<div class="player ${p.id===master?'master':''} ${p.away?'away':''}"><b>${i+1}. ${esc(p.name)}${p.away?' ⚠️':''}${Number(p.strikes||0)?' • strikes '+Number(p.strikes||0):''}</b><div class="player-actions"><span class="score">${Number(p.score||0)} pts</span>${kick}</div></div>`}).join(''):'No players yet.';
 }
 
 function rejectConn(conn,type,extra={}){const send=()=>{try{conn.send({type,...extra});setTimeout(()=>conn.close(),80)}catch(_){try{conn.close()}catch(__){}}};if(conn.open)send();else conn.on('open',send)}
@@ -668,7 +742,7 @@ async function joinGame(){
 function playerData(d){if(!d||typeof d!=='object')return;if(d.config)applyCfg(d.config,true);if(Number.isFinite(Number(d.bankCount)))$('bankCount').textContent='Questions: '+Number(d.bankCount);
   if(d.type==='g-state'){g.running=!!d.running;g.paused=!!d.paused;g.roomLocked=!!d.roomLocked;renderPlayers(d.players,d.quizmaster);$('round').textContent=`Round: ${d.round||0}/${g.cfg.totalRounds}`;updateRoomState();markActive(g.running)}
   else if(d.type==='g-master-preview'){clearAnswerState();g.current=d;g.running=true;updateAsker(d.quizmasterName,'Quiz Master');renderMaster(d);sound('start');markActive(true)}
-  else if(d.type==='g-wait-master'){clearAnswerState();g.current={round:d.round,quizmasterName:d.quizmasterName,asked:false};g.running=true;updateAsker(d.quizmasterName,'Preparing');$('round').textContent=`Round: ${d.round}/${g.cfg.totalRounds}`;$('question').innerHTML=`<div class="wait"><div style="font-size:46px">🎤</div><b>${esc(d.quizmasterName)}</b> is preparing the next question…</div>`;setTimer(g.cfg.seconds);markActive(true)}
+  else if(d.type==='g-wait-master'){clearAnswerState();g.current={round:d.round,quizmasterName:d.quizmasterName,asked:false};g.running=true;updateAsker(d.quizmasterName,'Preparing');$('round').textContent=`Round: ${d.round}/${g.cfg.totalRounds}`;$('question').innerHTML=`<div class="wait"><div style="font-size:46px"></div><b>${esc(d.quizmasterName)}</b> is preparing the next question…</div>`;setTimer(g.cfg.seconds);markActive(true)}
   else if(d.type==='g-question'){clearAnswerState();g.running=true;g.current=d;g.seconds=Number(d.seconds||g.cfg.seconds);updateAsker(d.quizmasterName,'Asking');$('round').textContent=`Round: ${d.round}/${g.cfg.totalRounds}`;renderQuestion(d);sound('start');markActive(true)}
   else if(d.type==='g-tick'){g.seconds=Number(d.seconds)||0;setTimer(g.seconds);if(g.seconds<=5&&g.seconds>0)sound(g.seconds<=3?'urgent':'tick')}
   else if(d.type==='g-answer-ack'){if(g.current&&d.qid===g.current.qid&&g.myAnswer!==null){clearTimeout(g.answerAckTimer);g.answerPending=false;g.myLocked=true;const m=$('roundMsg');if(m)m.textContent='🔒 Answer locked: '+String.fromCharCode(65+Number(d.answer))+' • received by host'}}
@@ -684,12 +758,12 @@ function playerData(d){if(!d||typeof d!=='object')return;if(d.config)applyCfg(d.
   else if(d.type==='g-ended'){clearAnswerState();g.running=false;setStatus(d.reason||'Game ended by host');markActive(false);$('question').innerHTML='<div class="wait">🏁 Game ended.</div>'}
 }
 
-function renderMaster(d){updateAsker(d.quizmasterName||g.name,'Quiz Master');$('question').innerHTML=`<div class="master-card"><div class="qmaster">🎤 You are Quiz Master — Round ${d.round}</div><div class="qid">Question ID: ${esc(d.sourceId||'')}</div><h2>${esc(d.question)}</h2>${imgHtml(d.image)}<div class="answers">${d.options.map((o,i)=>`<button class="answer" disabled>${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('')}</div><div class="notice" style="margin-top:10px"><b>আপনার কাজ:</b> Question ও options দেখে প্রস্তুত হলে নিচের button চাপুন। অন্য players-এর timer তখন শুরু হবে। আপনি এই round-এ answer দেবেন না।</div><button class="ask" id="askEveryone" type="button">📤 Ask Everyone</button></div>`;$('askEveryone').addEventListener('click',askCurrent)}
-function renderMasterAsked(d){updateAsker(d.quizmasterName||g.name,'Asking');$('question').innerHTML=`<div class="master-card"><div class="qmaster">🎤 Quiz Master: You</div><div class="qid">Question ID: ${esc(d.sourceId||'')}</div><h2>${esc(d.question)}</h2>${imgHtml(d.image)}<div class="answers">${d.options.map((o,i)=>`<button class="answer" disabled>${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('')}</div><div class="result" id="roundMsg">📡 Question sent. Players are answering…</div></div>`}
+function renderMaster(d){updateAsker(d.quizmasterName||g.name,'Quiz Master');$('question').innerHTML=`<div class="master-card"><div class="qmaster">Your turn to ask — Round ${d.round}</div><div class="qid">Question ID: ${esc(d.sourceId||'')}</div><h2>${esc(d.question)}</h2>${imgHtml(d.image)}<div class="answers">${d.options.map((o,i)=>`<button class="answer" disabled>${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('')}</div><div class="notice" style="margin-top:10px"><b>আপনার কাজ:</b> Question ও options দেখে প্রস্তুত হলে নিচের button চাপুন। অন্য players-এর timer তখন শুরু হবে। আপনি এই round-এ answer দেবেন না।</div><button class="ask" id="askEveryone" type="button">📤 Ask Everyone</button></div>`;$('askEveryone').addEventListener('click',askCurrent)}
+function renderMasterAsked(d){updateAsker(d.quizmasterName||g.name,'Asking');$('question').innerHTML=`<div class="master-card"><div class="qmaster">Asking: You</div><div class="qid">Question ID: ${esc(d.sourceId||'')}</div><h2>${esc(d.question)}</h2>${imgHtml(d.image)}<div class="answers">${d.options.map((o,i)=>`<button class="answer" disabled>${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('')}</div><div class="result" id="roundMsg">📡 Question sent. Players are answering…</div></div>`}
 function renderQuestion(d){if(g.peer?.id===d.quizmaster){renderMasterAsked(d);return}updateAsker(d.quizmasterName,'Asking');$('question').innerHTML=`<div class="qmaster">🎤 Asking: ${esc(d.quizmasterName)}</div><div class="qid">Question ID: ${esc(d.sourceId||'')}</div><h2>${esc(d.question)}</h2>${imgHtml(d.image)}<div class="answers">${d.options.map((o,i)=>`<button class="answer" data-answer="${i}">${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('')}</div><div class="result" id="roundMsg">⏱ Answer within ${g.cfg.seconds} seconds.</div>`;setTimer(d.seconds||g.cfg.seconds);$('question').querySelectorAll('[data-answer]').forEach(b=>b.addEventListener('click',()=>answer(Number(b.dataset.answer),b)))}
 
-function startGame(){if(g.role!=='host')return;if(g.players.size<2){setStatus('At least 2 players are needed.');return}if(!questionBank.length){setStatus('Teacher-set question bank is not ready. Use Refresh Question Bank.');return}applyCfg(readCfg());g.running=true;g.paused=false;g.round=0;g.used.clear();g.players.forEach(p=>{p.score=0;p.away=false;p.strikes=0});g.roomLocked=!!g.cfg.lockJoin;updateRoomState();$('pauseBtn').textContent='⏸ Pause';markActive(true);broadcastState();sound('start');nextRound()}
-function markActive(on){setSettingsLocked(!!on);document.body.classList.toggle('game-live',!!on);$('fair').textContent=on?(g.cfg.fairPlay?'🛡 Fair Play ON':'🛡 Fair Play OFF'):'🛡 Fair Play';if(on){closeOverlay('settingsOverlay');closeOverlay('guideOverlay');closeStartOverlay()}else updateAsker('','🎤 Waiting for Quiz Master')}
+function startGame(){if(g.role!=='host')return;if(g.players.size<2){setStatus('At least 2 players are needed.');return}if(!questionBank.length){setStatus('Teacher-set question bank is not ready. Use Refresh Question Bank.');return}applyCfg(readCfg());g.running=true;g.paused=false;g.round=0;g.used.clear();g.players.forEach(p=>{p.score=0;p.away=false;p.strikes=0});g.roomLocked=!!g.cfg.lockJoin;updateRoomState();$('pauseBtn').textContent='Pause';markActive(true);broadcastState();sound('start');nextRound()}
+function markActive(on){setSettingsLocked(!!on);document.body.classList.toggle('game-live',!!on);$('fair').textContent=on?(g.cfg.fairPlay?'🛡 Fair Play ON':'🛡 Fair Play OFF'):'🛡 Fair Play';if(on){closeOverlay('settingsOverlay');closeOverlay('guideOverlay');closeStartOverlay()}else updateAsker('','Waiting for player')}
 function emoji(e){if(!g.role||!g.cfg.emoji||!EMOJI_WHITELIST.has(e))return;const now=Date.now();if(now-g.localLastEmoji<1200){setStatus('Emoji cooldown — wait a moment.',true);return}g.localLastEmoji=now;const name=g.name||'Player';feed(name,e);floatEmoji(e);sound('emoji');if(g.role==='host')sendAll({type:'g-emoji',name,emoji:e});else try{if(g.hostConn?.open)g.hostConn.send({type:'g-emoji',emoji:e})}catch(_){}}
 async function destroy(clear=true){clearInterval(g.timer);clearTimeout(g.nextTimer);clearTimeout(g.answerAckTimer);clearTimeout(g.roomExpiryTimer);g.timer=g.nextTimer=g.answerAckTimer=g.roomExpiryTimer=null;g.answerPending=false;if(g.role==='host')sendAll({type:'g-ended'});g.conns.forEach(({conn})=>{try{conn.close()}catch(_){}});g.conns.clear();try{g.hostConn?.close()}catch(_){}g.hostConn=null;try{g.peer?.destroy()}catch(_){}g.peer=null;g.players.clear();g.answers.clear();g.blocked.clear();g.kickedDevices.clear();g.current=null;g.running=false;g.paused=false;g.round=0;g.myAnswer=null;g.myLocked=false;g.roomLocked=false;markActive(false);updateRoomState();if(clear){setRole('');setStatus('Offline');$('question').innerHTML='<div class="wait"><div style="font-size:48px">🎮</div><b>Host or join a game to begin.</b></div>';$('players').textContent='No players yet.';$('scoreRail').innerHTML='<div class="score-chip">🏆 Scores will appear here</div>';$('round').textContent=`Round: 0/${g.cfg.totalRounds}`;setTimer(g.cfg.seconds);$('shareLink').value=''}}
 
@@ -719,7 +793,7 @@ document.addEventListener('click',ev=>{const b=ev.target.closest('[data-kick]');
 $('reloadSheet').addEventListener('click',loadSheet);$('hostBtn').addEventListener('click',hostGame);$('joinBtn').addEventListener('click',joinGame);$('newCode').addEventListener('click',()=>{$('code').value=randomCode()});$('startBtn').addEventListener('click',startGame);$('pauseBtn').addEventListener('click',pauseGame);$('endBtn').addEventListener('click',()=>destroy(true));$('leaveBtn').addEventListener('click',leave);$('copyLink').addEventListener('click',copyLink);document.querySelectorAll('[data-emoji]').forEach(b=>b.addEventListener('click',()=>emoji(b.dataset.emoji)));
 $('settingsBtn').addEventListener('click',()=>openOverlay('settingsOverlay'));$('setupSettings').addEventListener('click',()=>openOverlay('settingsOverlay'));$('settingsClose').addEventListener('click',()=>closeOverlay('settingsOverlay'));$('settingsSave').addEventListener('click',()=>{if(g.running)return;applyCfg(readCfg());closeOverlay('settingsOverlay');setStatus('Host settings saved.',!!g.role);if(g.role==='host')broadcastState();sound('join')});$('settingsDefaults').addEventListener('click',()=>{if(g.running)return;writeCfg(DEFAULTS);applyCfg(DEFAULTS)});
 $('guideBtn').addEventListener('click',()=>openOverlay('guideOverlay'));$('setupGuide').addEventListener('click',()=>openOverlay('guideOverlay'));$('guideClose').addEventListener('click',()=>closeOverlay('guideOverlay'));
-$('soundBtn').addEventListener('click',()=>{g.sound=!g.sound;$('soundBtn').textContent=g.sound?'🔊 Sound':'🔇 Sound';if(g.sound){unlockAudio();sound('join')}});
+$('soundBtn').addEventListener('click',()=>{g.sound=!g.sound;$('soundBtn').textContent=g.sound?'Sound':'🔇 Sound';if(g.sound){unlockAudio();sound('join')}});
 
 ['setMax','setSeconds','setPoints','setFast','setMaster','setRounds','setDelay','setFair','setEmoji','setLockJoin','setStrikeLimit','setRoomMinutes'].forEach(id=>$(id).addEventListener('change',()=>{if(!g.running)applyCfg(readCfg())}));
 document.addEventListener('visibilitychange',()=>{if(!g.cfg.fairPlay||!document.hidden||!g.running||!g.current?.asked||g.peer?.id===g.current?.quizmaster||g.myAnswer!==null||g.myLocked)return;g.myLocked=true;lockLocal('⚠️ You left the game screen — this round is locked.');sound('wrong');if(g.role==='host'){g.blocked.add(g.peer.id);const p=g.players.get(g.peer.id);if(p){p.away=true;p.strikes=Number(p.strikes||0)+1}feed(g.name,'⚠️ left the game screen — answer locked');broadcastState()}else try{if(g.hostConn?.open)g.hostConn.send({type:'g-away',qid:g.current.qid})}catch(_){}});
