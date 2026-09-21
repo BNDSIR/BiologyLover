@@ -20,6 +20,111 @@ button,input,select{font:inherit}.shell{width:min(1450px,100%);margin:auto;paddi
 @media(max-width:380px){.side{grid-template-columns:1fr;max-height:25vh}.feed-wrap{display:none}.head-actions .btn:nth-child(1){display:none}.pill{font-size:.64rem}.question h2{font-size:.94rem}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+
+<style id="v4-safe-mobile-css">
+/* ===== V4: easier start UI + mobile-first game stage + misuse handling ===== */
+html{font-size:18px}
+body{font-size:1rem}
+.btn{font-size:1rem;min-height:48px;padding:11px 14px}
+.head-actions{align-items:center}
+#openStartBtn{background:linear-gradient(135deg,#10b981,#2563eb);color:#fff;border-color:transparent}
+
+/* Start / Host overlay */
+.start-overlay{position:fixed;inset:0;z-index:120;background:linear-gradient(145deg,rgba(3,10,20,.96),rgba(12,32,54,.97));display:none;overflow:auto;padding:14px}
+.start-overlay.open{display:block}
+.start-panel{width:min(1050px,100%);margin:0 auto;background:#fff;color:var(--ink);border-radius:24px;padding:18px;box-shadow:0 30px 90px rgba(0,0,0,.5)}
+.start-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:14px}
+.start-head h2{margin:0;color:#124d7a;font-size:clamp(1.55rem,5vw,2.25rem);line-height:1.15}
+.start-head p{margin:5px 0 0;color:#61798b;font-size:1rem}
+.start-close{min-width:48px}
+.mode-tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.mode-tab{border:2px solid #d6e1ea;background:#f7fafc;color:#21384c;border-radius:16px;padding:15px;font-weight:950;font-size:1.1rem;cursor:pointer;min-height:64px}
+.mode-tab.active{background:linear-gradient(135deg,#7c3aed,#2563eb);border-color:transparent;color:#fff}
+.start-pane{display:none}.start-pane.active{display:block}
+.start-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.start-fields label,.quick-setting label{display:grid;gap:6px;font-weight:900;font-size:1rem}
+.start-fields input,.quick-setting select{width:100%;font-size:1.05rem;min-height:52px;padding:10px 12px;border:1px solid #cbd8e2;border-radius:12px;background:#fff;color:#14283a}
+.quick-title{font-size:1.18rem;font-weight:950;color:#17538b;margin:7px 0 9px}
+.quick-settings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.quick-setting{border:1px solid #d8e2ea;background:#f8fafc;border-radius:13px;padding:10px;min-width:0}
+.quick-setting small{display:block;color:#647989;margin-top:6px;line-height:1.35}
+.quick-check{display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:900;font-size:1rem}
+.quick-check input{width:25px;height:25px}
+.start-primary{width:100%;margin-top:14px;min-height:58px;font-size:1.15rem;font-weight:950;border:0;border-radius:14px;color:#fff;background:linear-gradient(135deg,#059669,#2563eb);cursor:pointer}
+.start-primary.join{background:linear-gradient(135deg,#2563eb,#7c3aed)}
+.start-note{margin-top:10px;padding:10px 12px;border-radius:12px;background:#eef6ff;border-left:5px solid #2563eb;color:#355168;line-height:1.45}
+.start-error{margin-top:8px;color:#8b2727;font-weight:850;min-height:1.2em}
+
+/* Top scrolling scoreboard + current asker */
+.score-rail{order:-3;flex:1 0 100%;display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;padding:3px 1px 7px;scroll-snap-type:x proximity}
+.score-chip{flex:0 0 auto;display:flex;align-items:center;gap:8px;min-height:48px;padding:8px 11px;border-radius:13px;border:1px solid #cad8e2;background:#fff;scroll-snap-align:start;font-size:.98rem;font-weight:950;white-space:nowrap}
+.score-chip.master{border-color:#d9b42d;background:#fff7cf}.score-chip.away{border-color:#dd9a9a;background:#fff0f0}.score-chip.me{outline:3px solid rgba(37,99,235,.22)}
+.score-chip .rank{display:grid;place-items:center;width:29px;height:29px;border-radius:50%;background:#edf4f8;color:#355164;font-size:.82rem}
+.score-chip .pts{color:#047857}.score-chip .strikes{color:#a33a2d;font-size:.78rem}.score-chip .kick-mini{border:0;background:#ffe7e7;color:#9b2828;border-radius:8px;min-width:34px;height:34px;font-weight:950;cursor:pointer}
+.asker-banner{order:-2;flex:1 0 100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:9px 12px;border-radius:12px;background:linear-gradient(90deg,#fff7cb,#f4ecff);border:1px solid #dfcf78;color:#4d3a0b;font-size:1.08rem;font-weight:950;text-align:center}
+#roomState{font-size:.82rem}
+
+/* Active match = question takes the whole useful screen */
+body.game-live{overflow:hidden}
+body.game-live .shell{width:100%;max-width:none;min-height:100vh;padding:0;gap:0}
+body.game-live .head,body.game-live .quote,body.game-live .setup{display:none!important}
+body.game-live .arena{height:100vh;min-height:0;border-radius:0;padding:7px;box-shadow:none;overflow:hidden}
+body.game-live .topbar{position:sticky;top:0;z-index:25;border-radius:12px;margin:0;background:#f7fafc;padding:6px 7px}
+body.game-live .grid{grid-template-columns:1fr;margin-top:6px;min-height:0}
+body.game-live .side{display:none!important}
+body.game-live .main{height:auto;min-height:0}
+body.game-live .question{flex:1;min-height:0;height:100%;overflow:auto;border-radius:15px;padding:16px 18px;justify-content:flex-start}
+body.game-live .question h2{font-size:clamp(1.5rem,4vw,2.4rem);line-height:1.38;margin:8px 0 16px;color:#114e80}
+body.game-live .qmaster{font-size:1.05rem;padding:7px 11px}
+body.game-live .qid{font-size:.82rem}
+body.game-live .answers{gap:11px}
+body.game-live .answer{min-height:82px;font-size:clamp(1.15rem,3vw,1.5rem);line-height:1.35;padding:15px;border-radius:14px}
+body.game-live .result,body.game-live .lock{font-size:1.05rem;padding:12px}
+body.game-live .emoji{padding:5px 0 2px;min-height:50px}
+body.game-live .emoji button{width:46px;height:46px;font-size:1.25rem}
+body.game-live .controls{padding-top:3px}
+body.game-live .controls .btn{min-height:44px;padding:8px 11px;font-size:.9rem}
+body.game-live .linkbox{display:none}
+
+/* Host management */
+.player{align-items:center}.player-actions{display:flex;align-items:center;gap:5px}.kick-btn{border:0;background:#ffe5e5;color:#912929;border-radius:8px;padding:6px 8px;font-weight:900;cursor:pointer}
+.security-note{background:#fff4d6;border-left:5px solid #e1b029;padding:9px 11px;border-radius:10px;margin-top:8px;font-size:.88rem}
+
+/* Larger settings */
+.overlay .panel{width:min(1050px,100%);max-height:96vh;padding:18px;border-radius:22px}
+.overlay .panel-head h2{font-size:1.55rem}.settings{grid-template-columns:repeat(3,minmax(0,1fr))}.setting label{font-size:.95rem}.setting select{font-size:1rem;min-height:48px}.setting small{font-size:.82rem}
+
+@media(max-width:800px){
+  html{font-size:17px}
+  .quick-settings,.settings{grid-template-columns:1fr 1fr}
+  .start-fields{grid-template-columns:1fr}
+  .start-panel{padding:13px;border-radius:18px}
+  .score-chip{font-size:.95rem}
+  body.game-live .question{padding:12px}
+  body.game-live .question h2{font-size:1.55rem}
+  body.game-live .answers{grid-template-columns:1fr}
+  body.game-live .answer{font-size:1.18rem;min-height:68px}
+}
+@media(max-width:520px){
+  html{font-size:17px}
+  .start-overlay{padding:5px}.start-panel{border-radius:14px;padding:11px}
+  .start-head h2{font-size:1.55rem}.start-head p{font-size:.92rem}
+  .mode-tab{font-size:1rem;min-height:58px;padding:10px}
+  .quick-settings,.settings{grid-template-columns:1fr}
+  .quick-setting{padding:9px}.start-primary{font-size:1.08rem}
+  .topbar{gap:5px}.pill{font-size:.76rem;padding:5px 7px}.timer{font-size:1rem}
+  .asker-banner{font-size:1.03rem;padding:8px}
+  .score-rail{gap:6px}.score-chip{min-height:44px;padding:6px 9px;font-size:.92rem}
+  body.game-live .question h2{font-size:1.5rem;line-height:1.4}
+  body.game-live .answer{font-size:1.16rem;min-height:66px;padding:12px}
+  body.game-live .emoji button{width:44px;height:44px}
+}
+@media(max-width:360px){
+  html{font-size:16.5px}.mode-tabs{grid-template-columns:1fr}.score-chip{font-size:.88rem}
+  body.game-live .question h2{font-size:1.4rem}.brand h1{font-size:1rem}
+}
+</style>
+
 </head>
 <body>
 <div class="shell">
@@ -30,6 +135,7 @@ button,input,select{font:inherit}.shell{width:min(1450px,100%);margin:auto;paddi
     </div>
     <div class="head-actions">
       <a class="back" href="index.html">← Main Index</a>
+      <button class="btn" id="openStartBtn" type="button">🎮 Start</button>
       <button class="btn" id="settingsBtn" type="button">⚙ Settings</button>
       <button class="btn" id="guideBtn" type="button">📖 Guide</button>
       <button class="btn" id="soundBtn" type="button">🔊 Sound</button>
@@ -64,10 +170,12 @@ button,input,select{font:inherit}.shell{width:min(1450px,100%);margin:auto;paddi
 
   <main class="arena">
     <div class="topbar">
+      <div class="score-rail" id="scoreRail" aria-label="Live score leaderboard"><div class="score-chip">🏆 Scores will appear here</div></div>
+      <div class="asker-banner" id="askerBanner">🎤 Waiting for Quiz Master</div>
       <span class="dot" id="dot"></span><strong id="status">Offline</strong>
       <span class="pill" id="role">Role: —</span><span class="pill" id="round">Round: 0/10</span>
       <span class="pill" id="bankCount">Questions: 0</span><span class="pill timer" id="timer">⏱ 20</span>
-      <span class="pill" id="fair">🛡 Fair Play</span><div class="track"><div class="fill" id="timeFill"></div></div>
+      <span class="pill" id="fair">🛡 Fair Play</span><span class="pill" id="roomState">🔓 Room Open</span><div class="track"><div class="fill" id="timeFill"></div></div>
     </div>
 
     <div class="grid">
@@ -76,7 +184,7 @@ button,input,select{font:inherit}.shell{width:min(1450px,100%);margin:auto;paddi
         <div class="emoji" id="emojiBar">
           <button type="button" data-emoji="😀">😀</button><button type="button" data-emoji="🔥">🔥</button><button type="button" data-emoji="👏">👏</button><button type="button" data-emoji="😎">😎</button><button type="button" data-emoji="🤯">🤯</button><button type="button" data-emoji="❤️">❤️</button><button type="button" data-emoji="🎯">🎯</button><button type="button" data-emoji="😂">😂</button>
         </div>
-        <div class="controls host-only"><button class="btn primary" id="startBtn" type="button" disabled>▶ Start 10-Round Game</button><button class="btn" id="pauseBtn" type="button" disabled>⏸ Pause</button><button class="btn danger" id="endBtn" type="button" disabled>⛔ End Game</button></div>
+        <div class="controls host-only"><button class="btn primary" id="startBtn" type="button" disabled>▶ Start 10-Round Game</button><button class="btn" id="pauseBtn" type="button" disabled>⏸ Pause</button><button class="btn" id="lockBtn" type="button" disabled>🔓 Lock Joins</button><button class="btn danger" id="endBtn" type="button" disabled>⛔ End Game</button></div>
         <div class="controls player-only"><button class="btn danger" id="leaveBtn" type="button" disabled>🚪 Leave Game</button></div>
         <div class="linkbox host-only"><input id="shareLink" readonly placeholder="Game link appears here"><button class="btn" id="copyLink" type="button" disabled>Copy Link</button></div>
       </section>
@@ -89,6 +197,55 @@ button,input,select{font:inherit}.shell{width:min(1450px,100%);margin:auto;paddi
   </main>
 </div>
 <div class="reaction-layer" id="reactionLayer"></div>
+
+<div class="start-overlay open" id="startOverlay" aria-hidden="false">
+  <section class="start-panel">
+    <div class="start-head">
+      <div><h2>🎮 Biology Lovers — Quiz Arena</h2><p>Host settings প্রথমেই ঠিক করুন, অথবা shared link/code দিয়ে সরাসরি Join করুন।</p></div>
+      <button class="btn start-close" id="startClose" type="button" aria-label="Close">✕</button>
+    </div>
+    <div class="mode-tabs">
+      <button class="mode-tab active" id="modeHost" type="button">🏠 Host a Game</button>
+      <button class="mode-tab" id="modeJoin" type="button">🎯 Join a Game</button>
+    </div>
+
+    <div class="start-pane active" id="hostPane">
+      <div class="start-fields">
+        <label>Host Name<input id="quickHostName" maxlength="20" autocomplete="name" placeholder="e.g. Riya"></label>
+        <label>Game Code<input id="quickHostCode" maxlength="18" autocomplete="off" placeholder="Auto generated"></label>
+      </div>
+      <div class="quick-title">⚙ Host Game Settings</div>
+      <div class="quick-settings">
+        <div class="quick-setting"><label>Rounds<select id="qRounds"><option>5</option><option selected>10</option><option>15</option><option>20</option><option>25</option></select></label></div>
+        <div class="quick-setting"><label>Answer Time<select id="qSeconds"><option>10</option><option>15</option><option selected>20</option><option>30</option><option>45</option></select></label></div>
+        <div class="quick-setting"><label>Max Players<select id="qMax"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option selected>8</option></select></label></div>
+        <div class="quick-setting"><label>Correct Points<select id="qPoints"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></label></div>
+        <div class="quick-setting"><label>Fastest Bonus<select id="qFast"><option>0</option><option>3</option><option selected>5</option><option>10</option></select></label></div>
+        <div class="quick-setting"><label>Quiz Master Bonus<select id="qMaster"><option>0</option><option>1</option><option selected>2</option><option>3</option><option>5</option></select></label></div>
+        <div class="quick-setting"><label>Next Round Delay<select id="qDelay"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>7</option></select></label></div>
+        <div class="quick-setting"><div class="quick-check"><span>🛡 Fair Play</span><input id="qFair" type="checkbox" checked></div><small>Leaving the active game screen locks that round.</small></div>
+        <div class="quick-setting"><div class="quick-check"><span>🔒 Lock Late Join</span><input id="qLockJoin" type="checkbox" checked></div><small>Automatically lock new joins after Start.</small></div>
+        <div class="quick-setting"><label>Strike Limit<select id="qStrikeLimit"><option value="0">Warn only</option><option value="2">2 strikes</option><option value="3" selected>3 strikes</option><option value="4">4 strikes</option></select></label></div>
+        <div class="quick-setting"><label>Room Lifetime<select id="qRoomMinutes"><option value="30">30 min</option><option value="60" selected>60 min</option><option value="90">90 min</option><option value="120">120 min</option></select></label></div>
+        <div class="quick-setting"><div class="quick-check"><span>😀 Emoji Reactions</span><input id="qEmoji" type="checkbox" checked></div><small>Emoji spam is rate-limited automatically.</small></div>
+      </div>
+      <button class="start-primary" id="quickHostBtn" type="button">📥 Fetch Questions & Host Game</button>
+      <div class="start-note">Google Sheet-এর latest question bank Host Game চাপলেই fetch হবে। Duplicate name/device, late join, emoji spam, malformed answer packet এবং repeated Fair-Play violations-এর বিরুদ্ধে extra guard চালু আছে।</div>
+      <div class="start-error" id="hostStartMsg"></div>
+    </div>
+
+    <div class="start-pane" id="joinPane">
+      <div class="start-fields">
+        <label>Your Name<input id="quickJoinName" maxlength="20" autocomplete="name" placeholder="e.g. Rahul"></label>
+        <label>Game Code<input id="quickJoinCode" maxlength="18" autocomplete="off" placeholder="e.g. BIO-AB12-CD34"></label>
+      </div>
+      <button class="start-primary join" id="quickJoinBtn" type="button">🎯 Join Game</button>
+      <div class="start-note">Shared game link খুললে code নিজে থেকেই বসবে। একই browser/device থেকে duplicate joining এবং একই নামের duplicate player block করা হবে।</div>
+      <div class="start-error" id="joinStartMsg"></div>
+    </div>
+  </section>
+</div>
+
 
 <div class="overlay" id="settingsOverlay" aria-hidden="true">
   <section class="panel">
@@ -103,6 +260,9 @@ button,input,select{font:inherit}.shell{width:min(1450px,100%);margin:auto;paddi
       <div class="setting"><label>Next-round delay<select id="setDelay"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>7</option></select></label></div>
       <div class="setting"><div class="switchrow"><label for="setFair">🛡 Fair Play guard</label><input id="setFair" type="checkbox" checked></div><small>Leaving the game tab while an unanswered question is active locks that round.</small></div>
       <div class="setting"><div class="switchrow"><label for="setEmoji">😀 Emoji reactions</label><input id="setEmoji" type="checkbox" checked></div><small>Allow live reactions during the match.</small></div>
+      <div class="setting"><div class="switchrow"><label for="setLockJoin">🔒 Lock joins after Start</label><input id="setLockJoin" type="checkbox" checked></div><small>Stops late joining once a match begins. Host can still unlock manually.</small></div>
+      <div class="setting"><label>Fair-play strike limit<select id="setStrikeLimit"><option value="0">Warn only</option><option value="2">2 strikes</option><option value="3" selected>3 strikes</option><option value="4">4 strikes</option></select></label><small>Repeated tab/app leaving can auto-remove a player.</small></div>
+      <div class="setting"><label>Room lifetime<select id="setRoomMinutes"><option value="30">30 min</option><option value="60" selected>60 min</option><option value="90">90 min</option><option value="120">120 min</option></select></label><small>Room closes automatically after this time.</small></div>
     </div>
     <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:11px"><button class="btn primary" id="settingsSave" type="button">✅ Save Settings</button><button class="btn" id="settingsDefaults" type="button">↺ Defaults</button></div>
   </section>
@@ -119,7 +279,8 @@ button,input,select{font:inherit}.shell{width:min(1450px,100%);margin:auto;paddi
       <article><h3>⏱ 5. Answer and score</h3><p>Tap A/B/C/D before time ends. The guest waits for <b>🔒 Answer locked • received by host</b>. Correct score, fastest bonus and Quiz Master bonus are calculated by the host automatically.</p></article>
       <article><h3>😀 6. Sounds & reactions</h3><p>Join, question start, countdown, correct/wrong and final winner have different sounds. Emoji reactions float across all connected players. The host can disable reactions.</p></article>
       <article><h3>🛡 7. Fair Play</h3><p>If enabled, leaving the game tab/app before answering locks that round. Copy, cut, selection and right-click are blocked during active rounds. This is classroom fair-play protection, not a secure examination system.</p></article>
-      <article><h3>🖼 8. Images</h3><p>If ImageURL is present, the image appears above the options for Quiz Master and players. Use a direct, publicly accessible HTTPS image URL. Leave the cell blank for text-only questions.</p></article>
+      <article><h3>🔐 8. Misuse Guard</h3><p>Duplicate player names and duplicate browser/device joins are blocked. Host can lock new joins or remove a player. Emoji spam is rate-limited, malformed answer packets are ignored, game codes are longer, repeated Fair-Play strikes can auto-remove a player, and rooms expire automatically.</p></article>
+      <article><h3>🖼 9. Images</h3><p>If ImageURL is present, the image appears above the options for Quiz Master and players. Use a direct, publicly accessible HTTPS image URL. Leave the cell blank for text-only questions.</p></article>
       
     </div>
     <div class="notice" style="margin-top:10px"><b>Important:</b> The game reduces casual cheating, but a browser game cannot prevent a second device, another person, screenshots, or a determined user from using developer tools.</div>
@@ -134,7 +295,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 // ===== SITE OWNER SETTING — EDIT ONLY THIS LINE TO CHANGE THE QUESTION BANK =====
 const QUIZ_SHEET_URL='https://docs.google.com/spreadsheets/d/1BZsvfDeqe_y67J8QxABTp-ywXPjqMDvJfQx7qsKqTLE/edit?usp=sharing'; // recommended: normal Google Sheet /edit?gid=... link shared as Anyone with the link → Viewer
 // ============================================================================
-const DEFAULTS=Object.freeze({maxPlayers:8,seconds:20,points:10,fastBonus:5,masterPoint:2,totalRounds:10,nextDelay:4,fairPlay:true,emoji:true});
+const DEFAULTS=Object.freeze({maxPlayers:8,seconds:20,points:10,fastBonus:5,masterPoint:2,totalRounds:10,nextDelay:4,fairPlay:true,emoji:true,lockJoin:true,strikeLimit:3,roomMinutes:60});
 let questionBank=[];
 const g={role:'',peer:null,hostConn:null,conns:new Map(),players:new Map(),code:'',name:'',running:false,paused:false,round:0,current:null,answers:new Map(),used:new Set(),timer:null,nextTimer:null,seconds:20,blocked:new Set(),myAnswer:null,myLocked:false,answerPending:false,answerAckTimer:null,sound:true,audio:null,cfg:{...DEFAULTS}};
 
@@ -145,7 +306,7 @@ function writeCfg(c){c=normCfg(c);$('setMax').value=c.maxPlayers;$('setSeconds')
 function cfgText(c=g.cfg){return `${c.totalRounds} rounds • ${c.seconds} sec • +${c.points} correct • +${c.fastBonus} fastest • max ${c.maxPlayers} players`}
 function applyCfg(c,write=false){g.cfg=normCfg(c);if(write)writeCfg(g.cfg);$('configSummary').textContent='Host settings: '+cfgText();$('round').textContent=`Round: ${g.round||0}/${g.cfg.totalRounds}`;$('startBtn').textContent=`▶ Start ${g.cfg.totalRounds}-Round Game`;$('fair').textContent=g.cfg.fairPlay?'🛡 Fair Play ON':'🛡 Fair Play OFF';document.querySelectorAll('[data-emoji]').forEach(b=>b.disabled=!g.cfg.emoji);if(!g.current?.asked)setTimer(g.cfg.seconds,g.cfg.seconds)}
 function setSettingsLocked(on){['setMax','setSeconds','setPoints','setFast','setMaster','setRounds','setDelay','setFair','setEmoji','settingsSave','settingsDefaults'].forEach(id=>{$(id).disabled=!!on})}
-function setRole(role){g.role=role||'';document.body.classList.toggle('role-host',role==='host');document.body.classList.toggle('role-player',role==='player');document.body.classList.toggle('connected',!!role);$('role').textContent='Role: '+(role?role==='host'?'Host':'Player':'—');$('startBtn').disabled=role!=='host';$('pauseBtn').disabled=role!=='host';$('endBtn').disabled=role!=='host';$('copyLink').disabled=role!=='host';$('leaveBtn').disabled=role!=='player'}
+function setRole(role){g.role=role||'';document.body.classList.toggle('role-host',role==='host');document.body.classList.toggle('role-player',role==='player');document.body.classList.toggle('connected',!!role);$('role').textContent='Role: '+(role?role==='host'?'Host':'Player':'—');$('startBtn').disabled=role!=='host';$('pauseBtn').disabled=role!=='host';$('endBtn').disabled=role!=='host';$('lockBtn').disabled=role!=='host';$('copyLink').disabled=role!=='host';$('leaveBtn').disabled=role!=='player'}
 function setStatus(text,on=false){$('status').textContent=text;$('dot').classList.toggle('on',!!on)}
 function setTimer(sec,total=g.cfg.seconds){sec=Math.max(0,Number(sec)||0);$('timer').textContent='⏱ '+sec;$('timer').classList.toggle('danger',sec<=5&&g.current?.asked);$('timeFill').style.width=Math.max(0,Math.min(100,sec/Math.max(1,total)*100))+'%'}
 function bankStatus(text,type=''){$('sheetStatus').textContent=text;$('sheetStatus').className='sheet-status'+(type?' '+type:'');$('bankCount').textContent='Questions: '+questionBank.length}
@@ -387,18 +548,186 @@ function leave(){destroy(true)}
 function openOverlay(id){if(g.running){setStatus('Guide/settings are locked while the match is running.',true);sound('warn');return}if(id==='settingsOverlay'&&g.role==='player'){setStatus('Only the host can change settings.',true);return}$(id).classList.add('open');$(id).setAttribute('aria-hidden','false')}
 function closeOverlay(id){$(id).classList.remove('open');$(id).setAttribute('aria-hidden','true')}
 
+
+/* ===== V4 UI + MISUSE GUARD OVERRIDES ===== */
+const EMOJI_WHITELIST=new Set(['😀','🔥','👏','😎','🤯','❤️','🎯','😂']);
+const RESERVED_NAMES=new Set(['admin','administrator','teacher','system','moderator','host','quiz master','quizmaster']);
+function makeDeviceToken(){
+  try{
+    let t=localStorage.getItem('bioQuizDeviceToken');
+    if(!t){t='D-'+Math.random().toString(36).slice(2,10)+'-'+Date.now().toString(36);localStorage.setItem('bioQuizDeviceToken',t)}
+    return t.slice(0,64);
+  }catch(_){return 'S-'+Math.random().toString(36).slice(2,12)}
+}
+const DEVICE_TOKEN=makeDeviceToken();
+Object.assign(g,{roomLocked:false,roomExpiryTimer:null,kickedDevices:new Set(),localLastEmoji:0,deviceToken:DEVICE_TOKEN});
+
+function normalizeName(raw){
+  let v=String(raw||'').trim().replace(/\s+/g,' ');
+  try{v=v.replace(/[^\p{L}\p{N} ._'’-]/gu,'')}catch(_){v=v.replace(/[^a-zA-Z0-9 ._'’-]/g,'')}
+  v=v.slice(0,20).trim();
+  if(v.length<2)return {ok:false,msg:'Name must be at least 2 characters.'};
+  if(RESERVED_NAMES.has(v.toLowerCase()))return {ok:false,msg:'Please choose another player name.'};
+  if(/^[-_. ]+$/.test(v))return {ok:false,msg:'Please use a real readable name.'};
+  return {ok:true,name:v};
+}
+function sameName(a,b){return String(a||'').trim().toLocaleLowerCase()===String(b||'').trim().toLocaleLowerCase()}
+function updateRoomState(){
+  const el=$('roomState');if(el)el.textContent=g.roomLocked?'🔒 Room Locked':'🔓 Room Open';
+  const b=$('lockBtn');if(b)b.textContent=g.roomLocked?'🔓 Allow Joins':'🔒 Lock Joins';
+}
+function updateAsker(name='',mode=''){
+  const el=$('askerBanner');if(!el)return;
+  if(!name){el.textContent=mode||'🎤 Waiting for Quiz Master';return}
+  el.textContent=`🎤 ${mode||'Asking'}: ${name}`;
+}
+
+function normCfg(c={}){return {maxPlayers:clamp(c.maxPlayers,2,8,8),seconds:clamp(c.seconds,8,60,20),points:clamp(c.points,1,50,10),fastBonus:clamp(c.fastBonus,0,25,5),masterPoint:clamp(c.masterPoint,0,15,2),totalRounds:clamp(c.totalRounds,3,30,10),nextDelay:clamp(c.nextDelay,1,10,4),fairPlay:c.fairPlay!==false,emoji:c.emoji!==false,lockJoin:c.lockJoin!==false,strikeLimit:clamp(c.strikeLimit,0,6,3),roomMinutes:clamp(c.roomMinutes,15,180,60)}}
+function readCfg(){return normCfg({maxPlayers:$('setMax').value,seconds:$('setSeconds').value,points:$('setPoints').value,fastBonus:$('setFast').value,masterPoint:$('setMaster').value,totalRounds:$('setRounds').value,nextDelay:$('setDelay').value,fairPlay:$('setFair').checked,emoji:$('setEmoji').checked,lockJoin:$('setLockJoin').checked,strikeLimit:$('setStrikeLimit').value,roomMinutes:$('setRoomMinutes').value})}
+function writeCfg(c){c=normCfg(c);$('setMax').value=c.maxPlayers;$('setSeconds').value=c.seconds;$('setPoints').value=c.points;$('setFast').value=c.fastBonus;$('setMaster').value=c.masterPoint;$('setRounds').value=c.totalRounds;$('setDelay').value=c.nextDelay;$('setFair').checked=c.fairPlay;$('setEmoji').checked=c.emoji;$('setLockJoin').checked=c.lockJoin;$('setStrikeLimit').value=String(c.strikeLimit);$('setRoomMinutes').value=String(c.roomMinutes)}
+function cfgText(c=g.cfg){return `${c.totalRounds} rounds • ${c.seconds} sec • +${c.points} correct • +${c.fastBonus} fastest • max ${c.maxPlayers} players • room ${c.roomMinutes} min`}
+function applyCfg(c,write=false){g.cfg=normCfg(c);if(write)writeCfg(g.cfg);$('configSummary').textContent='Host settings: '+cfgText();$('round').textContent=`Round: ${g.round||0}/${g.cfg.totalRounds}`;$('startBtn').textContent=`▶ Start ${g.cfg.totalRounds}-Round Game`;$('fair').textContent=g.cfg.fairPlay?'🛡 Fair Play ON':'🛡 Fair Play OFF';document.querySelectorAll('[data-emoji]').forEach(b=>b.disabled=!g.cfg.emoji);if(!g.current?.asked)setTimer(g.cfg.seconds,g.cfg.seconds);syncQuickFromMain()}
+function setSettingsLocked(on){['setMax','setSeconds','setPoints','setFast','setMaster','setRounds','setDelay','setFair','setEmoji','setLockJoin','setStrikeLimit','setRoomMinutes','settingsSave','settingsDefaults'].forEach(id=>{if($(id))$(id).disabled=!!on})}
+function randomCode(){return 'BIO-'+Math.random().toString(36).slice(2,6).toUpperCase()+'-'+Math.random().toString(36).slice(2,6).toUpperCase()}
+
+function state(){return {type:'g-state',running:g.running,paused:g.paused,round:g.round,roomLocked:!!g.roomLocked,players:[...g.players.values()].map(p=>({id:p.id,name:p.name,score:p.score,away:!!p.away,strikes:Number(p.strikes||0)})),quizmaster:g.current?.quizmaster||'',config:{...g.cfg},bankCount:questionBank.length}}
+function broadcastState(){const s=state();sendAll(s);renderPlayers(s.players,s.quizmaster);$('bankCount').textContent='Questions: '+questionBank.length;updateRoomState()}
+function renderPlayers(arr=[...g.players.values()],master=''){
+  const a=[...arr].sort((x,y)=>(y.score||0)-(x.score||0));
+  const me=g.peer?.id||'';
+  const cards=a.map((p,i)=>{
+    const kick=g.role==='host'&&p.id!==me?`<button class="kick-mini" data-kick="${esc(p.id)}" title="Remove player">✕</button>`:'';
+    return `<div class="score-chip ${p.id===master?'master':''} ${p.away?'away':''} ${p.id===me?'me':''}"><span class="rank">${i+1}</span><b>${esc(p.name)}${p.id===master?' 🎤':''}</b><span class="pts">${Number(p.score||0)} pts</span>${Number(p.strikes||0)?`<span class="strikes">⚠${Number(p.strikes||0)}</span>`:''}${kick}</div>`
+  }).join('');
+  $('scoreRail').innerHTML=cards||'<div class="score-chip">🏆 Scores will appear here</div>';
+  $('players').innerHTML=a.length?a.map((p,i)=>{const kick=g.role==='host'&&p.id!==me?`<button class="kick-btn" data-kick="${esc(p.id)}">Remove</button>`:'';return `<div class="player ${p.id===master?'master':''} ${p.away?'away':''}"><b>${i+1}. ${esc(p.name)}${p.id===master?' 🎤':''}${p.away?' ⚠️':''}${Number(p.strikes||0)?' • strikes '+Number(p.strikes||0):''}</b><div class="player-actions"><span class="score">${Number(p.score||0)} pts</span>${kick}</div></div>`}).join(''):'No players yet.';
+}
+
+function rejectConn(conn,type,extra={}){const send=()=>{try{conn.send({type,...extra});setTimeout(()=>conn.close(),80)}catch(_){try{conn.close()}catch(__){}}};if(conn.open)send();else conn.on('open',send)}
+function accept(conn){
+  const rawName=String(conn.metadata?.name||'');const nv=normalizeName(rawName);const device=String(conn.metadata?.device||'').slice(0,64);
+  if(!nv.ok){rejectConn(conn,'g-join-reject',{reason:nv.msg});return}
+  if(g.roomLocked||(g.running&&g.cfg.lockJoin)){rejectConn(conn,'g-locked',{reason:'Host has locked new joins.'});return}
+  if(g.players.size>=g.cfg.maxPlayers){rejectConn(conn,'g-full',{max:g.cfg.maxPlayers});return}
+  if([...g.players.values()].some(p=>sameName(p.name,nv.name))){rejectConn(conn,'g-join-reject',{reason:'That player name is already in this room.'});return}
+  if(device&&([...g.players.values()].some(p=>p.device===device)||g.kickedDevices.has(device))){rejectConn(conn,'g-join-reject',{reason:'This browser/device is already connected or was removed from this room.'});return}
+  const name=nv.name;g.conns.set(conn.peer,{conn,name,device,lastEmoji:0});g.players.set(conn.peer,{id:conn.peer,name,score:0,away:false,strikes:0,device});
+  const ready=()=>{feed(name,'joined 🎮');sound('join');broadcastState();try{conn.send(state());if(g.current){if(conn.peer===g.current.quizmaster&&!g.current.asked)conn.send(publicCurrent('g-master-preview',g.cfg.seconds));else if(g.current.asked)conn.send(publicCurrent('g-question',g.seconds));else conn.send({type:'g-wait-master',round:g.round,total:g.cfg.totalRounds,quizmasterName:g.current.quizmasterName,config:{...g.cfg}})}}catch(_){}};
+  if(conn.open)ready();else conn.on('open',ready);
+  conn.on('data',d=>hostData(conn,d));
+  conn.on('close',()=>{const wasMaster=g.current?.quizmaster===conn.peer&&!g.current?.asked;const nm=g.players.get(conn.peer)?.name||name;g.conns.delete(conn.peer);g.players.delete(conn.peer);feed(nm,'left the game');broadcastState();if(wasMaster&&g.running&&!g.paused){clearTimeout(g.nextTimer);g.nextTimer=setTimeout(nextRound,900)}});
+  conn.on('error',()=>{});
+}
+function kickPlayer(pid,reason='Removed by host'){
+  if(g.role!=='host'||pid===g.peer?.id)return;
+  const p=g.players.get(pid);const rec=g.conns.get(pid);if(!p)return;
+  if(p.device)g.kickedDevices.add(p.device);
+  try{if(rec?.conn?.open)rec.conn.send({type:'g-kicked',reason})}catch(_){}
+  setTimeout(()=>{try{rec?.conn?.close()}catch(_){}g.conns.delete(pid);g.players.delete(pid);g.answers.delete(pid);g.blocked.delete(pid);feed(p.name,'removed from room');broadcastState();if(g.current?.quizmaster===pid&&g.running&&!g.paused){clearTimeout(g.nextTimer);g.nextTimer=setTimeout(nextRound,700)}},120)
+}
+function hostData(conn,d){
+  if(!d||typeof d!=='object')return;let size=0;try{size=JSON.stringify(d).length}catch(_){return}if(size>1600)return;
+  const p=g.players.get(conn.peer);if(!p)return;
+  const allowed=new Set(['g-answer','g-ask','g-emoji','g-away']);if(!allowed.has(d.type))return;
+  if(d.type==='g-answer'&&g.current?.asked&&d.qid===g.current.qid&&conn.peer!==g.current.quizmaster){
+    const ans=Number(d.answer);if(!Number.isInteger(ans)||ans<0||ans>3)return;
+    if(g.blocked.has(conn.peer)){try{conn.send({type:'g-answer-reject',qid:d.qid,reason:'fair-play'})}catch(_){};return}
+    if(!g.answers.has(conn.peer)){g.answers.set(conn.peer,{answer:ans,time:Date.now(),name:p.name});try{conn.send({type:'g-answer-ack',qid:d.qid,answer:ans})}catch(_){}}
+    else{const old=g.answers.get(conn.peer);try{conn.send({type:'g-answer-ack',qid:d.qid,answer:old.answer})}catch(_){}}
+  }else if(d.type==='g-ask'&&g.current&&!g.current.asked&&conn.peer===g.current.quizmaster&&d.qid===g.current.qid){publishQuestion()}
+  else if(d.type==='g-emoji'&&g.cfg.emoji&&EMOJI_WHITELIST.has(String(d.emoji||''))){
+    const rec=g.conns.get(conn.peer),now=Date.now();if(!rec||now-(rec.lastEmoji||0)<1200)return;rec.lastEmoji=now;feed(p.name,d.emoji);floatEmoji(d.emoji);sound('emoji');sendAll({type:'g-emoji',name:p.name,emoji:d.emoji},conn.peer)
+  }else if(d.type==='g-away'&&g.cfg.fairPlay&&g.current?.asked&&d.qid===g.current.qid){
+    if(g.blocked.has(conn.peer))return;g.blocked.add(conn.peer);p.away=true;p.strikes=Number(p.strikes||0)+1;feed(p.name,`⚠️ left game screen — strike ${p.strikes}`);try{conn.send({type:'g-fair-lock',qid:d.qid,strikes:p.strikes})}catch(_){};broadcastState();
+    if(g.cfg.strikeLimit>0&&p.strikes>=g.cfg.strikeLimit)setTimeout(()=>kickPlayer(conn.peer,`Fair Play: ${p.strikes} strikes`),350)
+  }
+}
+
+function armRoomExpiry(){clearTimeout(g.roomExpiryTimer);if(g.role!=='host')return;g.roomExpiryTimer=setTimeout(()=>{if(g.role==='host'){sendAll({type:'g-ended',reason:'Room time limit reached.'});setStatus('Room expired — create a new room.');destroy(true)}},g.cfg.roomMinutes*60*1000)}
+function toggleRoomLock(){if(g.role!=='host')return;g.roomLocked=!g.roomLocked;updateRoomState();feed('System',g.roomLocked?'New joins locked.':'New joins allowed.');broadcastState()}
+
+async function hostGame(){
+  if(!peerOk())return false;unlockAudio();const nv=normalizeName($('name').value);if(!nv.ok){setStatus(nv.msg);return false}$('name').value=nv.name;
+  const hostButton=$('hostBtn'),oldLabel=hostButton.textContent;hostButton.disabled=true;hostButton.textContent='📥 Fetching latest questions…';setStatus('Fetching latest questions from the teacher-set Google Sheet…');
+  try{
+    const ok=await loadSheet();if(!ok){setStatus('Question bank could not load — game was not created.');return false}
+    applyCfg(readCfg());const code=codeClean($('code').value)||randomCode();$('code').value=code;await destroy(false);
+    g.role='host';g.code=code;g.name=nv.name;g.roomLocked=false;g.kickedDevices.clear();setRole('host');setStatus(`✅ ${questionBank.length} questions loaded — creating game…`);updateRoomState();
+    g.peer=new Peer(hostId(code),{debug:1});
+    g.peer.on('open',id=>{g.players.set(id,{id,name:nv.name,score:0,away:false,strikes:0,device:DEVICE_TOKEN});$('shareLink').value=buildLink();setStatus(`Game ready — ${questionBank.length} questions loaded • share code/link`,true);feed('System',`Game hosted by ${nv.name} • ${cfgText()} • ${questionBank.length} questions`);sound('join');broadcastState();armRoomExpiry()});
+    g.peer.on('connection',accept);g.peer.on('error',e=>setStatus(e?.type==='unavailable-id'?'This game code is already active. Choose a new code.':'Game peer error: '+(e?.type||e?.message||'unknown')));
+    return true;
+  }finally{hostButton.disabled=false;hostButton.textContent=oldLabel}
+}
+async function joinGame(){
+  if(!peerOk())return false;unlockAudio();const nv=normalizeName($('name').value),code=codeClean($('code').value||new URLSearchParams(location.search).get('gamecode')||'');if(!nv.ok){setStatus(nv.msg);return false}if(!code){setStatus('Enter the Game Code.');return false}$('name').value=nv.name;
+  await destroy(false);g.role='player';g.code=code;g.name=nv.name;setRole('player');setStatus('Connecting to game host…');
+  g.peer=new Peer(undefined,{debug:1});g.peer.on('open',()=>{const conn=g.peer.connect(hostId(code),{reliable:true,metadata:{name:nv.name,device:DEVICE_TOKEN}});g.hostConn=conn;const ready=()=>{setStatus('Connected — waiting for game',true);feed('System','Joined game '+code);sound('join')};if(conn.open)ready();else conn.on('open',ready);conn.on('data',playerData);conn.on('close',()=>{if(g.role==='player'){setStatus('Game host disconnected');markActive(false)}});conn.on('error',()=>setStatus('Game connection error'))});g.peer.on('error',e=>setStatus('Game connection error: '+(e?.type||e?.message||'unknown')));return true
+}
+
+function playerData(d){if(!d||typeof d!=='object')return;if(d.config)applyCfg(d.config,true);if(Number.isFinite(Number(d.bankCount)))$('bankCount').textContent='Questions: '+Number(d.bankCount);
+  if(d.type==='g-state'){g.running=!!d.running;g.paused=!!d.paused;g.roomLocked=!!d.roomLocked;renderPlayers(d.players,d.quizmaster);$('round').textContent=`Round: ${d.round||0}/${g.cfg.totalRounds}`;updateRoomState();markActive(g.running)}
+  else if(d.type==='g-master-preview'){clearAnswerState();g.current=d;g.running=true;updateAsker(d.quizmasterName,'Quiz Master');renderMaster(d);sound('start');markActive(true)}
+  else if(d.type==='g-wait-master'){clearAnswerState();g.current={round:d.round,quizmasterName:d.quizmasterName,asked:false};g.running=true;updateAsker(d.quizmasterName,'Preparing');$('round').textContent=`Round: ${d.round}/${g.cfg.totalRounds}`;$('question').innerHTML=`<div class="wait"><div style="font-size:46px">🎤</div><b>${esc(d.quizmasterName)}</b> is preparing the next question…</div>`;setTimer(g.cfg.seconds);markActive(true)}
+  else if(d.type==='g-question'){clearAnswerState();g.running=true;g.current=d;g.seconds=Number(d.seconds||g.cfg.seconds);updateAsker(d.quizmasterName,'Asking');$('round').textContent=`Round: ${d.round}/${g.cfg.totalRounds}`;renderQuestion(d);sound('start');markActive(true)}
+  else if(d.type==='g-tick'){g.seconds=Number(d.seconds)||0;setTimer(g.seconds);if(g.seconds<=5&&g.seconds>0)sound(g.seconds<=3?'urgent':'tick')}
+  else if(d.type==='g-answer-ack'){if(g.current&&d.qid===g.current.qid&&g.myAnswer!==null){clearTimeout(g.answerAckTimer);g.answerPending=false;g.myLocked=true;const m=$('roundMsg');if(m)m.textContent='🔒 Answer locked: '+String.fromCharCode(65+Number(d.answer))+' • received by host'}}
+  else if(d.type==='g-answer-reject'){clearTimeout(g.answerAckTimer);g.answerPending=false;g.myLocked=true;lockLocal(d.reason==='fair-play'?'⚠️ Answer not accepted — Fair Play lock is active.':'⚠️ Answer not accepted by host.');sound('wrong')}
+  else if(d.type==='g-fair-lock'){clearTimeout(g.answerAckTimer);g.answerPending=false;g.myLocked=true;lockLocal(`⚠️ You left the game screen — this round is locked.${d.strikes?' Strike '+d.strikes+'.':''}`);sound('wrong')}
+  else if(d.type==='g-result'){clearTimeout(g.answerAckTimer);g.answerPending=false;showResult(d);renderPlayers(d.players);updateAsker(g.current?.quizmasterName||'','Round result')}
+  else if(d.type==='g-final'){clearAnswerState();g.running=false;showFinal(d);updateAsker('','🏆 Game complete')}
+  else if(d.type==='g-emoji'&&g.cfg.emoji){feed(d.name,d.emoji);floatEmoji(d.emoji);sound('emoji')}
+  else if(d.type==='g-full'){setStatus('Game is full (maximum '+d.max+' players).');showStartMode('join');openStartOverlay();$('joinStartMsg').textContent='Room is full.'}
+  else if(d.type==='g-locked'){setStatus(d.reason||'Room is locked to new joins.');showStartMode('join');openStartOverlay();$('joinStartMsg').textContent=d.reason||'Room is locked.'}
+  else if(d.type==='g-join-reject'){setStatus(d.reason||'Join request rejected.');showStartMode('join');openStartOverlay();$('joinStartMsg').textContent=d.reason||'Join request rejected.';setTimeout(()=>destroy(false),80)}
+  else if(d.type==='g-kicked'){const reason=d.reason||'Removed from game';setStatus(reason);markActive(false);showStartMode('join');openStartOverlay();$('joinStartMsg').textContent='⛔ '+reason;setTimeout(()=>destroy(false),80)}
+  else if(d.type==='g-ended'){clearAnswerState();g.running=false;setStatus(d.reason||'Game ended by host');markActive(false);$('question').innerHTML='<div class="wait">🏁 Game ended.</div>'}
+}
+
+function renderMaster(d){updateAsker(d.quizmasterName||g.name,'Quiz Master');$('question').innerHTML=`<div class="master-card"><div class="qmaster">🎤 You are Quiz Master — Round ${d.round}</div><div class="qid">Question ID: ${esc(d.sourceId||'')}</div><h2>${esc(d.question)}</h2>${imgHtml(d.image)}<div class="answers">${d.options.map((o,i)=>`<button class="answer" disabled>${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('')}</div><div class="notice" style="margin-top:10px"><b>আপনার কাজ:</b> Question ও options দেখে প্রস্তুত হলে নিচের button চাপুন। অন্য players-এর timer তখন শুরু হবে। আপনি এই round-এ answer দেবেন না।</div><button class="ask" id="askEveryone" type="button">📤 Ask Everyone</button></div>`;$('askEveryone').addEventListener('click',askCurrent)}
+function renderMasterAsked(d){updateAsker(d.quizmasterName||g.name,'Asking');$('question').innerHTML=`<div class="master-card"><div class="qmaster">🎤 Quiz Master: You</div><div class="qid">Question ID: ${esc(d.sourceId||'')}</div><h2>${esc(d.question)}</h2>${imgHtml(d.image)}<div class="answers">${d.options.map((o,i)=>`<button class="answer" disabled>${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('')}</div><div class="result" id="roundMsg">📡 Question sent. Players are answering…</div></div>`}
+function renderQuestion(d){if(g.peer?.id===d.quizmaster){renderMasterAsked(d);return}updateAsker(d.quizmasterName,'Asking');$('question').innerHTML=`<div class="qmaster">🎤 Asking: ${esc(d.quizmasterName)}</div><div class="qid">Question ID: ${esc(d.sourceId||'')}</div><h2>${esc(d.question)}</h2>${imgHtml(d.image)}<div class="answers">${d.options.map((o,i)=>`<button class="answer" data-answer="${i}">${String.fromCharCode(65+i)}. ${esc(o)}</button>`).join('')}</div><div class="result" id="roundMsg">⏱ Answer within ${g.cfg.seconds} seconds.</div>`;setTimer(d.seconds||g.cfg.seconds);$('question').querySelectorAll('[data-answer]').forEach(b=>b.addEventListener('click',()=>answer(Number(b.dataset.answer),b)))}
+
+function startGame(){if(g.role!=='host')return;if(g.players.size<2){setStatus('At least 2 players are needed.');return}if(!questionBank.length){setStatus('Teacher-set question bank is not ready. Use Refresh Question Bank.');return}applyCfg(readCfg());g.running=true;g.paused=false;g.round=0;g.used.clear();g.players.forEach(p=>{p.score=0;p.away=false;p.strikes=0});g.roomLocked=!!g.cfg.lockJoin;updateRoomState();$('pauseBtn').textContent='⏸ Pause';markActive(true);broadcastState();sound('start');nextRound()}
+function markActive(on){setSettingsLocked(!!on);document.body.classList.toggle('game-live',!!on);$('fair').textContent=on?(g.cfg.fairPlay?'🛡 Fair Play ON':'🛡 Fair Play OFF'):'🛡 Fair Play';if(on){closeOverlay('settingsOverlay');closeOverlay('guideOverlay');closeStartOverlay()}else updateAsker('','🎤 Waiting for Quiz Master')}
+function emoji(e){if(!g.role||!g.cfg.emoji||!EMOJI_WHITELIST.has(e))return;const now=Date.now();if(now-g.localLastEmoji<1200){setStatus('Emoji cooldown — wait a moment.',true);return}g.localLastEmoji=now;const name=g.name||'Player';feed(name,e);floatEmoji(e);sound('emoji');if(g.role==='host')sendAll({type:'g-emoji',name,emoji:e});else try{if(g.hostConn?.open)g.hostConn.send({type:'g-emoji',emoji:e})}catch(_){}}
+async function destroy(clear=true){clearInterval(g.timer);clearTimeout(g.nextTimer);clearTimeout(g.answerAckTimer);clearTimeout(g.roomExpiryTimer);g.timer=g.nextTimer=g.answerAckTimer=g.roomExpiryTimer=null;g.answerPending=false;if(g.role==='host')sendAll({type:'g-ended'});g.conns.forEach(({conn})=>{try{conn.close()}catch(_){}});g.conns.clear();try{g.hostConn?.close()}catch(_){}g.hostConn=null;try{g.peer?.destroy()}catch(_){}g.peer=null;g.players.clear();g.answers.clear();g.blocked.clear();g.kickedDevices.clear();g.current=null;g.running=false;g.paused=false;g.round=0;g.myAnswer=null;g.myLocked=false;g.roomLocked=false;markActive(false);updateRoomState();if(clear){setRole('');setStatus('Offline');$('question').innerHTML='<div class="wait"><div style="font-size:48px">🎮</div><b>Host or join a game to begin.</b></div>';$('players').textContent='No players yet.';$('scoreRail').innerHTML='<div class="score-chip">🏆 Scores will appear here</div>';$('round').textContent=`Round: 0/${g.cfg.totalRounds}`;setTimer(g.cfg.seconds);$('shareLink').value=''}}
+
+/* Full-screen start overlay */
+function syncQuickFromMain(){
+  const map=[['qRounds','setRounds'],['qSeconds','setSeconds'],['qMax','setMax'],['qPoints','setPoints'],['qFast','setFast'],['qMaster','setMaster'],['qDelay','setDelay'],['qStrikeLimit','setStrikeLimit'],['qRoomMinutes','setRoomMinutes']];
+  map.forEach(([q,m])=>{if($(q)&&$(m))$(q).value=$(m).value});if($('qFair'))$('qFair').checked=$('setFair').checked;if($('qEmoji'))$('qEmoji').checked=$('setEmoji').checked;if($('qLockJoin'))$('qLockJoin').checked=$('setLockJoin').checked;
+  if($('quickHostCode')&&!$('quickHostCode').value)$('quickHostCode').value=$('code').value||randomCode();
+}
+function syncMainFromQuick(){
+  const map=[['qRounds','setRounds'],['qSeconds','setSeconds'],['qMax','setMax'],['qPoints','setPoints'],['qFast','setFast'],['qMaster','setMaster'],['qDelay','setDelay'],['qStrikeLimit','setStrikeLimit'],['qRoomMinutes','setRoomMinutes']];
+  map.forEach(([q,m])=>{if($(q)&&$(m))$(m).value=$(q).value});$('setFair').checked=$('qFair').checked;$('setEmoji').checked=$('qEmoji').checked;$('setLockJoin').checked=$('qLockJoin').checked;applyCfg(readCfg())
+}
+function openStartOverlay(){const o=$('startOverlay');o.classList.add('open');o.setAttribute('aria-hidden','false');syncQuickFromMain()}
+function closeStartOverlay(){const o=$('startOverlay');o.classList.remove('open');o.setAttribute('aria-hidden','true')}
+function showStartMode(mode){const host=mode!=='join';$('modeHost').classList.toggle('active',host);$('modeJoin').classList.toggle('active',!host);$('hostPane').classList.toggle('active',host);$('joinPane').classList.toggle('active',!host)}
+
+$('modeHost').addEventListener('click',()=>showStartMode('host'));
+$('modeJoin').addEventListener('click',()=>showStartMode('join'));
+$('startClose').addEventListener('click',closeStartOverlay);
+$('openStartBtn').addEventListener('click',()=>{if(g.role==='player'){showStartMode('join')}else showStartMode('host');openStartOverlay()});
+$('quickHostBtn').addEventListener('click',async()=>{const b=$('quickHostBtn'),old=b.textContent;$('hostStartMsg').textContent='';$('name').value=$('quickHostName').value;$('code').value=codeClean($('quickHostCode').value)||randomCode();$('quickHostCode').value=$('code').value;syncMainFromQuick();b.disabled=true;b.textContent='📥 Loading question bank…';const ok=await hostGame();b.disabled=false;b.textContent=old;if(ok)closeStartOverlay();else $('hostStartMsg').textContent=$('status').textContent});
+$('quickJoinBtn').addEventListener('click',async()=>{const b=$('quickJoinBtn'),old=b.textContent;$('joinStartMsg').textContent='';$('name').value=$('quickJoinName').value;$('code').value=codeClean($('quickJoinCode').value);b.disabled=true;b.textContent='Connecting…';const ok=await joinGame();b.disabled=false;b.textContent=old;if(ok)closeStartOverlay();else $('joinStartMsg').textContent=$('status').textContent});
+$('lockBtn').addEventListener('click',toggleRoomLock);
+document.addEventListener('click',ev=>{const b=ev.target.closest('[data-kick]');if(b&&g.role==='host')kickPlayer(b.dataset.kick,'Removed by host')});
+
 $('reloadSheet').addEventListener('click',loadSheet);$('hostBtn').addEventListener('click',hostGame);$('joinBtn').addEventListener('click',joinGame);$('newCode').addEventListener('click',()=>{$('code').value=randomCode()});$('startBtn').addEventListener('click',startGame);$('pauseBtn').addEventListener('click',pauseGame);$('endBtn').addEventListener('click',()=>destroy(true));$('leaveBtn').addEventListener('click',leave);$('copyLink').addEventListener('click',copyLink);document.querySelectorAll('[data-emoji]').forEach(b=>b.addEventListener('click',()=>emoji(b.dataset.emoji)));
 $('settingsBtn').addEventListener('click',()=>openOverlay('settingsOverlay'));$('setupSettings').addEventListener('click',()=>openOverlay('settingsOverlay'));$('settingsClose').addEventListener('click',()=>closeOverlay('settingsOverlay'));$('settingsSave').addEventListener('click',()=>{if(g.running)return;applyCfg(readCfg());closeOverlay('settingsOverlay');setStatus('Host settings saved.',!!g.role);if(g.role==='host')broadcastState();sound('join')});$('settingsDefaults').addEventListener('click',()=>{if(g.running)return;writeCfg(DEFAULTS);applyCfg(DEFAULTS)});
 $('guideBtn').addEventListener('click',()=>openOverlay('guideOverlay'));$('setupGuide').addEventListener('click',()=>openOverlay('guideOverlay'));$('guideClose').addEventListener('click',()=>closeOverlay('guideOverlay'));
 $('soundBtn').addEventListener('click',()=>{g.sound=!g.sound;$('soundBtn').textContent=g.sound?'🔊 Sound':'🔇 Sound';if(g.sound){unlockAudio();sound('join')}});
 
-['setMax','setSeconds','setPoints','setFast','setMaster','setRounds','setDelay','setFair','setEmoji'].forEach(id=>$(id).addEventListener('change',()=>{if(!g.running)applyCfg(readCfg())}));
-document.addEventListener('visibilitychange',()=>{if(!g.cfg.fairPlay||!document.hidden||!g.running||!g.current?.asked||g.peer?.id===g.current?.quizmaster||g.myAnswer!==null||g.myLocked)return;g.myLocked=true;lockLocal('⚠️ You left the game screen — this round is locked.');sound('wrong');if(g.role==='host'){g.blocked.add(g.peer.id);const p=g.players.get(g.peer.id);if(p)p.away=true;feed(g.name,'⚠️ left the game screen — answer locked');broadcastState()}else try{if(g.hostConn?.open)g.hostConn.send({type:'g-away',qid:g.current.qid})}catch(_){}});
+['setMax','setSeconds','setPoints','setFast','setMaster','setRounds','setDelay','setFair','setEmoji','setLockJoin','setStrikeLimit','setRoomMinutes'].forEach(id=>$(id).addEventListener('change',()=>{if(!g.running)applyCfg(readCfg())}));
+document.addEventListener('visibilitychange',()=>{if(!g.cfg.fairPlay||!document.hidden||!g.running||!g.current?.asked||g.peer?.id===g.current?.quizmaster||g.myAnswer!==null||g.myLocked)return;g.myLocked=true;lockLocal('⚠️ You left the game screen — this round is locked.');sound('wrong');if(g.role==='host'){g.blocked.add(g.peer.id);const p=g.players.get(g.peer.id);if(p){p.away=true;p.strikes=Number(p.strikes||0)+1}feed(g.name,'⚠️ left the game screen — answer locked');broadcastState()}else try{if(g.hostConn?.open)g.hostConn.send({type:'g-away',qid:g.current.qid})}catch(_){}});
 ['contextmenu','copy','cut'].forEach(ev=>document.addEventListener(ev,e=>{if(g.running&&g.cfg.fairPlay)e.preventDefault()}));document.addEventListener('selectstart',e=>{if(g.running&&g.cfg.fairPlay&&!e.target.closest('input,select,button'))e.preventDefault()});
 window.addEventListener('beforeunload',e=>{if(g.running){e.preventDefault();e.returnValue=''}});window.addEventListener('pagehide',()=>{try{g.peer?.destroy()}catch(_){}});
 
-writeCfg(DEFAULTS);applyCfg(DEFAULTS);$('code').value=randomCode();
-const qp=new URLSearchParams(location.search);const qc=codeClean(qp.get('gamecode')||'');if(qc){$('code').value=qc;setStatus('Enter your name and press Join Game.');}
+writeCfg(DEFAULTS);applyCfg(DEFAULTS);$('code').value=randomCode();$('quickHostCode').value=$('code').value;syncQuickFromMain();updateRoomState();
+const qp=new URLSearchParams(location.search);const qc=codeClean(qp.get('gamecode')||'');if(qc){$('code').value=qc;$('quickJoinCode').value=qc;showStartMode('join');setStatus('Enter your name and press Join Game.');}else{showStartMode('host')}
 </script>
 </body>
 </html>
