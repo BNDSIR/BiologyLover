@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Biology Lab - Biology Lover</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --bg-color: #f3f4f6;
+            --surface: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); }
+
+        /* Animated Hero Header */
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .floating-bg {
+            position: absolute;
+            width: 300px; height: 300px;
+            background: #3b82f6; /* Blueish tint for 3D lab */
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.25;
+            animation: float 6s ease-in-out infinite alternate;
+            top: -100px; left: -100px;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100px, 50px); }
+        }
+
+        .hero-title { font-size: 2.8rem; font-weight: 800; margin-bottom: 0.5rem; position: relative; z-index: 1; }
+        .hero-subtitle { font-size: 1.1rem; color: #9ca3af; position: relative; z-index: 1; }
+
+        .container { max-width: 1200px; margin: -2rem auto 3rem; padding: 0 1rem; position: relative; z-index: 10; }
+
+        /* Top Navigation / Back Button */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--surface);
+            padding: 1rem 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 2rem;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #f3f4f6;
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .btn-back:hover { background: #e5e7eb; color: var(--primary); }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin: 2rem 0 1rem;
+        }
+
+        /* 3D Model Grid Cards */
+        .chapter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid #e5e7eb;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Add a subtle 3D hover effect to the cards */
+        .card:hover:not(.upcoming) {
+            transform: translateY(-8px) rotateX(5deg) scale(1.02);
+            box-shadow: 0 25px 30px -5px rgba(5, 150, 105, 0.15);
+            border-color: var(--primary);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-number { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600; }
+        .card-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .card-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.4; }
+        
+        /* Badges */
+        .card.upcoming { opacity: 0.7; cursor: not-allowed; background: #f9fafb; }
+        .badge {
+            align-self: flex-start;
+            background: #fef3c7; color: #d97706;
+            font-size: 0.75rem; font-weight: 600;
+            padding: 0.25rem 0.75rem; border-radius: 999px;
+            margin-top: auto;
+        }
+        .badge.ready { background: #d1fae5; color: #047857; }
+        .badge.premium { background: #e0e7ff; color: #4338ca; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="floating-bg"></div>
+        <h1 class="hero-title">🧬 3D Biology Lab</h1>
+        <p class="hero-subtitle">Interactive 3D Biological Models for Better Understanding</p>
+    </header>
+
+    <div class="container">
+        
+        <div class="nav-bar">
+            <a href="index.html" class="btn-back">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                Back to Home
+            </a>
+            <div style="font-weight: 600; color: var(--primary);">Explore Models in 360°</div>
+        </div>
+
+        <h2 class="section-title">Human Anatomy</h2>
+        <div class="chapter-grid">
+            <a href="3d_heart.html" class="card">
+                <div class="card-icon">🫀</div>
+                <span class="card-number">Model 01</span>
+                <h3 class="card-title">Human Heart</h3>
+                <p class="card-desc">Explore the chambers, valves, and blood vessels of a human heart in 3D.</p>
+                 <span class="badge">Coming Soon</span>
+            </a>
+
+            <a href="3d_brain.html" class="card">
+                <div class="card-icon">🧠</div>
+                <span class="card-number">Model 02</span>
+                <h3 class="card-title">Human Brain</h3>
+                <p class="card-desc">Detailed 3D view of the cerebrum, cerebellum, and brain stem.</p>
+                <span class="badge ready">View 3D Model</span>
+            </a>
+
+            <a href="3d_skeleton.html" class="card">
+                <div class="card-icon">💀</div>
+                <span class="card-number">Model 03</span>
+                <h3 class="card-title">Skeletal System</h3>
+                <p class="card-desc">Full human skeleton showcasing major bones and joints.</p>
+                 <span class="badge">Coming Soon</span>
+            </a>
+        </div>
+
+        <h2 class="section-title">Cellular & Molecular</h2>
+        <div class="chapter-grid">
+            <a href="3d_plant_cell.html" class="card">
+                <div class="card-icon">🌿</div>
+                <span class="card-number">Model 04</span>
+                <h3 class="card-title">Plant Cell</h3>
+                <p class="card-desc">Interactive view of chloroplasts, vacuole, and cell wall.</p>
+               <span class="badge">Coming Soon</span>
+            </a>
+
+            <a href="3d_animal_cell.html" class="card">
+                <div class="card-icon">🦠</div>
+                <span class="card-number">Model 05</span>
+                <h3 class="card-title">Animal Cell</h3>
+                <p class="card-desc">Zoom into mitochondria, nucleus, and Golgi apparatus.</p>
+                 <span class="badge">Coming Soon</span>
+            </a>
+
+            <a href="https://bndsir.github.io/biologyLover3dLibray/chromosome" class="card">
+                <div class="card-icon">🧬</div>
+                <span class="card-number">Model 06</span>
+                <h3 class="card-title">Chromosome</h3>
+                <p class="card-desc">ক্রোমোজোমের গঠন </p>
+                <span class="badge ready">View 3D Model</span>
+            </a>
+            
+            <div class="card upcoming">
+                <div class="card-icon">🦠</div>
+                <span class="card-number">Model 07</span>
+                <h3 class="card-title">Bacteriophage Virus</h3>
+                <p class="card-desc">3D structure of a virus infecting bacteria.</p>
+                <span class="badge">Coming Soon</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
